@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>XenoHead — Software for Strange Futures</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* =========================
+   RESET
+========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050816;
+            color: #EAF7FF;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+   VARIABLES
+========================= */
+
+        :root {
+            --bg: #050816;
+            --surface: #0B1020;
+            --surface2: #12192B;
+            --accent: #00CFFF;
+            --accentSoft: #5CE1FF;
+            --text: #EAF7FF;
+            --muted: #7D8CA3;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        /* =========================
+   BACKGROUND
+========================= */
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+        }
+
+        .glow {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0, 207, 255, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        /* =========================
+   NAVIGATION
+========================= */
+
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(18px);
+            background: rgba(5, 8, 22, 0.75);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 50px;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* =========================
+   HERO
+========================= */
+
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 8rem 2rem 4rem;
+            gap: 4rem;
+        }
+
+        .hero-text small {
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 2px;
+        }
+
+        .hero-text h2 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.95;
+            margin: 1.5rem 0;
+            font-weight: 700;
+        }
+
+        .hero-text h2 span {
+            color: var(--accent);
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 1.15rem;
+            line-height: 1.8;
+            max-width: 550px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 1rem 1.8rem;
+            border: 1px solid var(--accent);
+            color: var(--text);
+            text-decoration: none;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            transform: translateX(-100%);
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: translateX(0%);
+        }
+
+        .btn:hover {
+            color: #050816;
+            box-shadow: 0 0 25px rgba(0, 207, 255, 0.35);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            filter: drop-shadow(0 0 35px rgba(0, 207, 255, 0.25));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* =========================
+   SECTIONS
+========================= */
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            margin-bottom: 3rem;
+        }
+
+        .section-title small {
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .section-title h3 {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* =========================
+   CARDS
+========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(11, 16, 32, 0.8);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 207, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 207, 255, 0.12);
+        }
+
+        .card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .tags span {
+            border: 1px solid rgba(0, 207, 255, 0.2);
+            padding: 0.4rem 0.7rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* =========================
+   MANIFESTO
+========================= */
+
+        .manifesto {
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .manifesto p {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            line-height: 1.5;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .manifesto span {
+            color: var(--accent);
+        }
+
+        /* =========================
+   TERMINAL
+========================= */
+
+        .terminal {
+            background: #02040C;
+            border: 1px solid rgba(0, 207, 255, 0.15);
+            padding: 2rem;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--accentSoft);
+            line-height: 2;
+            margin-top: 3rem;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+   CONTACT
+========================= */
+
+        .contact-form {
+            display: grid;
+            gap: 1rem;
+            max-width: 700px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .contact-form textarea {
+            min-height: 180px;
+        }
+
+        .contact-form button {
+            cursor: pointer;
+        }
+
+        /* =========================
+   FOOTER
+========================= */
+
+        footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+        }
+
+        /* =========================
+   ANIMATIONS
+========================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        /* =========================
+   MOBILE
+========================= */
+
+        @media(max-width:900px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="glow"></div>
+
+    <!-- =========================
+NAV
+========================= -->
+
+    <nav>
+        <div class="nav-inner">
+
+            ```
+            <div class="logo">
+                <img src="logo.png" alt="XenoHead Logo">
+                <h1>Xeno<span>Head</span></h1>
+            </div>
+
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#writing">Writing</a>
+                <a href="#books">Books</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+        </div>
+        ```
+
+    </nav>
+
+    <!-- =========================
+HERO
+========================= -->
+
+    <section class="hero">
+
+        ```
+        <div class="hero-text reveal">
+
+            <small>// INDEPENDENT CREATOR</small>
+
+            <h2>
+                Software for
+                <span>strange futures.</span>
+            </h2>
+
+            <p>
+                Code, cognition, and speculative futures.
+                Independent software development,
+                AI experimentation,
+                and science-fiction writing.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">Explore Projects</a>
+                <a href="#writing" class="btn">Read Writing</a>
+            </div>
+
+            <div class="terminal">
+                ```
+
+                xenohead@lab:~$ whoami<br>
+                > Developer<br>
+                > AI Explorer<br>
+                > Sci-Fi Writer<br>
+                > Human<span class="cursor">_</span> </div>
+
+            ```
+        </div>
+
+        <div class="hero-image reveal">
+            <img src="logo.png" alt="XenoHead">
+        </div>
+        ```
+
+    </section>
+
+    <!-- =========================
+PROJECTS
+========================= -->
+
+    <section id="projects">
+
+        ```
+        <div class="section-title reveal">
+            <small>// PROJECTS</small>
+            <h3>Experimental Systems</h3>
+        </div>
+
+        <div class="grid">
+
+            <div class="card reveal">
+                <h4>NebulaOS</h4>
+                <p>
+                    AI-assisted operating environment focused on adaptive workflows and intelligent interfaces.
+                </p>
+
+                <div class="tags">
+                    <span>AI</span>
+                    <span>Systems</span>
+                    <span>Research</span>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <h4>Cognition Core</h4>
+                <p>
+                    Experimental modular architecture for testing machine cognition and symbolic reasoning.
+                </p>
+
+                <div class="tags">
+                    <span>ML</span>
+                    <span>Framework</span>
+                    <span>Research</span>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <h4>Ghost Protocol</h4>
+                <p>
+                    Lightweight cybernetic UI experiments inspired by sci-fi command systems and neural interaction.
+                </p>
+
+                <div class="tags">
+                    <span>UI</span>
+                    <span>Cyberpunk</span>
+                    <span>Design</span>
+                </div>
+            </div>
+
+        </div>
+        ```
+
+    </section>
+
+    <!-- =========================
+WRITING
+========================= -->
+
+    <section id="writing">
+
+        ```
+        <div class="section-title reveal">
+            <small>// WRITING</small>
+            <h3>Essays & Speculative Thought</h3>
+        </div>
+
+        <div class="grid">
+
+            <div class="card reveal">
+                <h4>Echoes of the Singularity</h4>
+                <p>
+                    Thoughts on intelligence, consciousness, and the systems humanity may become.
+                </p>
+            </div>
+
+            <div class="card reveal">
+                <h4>The Romanticism of Code</h4>
+                <p>
+                    Exploring software as language, architecture, and creative expression.
+                </p>
+            </div>
+
+            <div class="card reveal">
+                <h4>Tomorrow Has Teeth</h4>
+                <p>
+                    Science fiction and speculative futures from the edge of cognition.
+                </p>
+            </div>
+
+        </div>
+        ```
+
+    </section>
+
+    <!-- =========================
+BOOKS
+========================= -->
+
+    <section id="books">
+
+        ```
+        <div class="section-title reveal">
+            <small>// BOOKS</small>
+            <h3>Stories From Tomorrow</h3>
+        </div>
+
+        <div class="card reveal">
+
+            <h4>THE LAST MACHINE DREAM</h4>
+
+            <p style="margin-top:1rem;">
+                A speculative science-fiction novel exploring identity,
+                machine consciousness,
+                and humanity’s final evolutionary threshold.
+            </p>
+
+            <div class="hero-buttons" style="margin-top:2rem;">
+                <a href="#" class="btn">Buy Book</a>
+                <a href="#" class="btn">Read Excerpt</a>
+            </div>
+
+        </div>
+        ```
+
+    </section>
+
+    <!-- =========================
+MANIFESTO
+========================= -->
+
+    <section class="manifesto reveal">
+
+        ```
+        <p>
+            Technology is a tool.<br>
+            Imagination is the weapon.<br>
+            Curiosity is the engine.<br><br>
+
+            <span>The future is what we build.</span>
+        </p>
+        ```
+
+    </section>
+
+    <!-- =========================
+CONTACT
+========================= -->
+
+    <section id="contact">
+
+        ```
+        <div class="section-title reveal">
+            <small>// CONTACT</small>
+            <h3>Transmit Signal</h3>
+        </div>
+
+        <form class="contact-form reveal">
+
+            <input type="text" placeholder="Name">
+
+            <input type="email" placeholder="Email">
+
+            <textarea placeholder="Message"></textarea>
+
+            <button class="btn">Send Message</button>
+
+        </form>
+        ```
+
+    </section>
+
+    <!-- =========================
+FOOTER
+========================= -->
+
+    <footer>
+
+        ```
+        <p>
+            © 2025 XenoHead —
+            Built with code.
+            Fueled by curiosity.
+        </p>
+        ```
+
+    </footer>
+
+    <script>
+
+        /* =========================
+           SCROLL REVEALS
+        ========================= */
+
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+
+            });
+
+        }, {
+            threshold: 0.1
+        });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+
+        /* =========================
+           BUTTON GLOW TRACKING
+        ========================= */
+
+        const buttons = document.querySelectorAll('.btn');
+
+        buttons.forEach(button => {
+
+            button.addEventListener('mousemove', e => {
+
+                const rect = button.getBoundingClientRect();
+
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                button.style.background =
+                    `radial-gradient(circle at ${x}px ${y}px,
+        rgba(0,207,255,0.35),
+        rgba(0,0,0,0) 60%)`;
+
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.background = 'transparent';
+            });
+
+        });
+
+        /* =========================
+           PARALLAX GLOW
+        ========================= */
+
+        document.addEventListener('mousemove', e => {
+
+            const glow = document.querySelector('.glow');
+
+            glow.style.transform =
+                `translate(${e.clientX * 0.02}px, ${e.clientY * 0.02}px)`;
+
+        });
+
+    </script>
+
+</body>
+
+</html>

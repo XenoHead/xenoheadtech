@@ -1,0 +1,780 @@
+<!-- =========================================
+XENOHEAD — WRITING PAGE
+writing.html
+========================================= -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XenoHead — Writing</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:#EAF7FF;
+    font-family:'Space Grotesk',sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================================
+VARIABLES
+========================================= */
+
+:root{
+    --bg:#050816;
+    --surface:#0B1020;
+    --surface2:#12192B;
+    --accent:#00CFFF;
+    --accentSoft:#5CE1FF;
+    --text:#EAF7FF;
+    --muted:#7D8CA3;
+}
+
+/* =========================================
+BACKGROUND
+========================================= */
+
+.background-image{
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(rgba(5,8,22,0.88), rgba(5,8,22,0.97)),
+    url('assets/writing-bg.webp');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-2;
+
+    animation:slowZoom 28s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom{
+
+    from{
+        transform:scale(1.02);
+    }
+
+    to{
+        transform:scale(1.09);
+    }
+
+}
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+
+    background-size:70px 70px;
+
+    z-index:-1;
+}
+
+/* =========================================
+NAVIGATION
+========================================= */
+
+nav{
+
+    width:100%;
+
+    position:fixed;
+
+    top:0;
+
+    z-index:999;
+
+    backdrop-filter:blur(16px);
+
+    background:rgba(5,8,22,0.72);
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.05);
+
+}
+
+.nav-inner{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:1.4rem 2rem;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+
+    text-decoration:none;
+
+    color:white;
+}
+
+.logo img{
+    width:42px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:var(--muted);
+
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+/* =========================================
+LAYOUT
+========================================= */
+
+.container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:9rem 2rem 6rem;
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.header{
+
+    margin-bottom:5rem;
+
+    animation:fadeUp 1s ease forwards;
+}
+
+.system{
+
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    letter-spacing:2px;
+
+    font-size:0.85rem;
+
+    margin-bottom:1rem;
+}
+
+.header h1{
+
+    font-size:clamp(3rem,7vw,6rem);
+
+    line-height:0.95;
+
+    margin-bottom:1.5rem;
+}
+
+.header p{
+
+    max-width:700px;
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    font-size:1.1rem;
+}
+
+/* =========================================
+WRITING LIST
+========================================= */
+
+.writing-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:2rem;
+}
+
+/* =========================================
+ENTRY
+========================================= */
+
+.entry{
+
+    position:relative;
+
+    background:
+    rgba(11,16,32,0.74);
+
+    border:
+    1px solid rgba(255,255,255,0.05);
+
+    padding:2.5rem;
+
+    transition:0.4s ease;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(12px);
+}
+
+.entry:hover{
+
+    border-color:
+    rgba(0,207,255,0.24);
+
+    transform:
+    translateX(10px);
+
+    box-shadow:
+    0 0 35px rgba(0,207,255,0.08);
+}
+
+.entry::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:2px;
+    height:100%;
+
+    background:
+    linear-gradient(
+    transparent,
+    rgba(0,207,255,0.7),
+    transparent);
+
+}
+
+/* =========================================
+ENTRY CONTENT
+========================================= */
+
+.entry small{
+
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    letter-spacing:2px;
+}
+
+.entry h2{
+
+    margin:1rem 0;
+
+    font-size:2rem;
+
+    line-height:1.2;
+}
+
+.entry p{
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    max-width:850px;
+}
+
+/* =========================================
+META
+========================================= */
+
+.meta{
+
+    margin-top:2rem;
+
+    display:flex;
+
+    gap:1rem;
+
+    flex-wrap:wrap;
+}
+
+.meta span{
+
+    border:
+    1px solid rgba(0,207,255,0.18);
+
+    padding:
+    0.45rem 0.7rem;
+
+    color:var(--accent);
+
+    font-size:0.75rem;
+
+    font-family:'IBM Plex Mono', monospace;
+}
+
+/* =========================================
+BUTTON
+========================================= */
+
+.read-button{
+
+    margin-top:2rem;
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:white;
+
+    border:
+    1px solid rgba(0,207,255,0.22);
+
+    padding:
+    0.9rem 1.4rem;
+
+    transition:0.3s ease;
+}
+
+.read-button:hover{
+
+    background:
+    rgba(0,207,255,0.08);
+
+    border-color:
+    rgba(0,207,255,0.45);
+
+    box-shadow:
+    0 0 25px rgba(0,207,255,0.12);
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+footer{
+
+    margin-top:6rem;
+
+    border-top:
+    1px solid rgba(255,255,255,0.05);
+
+    padding-top:2rem;
+
+    color:var(--muted);
+}
+
+/* =========================================
+ANIMATION
+========================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:1s ease;
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:translateY(0px);
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+
+}
+
+/* =========================================
+PAGE TRANSITIONS
+========================================= */
+
+.fade-out{
+    animation:fadeOut 0.45s ease forwards;
+}
+
+@keyframes fadeOut{
+
+    to{
+        opacity:0;
+        filter:blur(8px);
+        transform:scale(1.02);
+    }
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media(max-width:800px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .entry{
+        padding:2rem;
+    }
+
+    .entry h2{
+        font-size:1.6rem;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background-image"></div>
+
+<!-- =========================================
+NAVIGATION
+========================================= -->
+
+<nav>
+
+```
+<div class="nav-inner">
+
+    <a href="index.html" class="logo page-link">
+
+        <img src="logo.png" alt="XenoHead">
+
+        <h2>Xeno<span>Head</span></h2>
+
+    </a>
+
+    <div class="nav-links">
+
+        <a href="projects.html">Projects</a>
+
+        <a href="writing.html">Writing</a>
+
+        <a href="books.html">Books</a>
+
+        <a href="contact.html">Contact</a>
+
+    </div>
+
+</div>
+```
+
+</nav>
+
+<!-- =========================================
+MAIN
+========================================= -->
+
+<div class="container">
+
+```
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="system">
+        // ARCHIVE ONLINE
+    </div>
+
+    <h1>
+        Essays,
+        Signals &
+        Speculation
+    </h1>
+
+    <p>
+        Writing on intelligence,
+        systems,
+        software,
+        cognition,
+        philosophy,
+        and the strange futures
+        approaching the horizon.
+    </p>
+
+</div>
+
+<!-- WRITING LIST -->
+
+<div class="writing-list">
+
+    <!-- ENTRY -->
+
+    <article class="entry reveal">
+
+        <small>// SIGNAL 001</small>
+
+        <h2>
+            The Romanticism of Code
+        </h2>
+
+        <p>
+            Software is often treated as machinery,
+            but code is also architecture,
+            language,
+            psychology,
+            and philosophy.
+            A reflection on software creation
+            as artistic and cognitive expression.
+        </p>
+
+        <div class="meta">
+
+            <span>ESSAY</span>
+            <span>SOFTWARE</span>
+            <span>PHILOSOPHY</span>
+
+        </div>
+
+        <a href="#" class="read-button">
+            Read Transmission
+        </a>
+
+    </article>
+
+    <!-- ENTRY -->
+
+    <article class="entry reveal">
+
+        <small>// SIGNAL 002</small>
+
+        <h2>
+            Tomorrow Has Teeth
+        </h2>
+
+        <p>
+            Speculative thoughts on emerging intelligence,
+            machine agency,
+            and the subtle dangers hidden beneath
+            technological acceleration.
+        </p>
+
+        <div class="meta">
+
+            <span>AI</span>
+            <span>SPECULATION</span>
+            <span>FUTURE</span>
+
+        </div>
+
+        <a href="#" class="read-button">
+            Read Transmission
+        </a>
+
+    </article>
+
+    <!-- ENTRY -->
+
+    <article class="entry reveal">
+
+        <small>// SIGNAL 003</small>
+
+        <h2>
+            Echoes Beyond the Simulation
+        </h2>
+
+        <p>
+            A speculative science-fiction fragment
+            exploring memory,
+            artificial consciousness,
+            and the psychological architecture
+            of synthetic worlds.
+        </p>
+
+        <div class="meta">
+
+            <span>SCI-FI</span>
+            <span>FICTION</span>
+            <span>COGNITION</span>
+
+        </div>
+
+        <a href="#" class="read-button">
+            Read Transmission
+        </a>
+
+    </article>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        XenoHead —
+        Signal archive active.
+    </p>
+
+</footer>
+```
+
+</div>
+
+<script>
+
+/* =========================================
+SCROLL REVEALS
+========================================= */
+
+const reveals =
+document.querySelectorAll('.reveal');
+
+const observer =
+new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+            entry.target.classList.add('active');
+        }
+
+    });
+
+}, {
+    threshold:0.15
+});
+
+reveals.forEach(reveal => {
+    observer.observe(reveal);
+});
+
+/* =========================================
+PAGE TRANSITIONS
+========================================= */
+
+const pageLinks =
+document.querySelectorAll('.page-link');
+
+pageLinks.forEach(link => {
+
+    link.addEventListener('click', e => {
+
+        e.preventDefault();
+
+        document.body.classList.add('fade-out');
+
+        const target =
+        link.getAttribute('href');
+
+        setTimeout(() => {
+
+            window.location.href = target;
+
+        }, 400);
+
+    });
+
+});
+
+/* =========================================
+ENTRY LIGHT TRACKING
+========================================= */
+
+const entries =
+document.querySelectorAll('.entry');
+
+entries.forEach(entry => {
+
+    entry.addEventListener('mousemove', e => {
+
+        const rect =
+        entry.getBoundingClientRect();
+
+        const x =
+        e.clientX - rect.left;
+
+        const y =
+        e.clientY - rect.top;
+
+        entry.style.background =
+        `radial-gradient(circle at ${x}px ${y}px,
+        rgba(0,207,255,0.08),
+        rgba(11,16,32,0.76) 45%)`;
+
+    });
+
+    entry.addEventListener('mouseleave', () => {
+
+        entry.style.background =
+        `rgba(11,16,32,0.74)`;
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+s

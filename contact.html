@@ -1,0 +1,682 @@
+<!-- =========================================
+XENOHEAD — CONTACT PAGE
+contact.html
+========================================= -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XenoHead — Contact</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:#EAF7FF;
+    font-family:'Space Grotesk',sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================================
+VARIABLES
+========================================= */
+
+:root{
+    --bg:#050816;
+    --surface:#0B1020;
+    --surface2:#12192B;
+    --accent:#00CFFF;
+    --accentSoft:#5CE1FF;
+    --text:#EAF7FF;
+    --muted:#7D8CA3;
+}
+
+/* =========================================
+BACKGROUND
+========================================= */
+
+.background-image{
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(rgba(5,8,22,0.9), rgba(5,8,22,0.97)),
+    url('assets/contact-bg.webp');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-2;
+
+    animation:slowZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom{
+
+    from{
+        transform:scale(1.02);
+    }
+
+    to{
+        transform:scale(1.08);
+    }
+
+}
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+
+    background-size:70px 70px;
+
+    z-index:-1;
+}
+
+/* =========================================
+NAVIGATION
+========================================= */
+
+nav{
+
+    width:100%;
+
+    position:fixed;
+
+    top:0;
+
+    z-index:999;
+
+    backdrop-filter:blur(16px);
+
+    background:rgba(5,8,22,0.7);
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.05);
+
+}
+
+.nav-inner{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:1.4rem 2rem;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+
+    text-decoration:none;
+
+    color:white;
+}
+
+.logo img{
+    width:42px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:var(--muted);
+
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+/* =========================================
+LAYOUT
+========================================= */
+
+.container{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:8rem 2rem 4rem;
+}
+
+/* =========================================
+CONTACT PANEL
+========================================= */
+
+.contact-panel{
+
+    width:100%;
+
+    max-width:900px;
+
+    background:
+    rgba(11,16,32,0.72);
+
+    border:
+    1px solid rgba(255,255,255,0.06);
+
+    padding:4rem;
+
+    backdrop-filter:blur(18px);
+
+    position:relative;
+
+    overflow:hidden;
+
+    animation:fadeUp 1s ease forwards;
+}
+
+.contact-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(0,207,255,0.08),
+    transparent 50%);
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.system{
+
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    letter-spacing:2px;
+
+    font-size:0.85rem;
+
+    margin-bottom:1rem;
+}
+
+.contact-panel h1{
+
+    font-size:clamp(3rem,6vw,5rem);
+
+    line-height:0.95;
+
+    margin-bottom:1.5rem;
+}
+
+.contact-panel p{
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    max-width:650px;
+
+    margin-bottom:3rem;
+}
+
+/* =========================================
+FORM
+========================================= */
+
+.contact-form{
+
+    display:grid;
+
+    gap:1.4rem;
+}
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:0.6rem;
+}
+
+.input-group label{
+
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    font-size:0.8rem;
+
+    letter-spacing:1px;
+}
+
+.contact-form input,
+.contact-form textarea{
+
+    background:
+    rgba(5,8,22,0.8);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    padding:
+    1rem 1.2rem;
+
+    color:white;
+
+    font-size:1rem;
+
+    outline:none;
+
+    transition:0.3s ease;
+
+    font-family:'Space Grotesk', sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+
+    border-color:
+    rgba(0,207,255,0.4);
+
+    box-shadow:
+    0 0 25px rgba(0,207,255,0.08);
+}
+
+.contact-form textarea{
+
+    resize:none;
+
+    min-height:180px;
+}
+
+/* =========================================
+BUTTON
+========================================= */
+
+.send-button{
+
+    margin-top:1rem;
+
+    padding:
+    1rem 1.6rem;
+
+    background:
+    transparent;
+
+    border:
+    1px solid rgba(0,207,255,0.25);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.35s ease;
+
+    position:relative;
+
+    overflow:hidden;
+
+    font-size:1rem;
+}
+
+.send-button:hover{
+
+    border-color:
+    rgba(0,207,255,0.5);
+
+    background:
+    rgba(0,207,255,0.08);
+
+    box-shadow:
+    0 0 30px rgba(0,207,255,0.12);
+}
+
+/* =========================================
+SIGNAL BLOCK
+========================================= */
+
+.signal{
+
+    margin-top:3rem;
+
+    padding-top:2rem;
+
+    border-top:
+    1px solid rgba(255,255,255,0.06);
+
+    color:var(--muted);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    line-height:2;
+}
+
+/* =========================================
+ANIMATION
+========================================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+
+}
+
+/* =========================================
+PAGE TRANSITION
+========================================= */
+
+.fade-out{
+    animation:fadeOut 0.45s ease forwards;
+}
+
+@keyframes fadeOut{
+
+    to{
+        opacity:0;
+        filter:blur(8px);
+        transform:scale(1.02);
+    }
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media(max-width:800px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .contact-panel{
+        padding:2rem;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background-image"></div>
+
+<!-- =========================================
+NAVIGATION
+========================================= -->
+
+<nav>
+
+```
+<div class="nav-inner">
+
+    <a href="index.html" class="logo page-link">
+
+        <img src="logo.png" alt="XenoHead">
+
+        <h2>Xeno<span>Head</span></h2>
+
+    </a>
+
+    <div class="nav-links">
+
+        <a href="projects.html">Projects</a>
+
+        <a href="writing.html">Writing</a>
+
+        <a href="books.html">Books</a>
+
+        <a href="contact.html">Contact</a>
+
+    </div>
+
+</div>
+```
+
+</nav>
+
+<!-- =========================================
+MAIN
+========================================= -->
+
+<div class="container">
+
+```
+<div class="contact-panel">
+
+    <div class="system">
+        // SIGNAL INTERFACE ACTIVE
+    </div>
+
+    <h1>
+        Transmit
+        Signal
+    </h1>
+
+    <p>
+        Open communication channel for software,
+        AI systems,
+        creative collaboration,
+        speculative projects,
+        or transmissions from strange futures.
+    </p>
+
+    <!-- FORM -->
+
+    <form class="contact-form">
+
+        <div class="input-group">
+
+            <label>NAME</label>
+
+            <input type="text" placeholder="Enter designation">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>EMAIL</label>
+
+            <input type="email" placeholder="Enter communication address">
+
+        </div>
+
+        <div class="input-group">
+
+            <label>MESSAGE</label>
+
+            <textarea placeholder="Transmit message..."></textarea>
+
+        </div>
+
+        <button class="send-button">
+            Send Transmission
+        </button>
+
+    </form>
+
+    <!-- SIGNAL -->
+
+    <div class="signal">
+```
+
+xenohead@network:~$ signal_status<br>
+
+> Channel Open<br>
+> Secure Relay Active<br>
+> Awaiting Transmission_
+
+```
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* =========================================
+PAGE TRANSITIONS
+========================================= */
+
+const pageLinks =
+document.querySelectorAll('.page-link');
+
+pageLinks.forEach(link => {
+
+    link.addEventListener('click', e => {
+
+        e.preventDefault();
+
+        document.body.classList.add('fade-out');
+
+        const target =
+        link.getAttribute('href');
+
+        setTimeout(() => {
+
+            window.location.href = target;
+
+        }, 400);
+
+    });
+
+});
+
+/* =========================================
+BUTTON GLOW TRACKING
+========================================= */
+
+const button =
+document.querySelector('.send-button');
+
+button.addEventListener('mousemove', e => {
+
+    const rect =
+    button.getBoundingClientRect();
+
+    const x =
+    e.clientX - rect.left;
+
+    const y =
+    e.clientY - rect.top;
+
+    button.style.background =
+    `radial-gradient(circle at ${x}px ${y}px,
+    rgba(0,207,255,0.18),
+    rgba(0,0,0,0) 55%)`;
+
+});
+
+button.addEventListener('mouseleave', () => {
+
+    button.style.background =
+    'transparent';
+
+});
+
+/* =========================================
+PANEL LIGHT TRACKING
+========================================= */
+
+const panel =
+document.querySelector('.contact-panel');
+
+panel.addEventListener('mousemove', e => {
+
+    const rect =
+    panel.getBoundingClientRect();
+
+    const x =
+    e.clientX - rect.left;
+
+    const y =
+    e.clientY - rect.top;
+
+    panel.style.background =
+    `radial-gradient(circle at ${x}px ${y}px,
+    rgba(0,207,255,0.06),
+    rgba(11,16,32,0.74) 45%)`;
+
+});
+
+panel.addEventListener('mouseleave', () => {
+
+    panel.style.background =
+    `rgba(11,16,32,0.72)`;
+
+});
+
+</script>
+
+</body>
+</html>

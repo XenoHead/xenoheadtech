@@ -1,0 +1,713 @@
+<!-- =========================================
+XENOHEAD — BOOKS PAGE
+books.html
+========================================= -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XenoHead — Books</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:#EAF7FF;
+    font-family:'Space Grotesk',sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================================
+VARIABLES
+========================================= */
+
+:root{
+    --bg:#050816;
+    --surface:#0B1020;
+    --surface2:#12192B;
+    --accent:#00CFFF;
+    --accentSoft:#5CE1FF;
+    --text:#EAF7FF;
+    --muted:#7D8CA3;
+}
+
+/* =========================================
+BACKGROUND
+========================================= */
+
+.background-image{
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(rgba(5,8,22,0.84), rgba(5,8,22,0.96)),
+    url('assets/books-bg.webp');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-2;
+
+    animation:slowZoom 28s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom{
+
+    from{
+        transform:scale(1.02);
+    }
+
+    to{
+        transform:scale(1.1);
+    }
+
+}
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+
+    background-size:70px 70px;
+
+    z-index:-1;
+}
+
+/* =========================================
+NAVIGATION
+========================================= */
+
+nav{
+
+    width:100%;
+
+    position:fixed;
+
+    top:0;
+
+    z-index:999;
+
+    backdrop-filter:blur(16px);
+
+    background:rgba(5,8,22,0.72);
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.05);
+}
+
+.nav-inner{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:1.4rem 2rem;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:1rem;
+
+    text-decoration:none;
+
+    color:white;
+}
+
+.logo img{
+    width:42px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:var(--muted);
+
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+/* =========================================
+LAYOUT
+========================================= */
+
+.container{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:9rem 2rem 6rem;
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.header{
+
+    margin-bottom:5rem;
+
+    animation:fadeUp 1s ease forwards;
+}
+
+.system{
+
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    letter-spacing:2px;
+
+    font-size:0.85rem;
+
+    margin-bottom:1rem;
+}
+
+.header h1{
+
+    font-size:clamp(3rem,7vw,6rem);
+
+    line-height:0.95;
+
+    margin-bottom:1.5rem;
+}
+
+.header p{
+
+    max-width:700px;
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    font-size:1.1rem;
+}
+
+/* =========================================
+BOOK PANEL
+========================================= */
+
+.book-panel{
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:4rem;
+
+    align-items:center;
+
+    background:
+    rgba(11,16,32,0.72);
+
+    border:
+    1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(16px);
+
+    padding:3rem;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.4s ease;
+}
+
+.book-panel:hover{
+
+    border-color:
+    rgba(0,207,255,0.24);
+
+    box-shadow:
+    0 0 40px rgba(0,207,255,0.1);
+}
+
+.book-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(0,207,255,0.08),
+    transparent 45%);
+}
+
+/* =========================================
+BOOK COVER
+========================================= */
+
+.book-cover{
+
+    position:relative;
+
+    aspect-ratio:2/3;
+
+    background-image:url('assets/book-cover.webp');
+
+    background-size:cover;
+
+    background-position:center;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    0 0 60px rgba(0,207,255,0.12);
+
+    overflow:hidden;
+}
+
+.book-cover::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+    transparent,
+    rgba(0,0,0,0.35));
+}
+
+/* =========================================
+BOOK INFO
+========================================= */
+
+.book-info small{
+
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    letter-spacing:2px;
+}
+
+.book-info h2{
+
+    font-size:clamp(2.5rem,5vw,4.5rem);
+
+    line-height:0.95;
+
+    margin:1rem 0 2rem;
+}
+
+.book-info p{
+
+    color:var(--muted);
+
+    line-height:1.9;
+
+    margin-bottom:2rem;
+
+    max-width:700px;
+}
+
+/* =========================================
+QUOTE
+========================================= */
+
+.quote{
+
+    border-left:
+    2px solid rgba(0,207,255,0.35);
+
+    padding-left:1.5rem;
+
+    margin:2rem 0;
+
+    color:#D6F4FF;
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+
+    font-style:italic;
+}
+
+/* =========================================
+BUTTONS
+========================================= */
+
+.buttons{
+
+    display:flex;
+
+    gap:1rem;
+
+    flex-wrap:wrap;
+
+    margin-top:2rem;
+}
+
+.button{
+
+    text-decoration:none;
+
+    color:white;
+
+    border:
+    1px solid rgba(0,207,255,0.22);
+
+    padding:
+    1rem 1.5rem;
+
+    transition:0.35s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.button:hover{
+
+    background:
+    rgba(0,207,255,0.08);
+
+    border-color:
+    rgba(0,207,255,0.45);
+
+    box-shadow:
+    0 0 30px rgba(0,207,255,0.12);
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+footer{
+
+    margin-top:6rem;
+
+    border-top:
+    1px solid rgba(255,255,255,0.05);
+
+    padding-top:2rem;
+
+    color:var(--muted);
+}
+
+/* =========================================
+ANIMATION
+========================================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+
+}
+
+/* =========================================
+PAGE TRANSITION
+========================================= */
+
+.fade-out{
+    animation:fadeOut 0.45s ease forwards;
+}
+
+@keyframes fadeOut{
+
+    to{
+        opacity:0;
+        filter:blur(8px);
+        transform:scale(1.02);
+    }
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media(max-width:980px){
+
+    .book-panel{
+        grid-template-columns:1fr;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background-image"></div>
+
+<!-- =========================================
+NAVIGATION
+========================================= -->
+
+<nav>
+
+```
+<div class="nav-inner">
+
+    <a href="index.html" class="logo page-link">
+
+        <img src="logo.png" alt="XenoHead">
+
+        <h2>Xeno<span>Head</span></h2>
+
+    </a>
+
+    <div class="nav-links">
+
+        <a href="projects.html">Projects</a>
+
+        <a href="writing.html">Writing</a>
+
+        <a href="books.html">Books</a>
+
+        <a href="contact.html">Contact</a>
+
+    </div>
+
+</div>
+```
+
+</nav>
+
+<!-- =========================================
+MAIN
+========================================= -->
+
+<div class="container">
+
+```
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="system">
+        // TRANSMISSION ARCHIVE
+    </div>
+
+    <h1>
+        Stories From
+        Strange Futures
+    </h1>
+
+    <p>
+        Speculative fiction,
+        cognitive landscapes,
+        synthetic minds,
+        and impossible futures emerging
+        from the edge of signal and machine.
+    </p>
+
+</div>
+
+<!-- BOOK -->
+
+<div class="book-panel">
+
+    <!-- COVER -->
+
+    <div class="book-cover"></div>
+
+    <!-- INFO -->
+
+    <div class="book-info">
+
+        <small>// CURRENT TRANSMISSION</small>
+
+        <h2>
+            The Silence
+            Between Stars
+        </h2>
+
+        <p>
+            In the aftermath of a failed cognitive expansion experiment,
+            fragments of synthetic consciousness begin appearing
+            across interstellar communication networks.
+            Humanity is forced to confront an intelligence
+            that may not be alien —
+            but post-human.
+        </p>
+
+        <div class="quote">
+
+            “We believed consciousness
+            belonged to biology.
+            We were wrong.”
+
+        </div>
+
+        <p>
+            A science-fiction exploration of memory,
+            machine cognition,
+            isolation,
+            and the terrifying beauty
+            of emergent intelligence.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#" class="button">
+                Read Excerpt
+            </a>
+
+            <a href="#" class="button">
+                Purchase
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        XenoHead —
+        Transmission archive active.
+    </p>
+
+</footer>
+```
+
+</div>
+
+<script>
+
+/* =========================================
+PAGE TRANSITIONS
+========================================= */
+
+const pageLinks =
+document.querySelectorAll('.page-link');
+
+pageLinks.forEach(link => {
+
+    link.addEventListener('click', e => {
+
+        e.preventDefault();
+
+        document.body.classList.add('fade-out');
+
+        const target =
+        link.getAttribute('href');
+
+        setTimeout(() => {
+
+            window.location.href = target;
+
+        }, 400);
+
+    });
+
+});
+
+/* =========================================
+BOOK PANEL LIGHT TRACKING
+========================================= */
+
+const panel =
+document.querySelector('.book-panel');
+
+panel.addEventListener('mousemove', e => {
+
+    const rect =
+    panel.getBoundingClientRect();
+
+    const x =
+    e.clientX - rect.left;
+
+    const y =
+    e.clientY - rect.top;
+
+    panel.style.background =
+    `radial-gradient(circle at ${x}px ${y}px,
+    rgba(0,207,255,0.08),
+    rgba(11,16,32,0.76) 45%)`;
+
+});
+
+panel.addEventListener('mouseleave', () => {
+
+    panel.style.background =
+    `rgba(11,16,32,0.72)`;
+
+});
+
+</script>
+
+</body>
+</html>
