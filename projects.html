@@ -460,8 +460,67 @@ PAGE TRANSITION
 }
 
 /* =========================================
-MOBILE
+MODAL
 ========================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,22,0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+.modal-content {
+    background: var(--surface);
+    border: 1px solid rgba(0,207,255,0.2);
+    box-shadow: 0 0 40px rgba(0,207,255,0.1);
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 3rem;
+}
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+    line-height: 1;
+}
+.modal-close:hover {
+    color: var(--accent);
+}
+.modal-hero {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(0,207,255,0.2);
+    margin-bottom: 2rem;
+    position: relative;
+}
+.modal-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--surface), transparent);
+}
 
 @media(max-width:800px){
 
@@ -471,6 +530,10 @@ MOBILE
 
     .projects-grid{
         grid-template-columns:1fr;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
     }
 
 }
@@ -569,15 +632,25 @@ MAIN
 
 </div>
 
+<!-- MODAL -->
+<div id="project-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
 <script>
+
+let allProjects = [];
 
 async function loadProjects() {
     try {
         // Prevent caching in development by appending timestamp, though a cache-control header is better in prod
         const response = await fetch('data/projects.json?t=' + Date.now());
-        const projects = await response.json();
+        allProjects = await response.json();
         const grid = document.querySelector('.projects-grid');
-        grid.innerHTML = projects.map(p => `
+        grid.innerHTML = allProjects.map(p => `
             <div class="project-card reveal">
                 <div class="project-image" style="background-image:url('${p.image}')"></div>
                 <div class="project-content">
@@ -591,7 +664,7 @@ async function loadProjects() {
                         <a href="${p.viewLink}" target="_blank">
                             <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
                         </a>
-                        <a href="project.html?id=${p.id}" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; transition: 0.3s;">Read more...</a>
+                        <a href="#" onclick="openModal('${p.id}'); return false;" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; transition: 0.3s;">Read more...</a>
                     </div>
                 </div>
             </div>
@@ -601,6 +674,36 @@ async function loadProjects() {
     } catch (e) {
         console.error("Failed to load projects:", e);
     }
+}
+
+function openModal(id) {
+    const p = allProjects.find(x => x.id === id);
+    if (!p) return;
+    
+    document.getElementById('modal-body').innerHTML = \`
+        <div class="modal-hero" style="background-image:url('\${p.image}')"></div>
+        <div class="system" style="color:var(--accent); font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:0.85rem; margin-bottom:1rem;">// \${p.category}</div>
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1; margin-bottom: 1.5rem;">\${p.title}</h1>
+        <div class="tags" style="display:flex; gap:0.8rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            \${p.tags.map(t => \`<span style="border: 1px solid rgba(0,207,255,0.15); padding: 0.35rem 0.6rem; color:var(--accentSoft); font-size:0.75rem; font-family:'IBM Plex Mono', monospace;">\${t}</span>\`).join('')}
+        </div>
+        <div class="description" style="color:var(--muted); line-height:2; font-size:1.15rem; margin-bottom: 3rem;">
+            \${p.description ? p.description.replace(/\\n/g, '<br>') : ''}
+        </div>
+        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            <a href="\${p.viewLink}" target="_blank">
+                <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
+            </a>
+        </div>
+    \`;
+    
+    document.getElementById('project-modal').classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeModal() {
+    document.getElementById('project-modal').classList.remove('active');
+    document.body.style.overflow = 'auto'; // Restore scrolling
 }
 
 function initializeEffects() {
