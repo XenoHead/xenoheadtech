@@ -583,7 +583,7 @@ async function loadProjects() {
                 <div class="project-content">
                     <small>// ${p.category}</small>
                     <h2>${p.title}</h2>
-                    <p>${p.description}</p>
+                    <p>${p.description.replace(/\\n/g, '<br>')}</p>
                     <div class="tags">
                         ${p.tags.map(t => `<span>${t}</span>`).join('')}
                     </div>
