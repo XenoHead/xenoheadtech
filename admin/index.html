@@ -42,8 +42,10 @@
 
     <a href="/" class="nav-back">← RETURN TO MAIN SYSTEM</a>
 
-    <h1>[ SYSTEM ADMIN ]</h1>
-    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1 style="margin-bottom: 0;">[ SYSTEM ADMIN ]</h1>
+        <button id="push-btn" class="btn" style="background: var(--accentSoft); color: var(--bg);" onclick="pushToGit()">Push to GitHub</button>
+    </div>
     <div class="tabs">
         <div class="tab active" onclick="switchTab('projects')">PROJECTS</div>
         <div class="tab" onclick="switchTab('writing')">WRITING</div>
@@ -199,8 +201,27 @@ async function uploadImage() {
             alert('Upload failed');
         }
     } catch (e) {
-        console.error(e);
-        alert('Upload failed');
+        console.error('Upload failed', e);
+    }
+}
+
+async function pushToGit() {
+    const btn = document.getElementById('push-btn');
+    const originalText = btn.innerText;
+    btn.innerText = 'Pushing...';
+    try {
+        const res = await fetch('/api/push', { method: 'POST' });
+        const data = await res.json();
+        if(data.success) {
+            btn.innerText = 'Pushed Successfully!';
+            setTimeout(() => btn.innerText = originalText, 3000);
+        } else {
+            alert('Push failed: ' + data.message);
+            btn.innerText = originalText;
+        }
+    } catch (e) {
+        alert('Push failed: ' + e);
+        btn.innerText = originalText;
     }
 }
 

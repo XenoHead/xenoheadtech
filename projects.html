@@ -680,22 +680,22 @@ function openModal(id) {
     const p = allProjects.find(x => x.id === id);
     if (!p) return;
     
-    document.getElementById('modal-body').innerHTML = \`
-        <div class="modal-hero" style="background-image:url('\${p.image}')"></div>
-        <div class="system" style="color:var(--accent); font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:0.85rem; margin-bottom:1rem;">// \${p.category}</div>
-        <h1 style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1; margin-bottom: 1.5rem;">\${p.title}</h1>
+    document.getElementById('modal-body').innerHTML = `
+        <div class="modal-hero" style="background-image:url('${p.image}')"></div>
+        <div class="system" style="color:var(--accent); font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:0.85rem; margin-bottom:1rem;">// ${p.category}</div>
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1; margin-bottom: 1.5rem;">${p.title}</h1>
         <div class="tags" style="display:flex; gap:0.8rem; margin-bottom: 2rem; flex-wrap: wrap;">
-            \${p.tags.map(t => \`<span style="border: 1px solid rgba(0,207,255,0.15); padding: 0.35rem 0.6rem; color:var(--accentSoft); font-size:0.75rem; font-family:'IBM Plex Mono', monospace;">\${t}</span>\`).join('')}
+            ${p.tags.map(t => `<span style="border: 1px solid rgba(0,207,255,0.15); padding: 0.35rem 0.6rem; color:var(--accentSoft); font-size:0.75rem; font-family:'IBM Plex Mono', monospace;">${t}</span>`).join('')}
         </div>
         <div class="description" style="color:var(--muted); line-height:2; font-size:1.15rem; margin-bottom: 3rem;">
-            \${p.description ? p.description.replace(/\\n/g, '<br>') : ''}
+            ${p.description ? p.description.replace(/\n/g, '<br>') : ''}
         </div>
         <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
-            <a href="\${p.viewLink}" target="_blank">
+            <a href="${p.viewLink}" target="_blank">
                 <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
             </a>
         </div>
-    \`;
+    `;
     
     document.getElementById('project-modal').classList.add('active');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling

@@ -33,7 +33,6 @@ const pushToGithub = () => {
     console.log('Pushing changes to GitHub...');
     exec('git add . && git commit -m "Auto-update from Admin Dashboard" && git push', (error, stdout, stderr) => {
         if (error) {
-            // Ignore errors if there are no changes to commit
             if (!stdout.includes('nothing to commit')) {
                 console.error(`Git push error: ${error.message}`);
             }
@@ -42,6 +41,18 @@ const pushToGithub = () => {
         console.log('GitHub push successful.');
     });
 };
+
+app.post('/api/push', (req, res) => {
+    console.log('Manual push requested...');
+    exec('git add . && git commit -m "Manual update from Admin Dashboard" && git push', (error, stdout, stderr) => {
+        if (error && (!stdout || !stdout.includes('nothing to commit'))) {
+            console.error(`Git push error: ${error.message}`);
+            return res.status(500).json({ success: false, message: error.message });
+        }
+        console.log('Manual push successful.');
+        res.json({ success: true, message: 'Pushed successfully!' });
+    });
+});
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
