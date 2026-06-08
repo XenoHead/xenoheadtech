@@ -583,13 +583,15 @@ async function loadProjects() {
                 <div class="project-content">
                     <small>// ${p.category}</small>
                     <h2>${p.title}</h2>
-                    <p>${p.description.replace(/\\n/g, '<br>')}</p>
+                    <p>${p.description ? p.description.split(/\n/).slice(0, 2).join('<br><br>') + (p.description.split(/\n/).length > 2 ? '<br><br>...' : '') : ''}</p>
                     <div class="tags">
                         ${p.tags.map(t => `<span>${t}</span>`).join('')}
                     </div>
-                    <div class="project-links">
-                        <a href="${p.viewLink}" class="button">View Project</a>
-                        <a href="${p.githubLink}" class="button">GitHub</a>
+                    <div class="project-links" style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+                        <a href="${p.viewLink}" target="_blank">
+                            <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
+                        </a>
+                        <a href="project.html?id=${p.id}" target="_blank" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; transition: 0.3s;">Read more...</a>
                     </div>
                 </div>
             </div>
