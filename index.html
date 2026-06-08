@@ -19,7 +19,7 @@ index.html
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&family=VT323&display=swap"
         rel="stylesheet">
 
     <style>
@@ -157,11 +157,67 @@ LEFT
             animation: fadeUp 1.2s ease forwards;
         }
 
+        .logo-frame {
+            display: inline-block;
+            padding: 0.8rem;
+            margin-bottom: 2rem;
+            
+            border-top: 2px solid rgba(0, 207, 255, 0.6);
+            border-left: 2px solid rgba(0, 207, 255, 0.6);
+            border-bottom: 2px solid rgba(0, 207, 255, 0.1);
+            border-right: 2px solid rgba(0, 207, 255, 0.1);
+            
+            background: rgba(0, 207, 255, 0.05);
+            position: relative;
+            animation: glitchFlicker 6s infinite;
+            
+            box-shadow: 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.2), 
+                inset -2px -2px 5px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(0, 207, 255, 0.1);
+        }
+
+        .logo-frame::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: 
+                linear-gradient(to right, var(--accent) 6px, transparent 6px) top left,
+                linear-gradient(to bottom, var(--accent) 6px, transparent 6px) top left,
+                linear-gradient(to left, var(--accent) 6px, transparent 6px) top right,
+                linear-gradient(to bottom, var(--accent) 6px, transparent 6px) top right,
+                linear-gradient(to right, var(--accent) 6px, transparent 6px) bottom left,
+                linear-gradient(to top, var(--accent) 6px, transparent 6px) bottom left,
+                linear-gradient(to left, var(--accent) 6px, transparent 6px) bottom right,
+                linear-gradient(to top, var(--accent) 6px, transparent 6px) bottom right;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        @keyframes glitchFlicker {
+            0%, 6%, 8%, 46%, 48%, 86%, 88%, 100% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            7% {
+                opacity: 0.1;
+                transform: translate(-3px, 2px);
+            }
+            47% {
+                opacity: 0.3;
+                transform: translate(4px, -1px);
+            }
+            87% {
+                opacity: 0.2;
+                transform: translate(-2px, -3px);
+            }
+        }
+
         .logo {
             width: 120px;
-            margin-bottom: 2rem;
-
-            filter: drop-shadow(0 0 30px rgba(0, 207, 255, 0.25));
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(0, 207, 255, 0.4));
         }
 
         .system {
@@ -173,10 +229,11 @@ LEFT
         }
 
         h1 {
-            font-size: clamp(4rem, 8vw, 7rem);
-            line-height: 0.9;
+            font-family: 'VT323', monospace;
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1;
             margin-bottom: 2rem;
-            font-weight: 700;
+            font-weight: 400;
         }
 
         h1 span {
@@ -381,7 +438,7 @@ MOBILE
 
     <div class="wrapper">
 
-        ```
+
         <div class="hero">
 
             <!-- =========================================
@@ -390,10 +447,12 @@ MOBILE
 
             <div class="left">
 
-                <img src="logo.png" class="logo" alt="XenoHead">
+                <div class="logo-frame">
+                    <img src="logo.png" class="logo" alt="XenoHead">
+                </div>
 
                 <div class="system">
-                    // XENOHEAD SYSTEM ONLINE
+                    /// XENOHEAD SYSTEM ONLINE...
                 </div>
 
                 <h1>
@@ -428,6 +487,14 @@ MOBILE
 
                 </a>
 
+                <a href="tech-work.html" class="nav-button page-link">
+
+                    <strong>Tech Work</strong>
+
+                    <span>[ CODE ]</span>
+
+                </a>
+
                 <a href="writing.html" class="nav-button page-link">
 
                     <strong>Writing</strong>
@@ -452,8 +519,16 @@ MOBILE
 
                 </a>
 
+                <a href="http://localhost:3000/admin" class="nav-button" id="secret-admin-btn" style="display: none; border-color: #00CFFF; background: rgba(0, 207, 255, 0.1);">
+
+                    <strong style="color: #00CFFF;">Admin</strong>
+
+                    <span style="color: #00CFFF;">[ SYSTEM OVERRIDE ]</span>
+
+                </a>
+
                 <div class="terminal">
-                    ```
+                    \\\
 
                     xenohead@lab:~$ whoami<br>
 
@@ -462,17 +537,24 @@ MOBILE
                     > Sci-Fi Writer<br>
                     > Human<span class="cursor">_</span>
 
-                    ```
+                    ///
                 </div>
 
             </div>
 
         </div>
-        ```
+
 
     </div>
 
     <script>
+
+        /* =========================================
+        SECRET ADMIN REVEAL
+        ========================================= */
+        if (localStorage.getItem('xeno_admin') === 'true') {
+            document.getElementById('secret-admin-btn').style.display = 'flex';
+        }
 
         /* =========================================
         PARALLAX GLOW

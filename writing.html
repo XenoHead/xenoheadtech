@@ -567,104 +567,7 @@ MAIN
 <!-- WRITING LIST -->
 
 <div class="writing-list">
-
-    <!-- ENTRY -->
-
-    <article class="entry reveal">
-
-        <small>// SIGNAL 001</small>
-
-        <h2>
-            The Romanticism of Code
-        </h2>
-
-        <p>
-            Software is often treated as machinery,
-            but code is also architecture,
-            language,
-            psychology,
-            and philosophy.
-            A reflection on software creation
-            as artistic and cognitive expression.
-        </p>
-
-        <div class="meta">
-
-            <span>ESSAY</span>
-            <span>SOFTWARE</span>
-            <span>PHILOSOPHY</span>
-
-        </div>
-
-        <a href="#" class="read-button">
-            Read Transmission
-        </a>
-
-    </article>
-
-    <!-- ENTRY -->
-
-    <article class="entry reveal">
-
-        <small>// SIGNAL 002</small>
-
-        <h2>
-            Tomorrow Has Teeth
-        </h2>
-
-        <p>
-            Speculative thoughts on emerging intelligence,
-            machine agency,
-            and the subtle dangers hidden beneath
-            technological acceleration.
-        </p>
-
-        <div class="meta">
-
-            <span>AI</span>
-            <span>SPECULATION</span>
-            <span>FUTURE</span>
-
-        </div>
-
-        <a href="#" class="read-button">
-            Read Transmission
-        </a>
-
-    </article>
-
-    <!-- ENTRY -->
-
-    <article class="entry reveal">
-
-        <small>// SIGNAL 003</small>
-
-        <h2>
-            Echoes Beyond the Simulation
-        </h2>
-
-        <p>
-            A speculative science-fiction fragment
-            exploring memory,
-            artificial consciousness,
-            and the psychological architecture
-            of synthetic worlds.
-        </p>
-
-        <div class="meta">
-
-            <span>SCI-FI</span>
-            <span>FICTION</span>
-            <span>COGNITION</span>
-
-        </div>
-
-        <a href="#" class="read-button">
-            Read Transmission
-        </a>
-
-    </article>
-
+    <!-- Writing entries will be loaded dynamically from data/writing.json -->
 </div>
 
 <!-- FOOTER -->
@@ -683,95 +586,79 @@ MAIN
 
 <script>
 
-/* =========================================
-SCROLL REVEALS
-========================================= */
+async function loadWriting() {
+    try {
+        const response = await fetch('data/writing.json?t=' + Date.now());
+        const writing = await response.json();
+        const list = document.querySelector('.writing-list');
+        list.innerHTML = writing.map(w => `
+            <article class="entry reveal">
+                <small>// ${w.signal}</small>
+                <h2>${w.title}</h2>
+                <p>${w.description}</p>
+                <div class="meta">
+                    ${w.tags.map(t => `<span>${t}</span>`).join('')}
+                </div>
+                <a href="${w.link}" class="read-button">Read Transmission</a>
+            </article>
+        `).join('');
+        
+        initializeEffects();
+    } catch (e) {
+        console.error("Failed to load writing entries:", e);
+    }
+}
 
-const reveals =
-document.querySelectorAll('.reveal');
+function initializeEffects() {
+    /* =========================================
+    SCROLL REVEALS
+    ========================================= */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold:0.15 });
 
-const observer =
-new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.classList.add('active');
-        }
-
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
     });
 
-}, {
-    threshold:0.15
-});
-
-reveals.forEach(reveal => {
-    observer.observe(reveal);
-});
+    /* =========================================
+    ENTRY LIGHT TRACKING
+    ========================================= */
+    const entriesList = document.querySelectorAll('.entry');
+    entriesList.forEach(entry => {
+        entry.addEventListener('mousemove', e => {
+            const rect = entry.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            entry.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,207,255,0.08), rgba(11,16,32,0.76) 45%)`;
+        });
+        entry.addEventListener('mouseleave', () => {
+            entry.style.background = `rgba(11,16,32,0.74)`;
+        });
+    });
+}
 
 /* =========================================
 PAGE TRANSITIONS
 ========================================= */
-
-const pageLinks =
-document.querySelectorAll('.page-link');
-
+const pageLinks = document.querySelectorAll('.page-link');
 pageLinks.forEach(link => {
-
     link.addEventListener('click', e => {
-
         e.preventDefault();
-
         document.body.classList.add('fade-out');
-
-        const target =
-        link.getAttribute('href');
-
+        const target = link.getAttribute('href');
         setTimeout(() => {
-
             window.location.href = target;
-
         }, 400);
-
     });
-
 });
 
-/* =========================================
-ENTRY LIGHT TRACKING
-========================================= */
-
-const entries =
-document.querySelectorAll('.entry');
-
-entries.forEach(entry => {
-
-    entry.addEventListener('mousemove', e => {
-
-        const rect =
-        entry.getBoundingClientRect();
-
-        const x =
-        e.clientX - rect.left;
-
-        const y =
-        e.clientY - rect.top;
-
-        entry.style.background =
-        `radial-gradient(circle at ${x}px ${y}px,
-        rgba(0,207,255,0.08),
-        rgba(11,16,32,0.76) 45%)`;
-
-    });
-
-    entry.addEventListener('mouseleave', () => {
-
-        entry.style.background =
-        `rgba(11,16,32,0.74)`;
-
-    });
-
-});
+document.addEventListener('DOMContentLoaded', loadWriting);
 
 </script>
 

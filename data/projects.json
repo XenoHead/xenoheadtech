@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Creative",
+    "title": "ReelScript",
+    "description": "ReelScript is a professional screenplay writing application built for Windows. \n\n1- It combines industry-standard formatting with real-time collaboration\n\n2- BYOK  AI-content critique and suggestions with out writing for you.\n\n3- An aggressive backup system \n\nAnd MUCH MUCH MORE\nEverything a screenwriter needs in one place.",
+    "tags": [
+      "movie scripts",
+      "writing",
+      "creative"
+    ],
+    "image": "assets/upload-1780959612208.png",
+    "viewLink": "#",
+    "githubLink": "#",
+    "id": "p1780959301301"
+  },
+  {
+    "category": "Multi Media",
+    "title": "Xenoplayer",
+    "description": "# XenoPlayer\n\nXenoPlayer is a versatile, all-in-one media player and manga reader. It effortlessly handles both video files and images (including animated GIFs), automatically loading all supported media within the same directory as the opened file.\n\nBeyond standard playback, XenoPlayer is packed with advanced features including AI-powered live manga translation, built-in online manga downloading, voice-controlled reading, and extensive file management tools. Everything is packaged into a single, easy-to-use application!\n\n## ✨ Key Features\n\n* **Folder-based Playback:** Open a single file and instantly access a playlist of all media in that folder. Seamlessly transitions between playing videos and viewing images/GIFs.\n* **Manga Reading & Live Translation:**\n  * Draw a box over foreign text in the Manga Viewer to automatically recognize and translate it to English (or other languages) using built-in AI.\n  * **Burn Translations:** Optionally burn translated text directly into the image file using ImageMagick.\n  * **Voice Navigation:** Control page-turning using voice commands (\"next\", \"back\", \"previous\") via speech recognition.\n* **Online Manga Integration:** Browse popular tags, search, and download galleries directly from your favorite online sources using the built-in downloader.\n* **Advanced File Management:**\n  * Instantly move files to pre-configured \"Move Target\" folders.\n  * Smart duplicate deletion—automatically finds and removes identical files to save space.\n  * Mass rename files or rename them individually.\n* **Favorites System:** Keep track of your favorite files. Play exclusively your favorites or filter them out to watch only unfavorited content.\n* **Live Thumbnails:** The playlist dynamically generates previews for your videos and images on the fly.\n\n## 🎬 Supported Formats\n\n* **Video:** `.mp4`, `.avi`, `.mkv`, `.mov`, `.wmv`, `.flv`, `.webm`, `.mpg`, `.mpeg`, `.ogg`\n* **Image:** `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`\n\n## 🚀 Installation & Usage\n\n1. **Download:** Grab the latest `XenoPlayer.exe` (or installer) from the Releases page.\n2. **Run:** Double-click the executable to launch the app. No complex setup or dependencies required!\n3. **Play:** Drag and drop a file, or click \"Load Folder/File\" to start watching or reading.\n*(Note: The AI translation model may download a small, one-time update on its very first run).*\n\n## Keyboard & Mouse Shortcuts\n\n### Main Player\n* **Space:** Play / Pause\n* **Left / Right Arrow:** Previous / Next media\n* **Mouse Wheel Up / Down:** Previous / Next media\n* **+ / -:** Increase / Decrease video playback speed\n* **Home / End:** Jump to the start / end of the playlist\n* **F2:** Rename current or selected file(s)\n* **F3:** Move current or selected file(s) to a folder\n* **Delete:** Delete current or selected file(s)\n* **Escape:** Close application\n* **Double-Click Video/Image:** Toggle fullscreen\n\n### Manga Viewer\n* **Left / Right Arrow:** Previous / Next page\n* **Right-Click / Forward/Back Mouse Buttons:** Navigate pages or clear selection boxes\n* **Left-Click & Drag:** Draw translation box\n* **Voice Commands:** Say \"next\", \"forward\", \"back\", or \"previous\" to turn pages (if Voice is enabled).\n",
+    "tags": [],
+    "image": "assets/project-1.webp",
+    "viewLink": "#",
+    "githubLink": "#",
+    "id": "p1780959802267"
+  }
+]

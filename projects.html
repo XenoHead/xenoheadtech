@@ -552,141 +552,7 @@ MAIN
 <!-- PROJECT GRID -->
 
 <div class="projects-grid">
-
-    <!-- PROJECT -->
-
-    <div class="project-card reveal">
-
-        <div class="project-image"
-        style="background-image:url('assets/project-1.webp')">
-        </div>
-
-        <div class="project-content">
-
-            <small>// AI SYSTEM</small>
-
-            <h2>NebulaOS</h2>
-
-            <p>
-                Adaptive AI-assisted operating environment
-                designed for future human-machine workflows
-                and cognition-driven interaction systems.
-            </p>
-
-            <div class="tags">
-
-                <span>AI</span>
-                <span>Systems</span>
-                <span>Research</span>
-
-            </div>
-
-            <div class="project-links">
-
-                <a href="#" class="button">
-                    View Project
-                </a>
-
-                <a href="#" class="button">
-                    GitHub
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- PROJECT -->
-
-    <div class="project-card reveal">
-
-        <div class="project-image"
-        style="background-image:url('assets/project-2.webp')">
-        </div>
-
-        <div class="project-content">
-
-            <small>// COGNITION LAB</small>
-
-            <h2>Cognition Core</h2>
-
-            <p>
-                Experimental modular framework
-                for symbolic reasoning,
-                machine cognition,
-                and recursive intelligence systems.
-            </p>
-
-            <div class="tags">
-
-                <span>ML</span>
-                <span>Framework</span>
-                <span>Neural</span>
-
-            </div>
-
-            <div class="project-links">
-
-                <a href="#" class="button">
-                    View Project
-                </a>
-
-                <a href="#" class="button">
-                    GitHub
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- PROJECT -->
-
-    <div class="project-card reveal">
-
-        <div class="project-image"
-        style="background-image:url('assets/project-3.webp')">
-        </div>
-
-        <div class="project-content">
-
-            <small>// INTERFACE DESIGN</small>
-
-            <h2>Ghost Protocol</h2>
-
-            <p>
-                Cybernetic interface experiments inspired
-                by science-fiction command systems,
-                neural overlays,
-                and immersive future UI concepts.
-            </p>
-
-            <div class="tags">
-
-                <span>UI</span>
-                <span>Cyberpunk</span>
-                <span>Design</span>
-
-            </div>
-
-            <div class="project-links">
-
-                <a href="#" class="button">
-                    View Project
-                </a>
-
-                <a href="#" class="button">
-                    GitHub
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
+    <!-- Projects will be loaded dynamically from data/projects.json -->
 </div>
 
 <!-- FOOTER -->
@@ -705,90 +571,86 @@ MAIN
 
 <script>
 
-/* =========================================
-SCROLL REVEAL
-========================================= */
+async function loadProjects() {
+    try {
+        // Prevent caching in development by appending timestamp, though a cache-control header is better in prod
+        const response = await fetch('data/projects.json?t=' + Date.now());
+        const projects = await response.json();
+        const grid = document.querySelector('.projects-grid');
+        grid.innerHTML = projects.map(p => `
+            <div class="project-card reveal">
+                <div class="project-image" style="background-image:url('${p.image}')"></div>
+                <div class="project-content">
+                    <small>// ${p.category}</small>
+                    <h2>${p.title}</h2>
+                    <p>${p.description}</p>
+                    <div class="tags">
+                        ${p.tags.map(t => `<span>${t}</span>`).join('')}
+                    </div>
+                    <div class="project-links">
+                        <a href="${p.viewLink}" class="button">View Project</a>
+                        <a href="${p.githubLink}" class="button">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        initializeEffects();
+    } catch (e) {
+        console.error("Failed to load projects:", e);
+    }
+}
 
-const reveals = document.querySelectorAll('.reveal');
+function initializeEffects() {
+    /* =========================================
+    SCROLL REVEAL
+    ========================================= */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold:0.15 });
 
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.classList.add('active');
-        }
-
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
     });
 
-}, {
-    threshold:0.15
-});
-
-reveals.forEach(reveal => {
-    observer.observe(reveal);
-});
+    /* =========================================
+    CARD LIGHT TRACKING
+    ========================================= */
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,207,255,0.10), rgba(11,16,32,0.78) 40%)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.background = `rgba(11,16,32,0.72)`;
+        });
+    });
+}
 
 /* =========================================
 PAGE TRANSITIONS
 ========================================= */
-
-const pageLinks =
-document.querySelectorAll('.page-link');
-
+const pageLinks = document.querySelectorAll('.page-link');
 pageLinks.forEach(link => {
-
     link.addEventListener('click', e => {
-
         e.preventDefault();
-
         document.body.classList.add('fade-out');
-
-        const target =
-        link.getAttribute('href');
-
+        const target = link.getAttribute('href');
         setTimeout(() => {
-
             window.location.href = target;
-
         }, 400);
-
     });
-
 });
 
-/* =========================================
-CARD LIGHT TRACKING
-========================================= */
-
-const cards =
-document.querySelectorAll('.project-card');
-
-cards.forEach(card => {
-
-    card.addEventListener('mousemove', e => {
-
-        const rect =
-        card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        card.style.background =
-        `radial-gradient(circle at ${x}px ${y}px,
-        rgba(0,207,255,0.10),
-        rgba(11,16,32,0.78) 40%)`;
-
-    });
-
-    card.addEventListener('mouseleave', () => {
-
-        card.style.background =
-        `rgba(11,16,32,0.72)`;
-
-    });
-
-});
+document.addEventListener('DOMContentLoaded', loadProjects);
 
 </script>
 
