@@ -321,6 +321,17 @@ BUTTONS
 ANIMATION
 ========================================= */
 
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
         @keyframes fadeUp {
 
             from {
@@ -497,62 +508,8 @@ MAIN
 
         <!-- BOOK -->
 
-        <div class="book-panel">
-
-            <!-- COVER -->
-
-            <div class="book-cover"></div>
-
-            <!-- INFO -->
-
-            <div class="book-info">
-
-                <small>// CURRENT TRANSMISSION</small>
-
-                <h2>
-                    The Silence
-                    Between Stars
-                </h2>
-
-                <p>
-                    In the aftermath of a failed cognitive expansion experiment,
-                    fragments of synthetic consciousness begin appearing
-                    across interstellar communication networks.
-                    Humanity is forced to confront an intelligence
-                    that may not be alien —
-                    but post-human.
-                </p>
-
-                <div class="quote">
-
-                    “We believed consciousness
-                    belonged to biology.
-                    We were wrong.”
-
-                </div>
-
-                <p>
-                    A science-fiction exploration of memory,
-                    machine cognition,
-                    isolation,
-                    and the terrifying beauty
-                    of emergent intelligence.
-                </p>
-
-                <div class="buttons">
-
-                    <a href="#" class="button">
-                        Read Excerpt
-                    </a>
-
-                    <a href="#" class="button">
-                        Purchase
-                    </a>
-
-                </div>
-
-            </div>
-
+        <div id="books-container" style="display: flex; flex-direction: column; gap: 4rem;">
+            <!-- Books will be loaded dynamically from data/books.json -->
         </div>
 
         <!-- FOOTER -->
@@ -599,37 +556,61 @@ MAIN
 
         });
 
-        /* =========================================
-        BOOK PANEL LIGHT TRACKING
-        ========================================= */
+        async function loadBooks() {
+            try {
+                const response = await fetch('data/books.json?t=' + Date.now());
+                const books = await response.json();
+                const container = document.getElementById('books-container');
+                
+                container.innerHTML = books.map(b => `
+                    <div class="book-panel reveal">
+                        <div class="book-cover" style="${b.cover ? `background-image: url('${b.cover}')` : ''}"></div>
+                        <div class="book-info">
+                            <small>// ${b.category || 'TRANSMISSION'}</small>
+                            <h2>${b.title}</h2>
+                            <p>${b.descriptionTop ? b.descriptionTop.replace(/\n/g, '<br>') : ''}</p>
+                            ${b.quote ? `<div class="quote">“${b.quote.replace(/\n/g, '<br>')}”</div>` : ''}
+                            <p>${b.descriptionBottom ? b.descriptionBottom.replace(/\n/g, '<br>') : ''}</p>
+                            <div class="buttons">
+                                ${b.excerptLink ? `<a href="${b.excerptLink}" class="button">Read Excerpt</a>` : ''}
+                                ${b.purchaseLink ? `<a href="${b.purchaseLink}" class="button">Purchase</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
 
-        const panel =
-            document.querySelector('.book-panel');
+                initializeEffects();
+            } catch (e) {
+                console.error("Failed to load books:", e);
+            }
+        }
 
-        panel.addEventListener('mousemove', e => {
+        function initializeEffects() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+            reveals.forEach(reveal => observer.observe(reveal));
 
-            const rect =
-                panel.getBoundingClientRect();
+            const panels = document.querySelectorAll('.book-panel');
+            panels.forEach(panel => {
+                panel.addEventListener('mousemove', e => {
+                    const rect = panel.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    panel.style.background = \`radial-gradient(circle at ${x}px ${y}px, rgba(0,207,255,0.08), rgba(11,16,32,0.76) 45%)\`;
+                });
+                panel.addEventListener('mouseleave', () => {
+                    panel.style.background = \`rgba(11,16,32,0.72)\`;
+                });
+            });
+        }
 
-            const x =
-                e.clientX - rect.left;
-
-            const y =
-                e.clientY - rect.top;
-
-            panel.style.background =
-                `radial-gradient(circle at ${x}px ${y}px,
-    rgba(0,207,255,0.08),
-    rgba(11,16,32,0.76) 45%)`;
-
-        });
-
-        panel.addEventListener('mouseleave', () => {
-
-            panel.style.background =
-                `rgba(11,16,32,0.72)`;
-
-        });
+        document.addEventListener('DOMContentLoaded', loadBooks);
 
     </script>
 
