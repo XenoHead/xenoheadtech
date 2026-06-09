@@ -149,6 +149,41 @@ app.delete('/api/writing/:id', (req, res) => {
     res.json({ success: true });
 });
 
+// Tech-Work Routes
+app.get('/api/tech-work', (req, res) => {
+    res.json(readData('tech-work.json'));
+});
+
+app.post('/api/tech-work', (req, res) => {
+    const techwork = readData('tech-work.json');
+    const newEntry = { ...req.body, id: 'tw' + Date.now() };
+    techwork.push(newEntry);
+    writeData('tech-work.json', techwork);
+    pushToGithub();
+    res.json(newEntry);
+});
+
+app.put('/api/tech-work/:id', (req, res) => {
+    const techwork = readData('tech-work.json');
+    const index = techwork.findIndex(w => w.id === req.params.id);
+    if (index !== -1) {
+        techwork[index] = { ...techwork[index], ...req.body, id: req.params.id };
+        writeData('tech-work.json', techwork);
+        pushToGithub();
+        res.json(techwork[index]);
+    } else {
+        res.status(404).send('Not found');
+    }
+});
+
+app.delete('/api/tech-work/:id', (req, res) => {
+    let techwork = readData('tech-work.json');
+    techwork = techwork.filter(w => w.id !== req.params.id);
+    writeData('tech-work.json', techwork);
+    pushToGithub();
+    res.json({ success: true });
+});
+
 app.listen(PORT, () => {
     console.log(`XenoHead Admin Server running at http://localhost:${PORT}/admin`);
 });

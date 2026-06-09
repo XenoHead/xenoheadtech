@@ -48,12 +48,18 @@
     </div>
     <div class="tabs">
         <div class="tab active" onclick="switchTab('projects')">PROJECTS</div>
+        <div class="tab" onclick="switchTab('tech-work')">TECH WORK</div>
         <div class="tab" onclick="switchTab('writing')">WRITING</div>
     </div>
 
     <div id="projects-panel" class="panel active">
         <button class="btn" style="margin-bottom: 1rem;" onclick="openEditor('projects')">+ NEW PROJECT</button>
         <div id="projects-list"></div>
+    </div>
+
+    <div id="tech-work-panel" class="panel">
+        <button class="btn" style="margin-bottom: 1rem;" onclick="openEditor('tech-work')">+ NEW TECH WORK</button>
+        <div id="tech-work-list"></div>
     </div>
 
     <div id="writing-panel" class="panel">
@@ -75,7 +81,7 @@
     </div>
 
 <script>
-let currentData = { projects: [], writing: [] };
+let currentData = { projects: [], writing: [], 'tech-work': [] };
 let editingType = null;
 let editingId = null;
 
@@ -115,23 +121,23 @@ function openEditor(type, id = null) {
     
     document.getElementById('modal-title').innerText = id ? `EDIT ${type.toUpperCase()}` : `NEW ${type.toUpperCase()}`;
     
-    let fieldsHtml = '';
-    if (type === 'projects') {
-        fieldsHtml = `
-            <div class="form-group"><label>Category / System</label><input type="text" name="category" value="${item.category || ''}" required></div>
-            <div class="form-group"><label>Title</label><input type="text" name="title" value="${item.title || ''}" required></div>
-            <div class="form-group"><label>Description</label><textarea name="description" rows="4" required>${item.description || ''}</textarea></div>
-            <div class="form-group"><label>Tags (comma separated)</label><input type="text" name="tags" value="${(item.tags || []).join(', ')}"></div>
-            <div class="form-group">
-                <label>Image</label>
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" name="image" id="image-input" value="${item.image || 'assets/project-1.webp'}" style="flex: 1;">
-                    <input type="file" id="image-file" style="display: none;" accept="image/*" onchange="uploadImage()">
-                    <button type="button" class="btn" onclick="document.getElementById('image-file').click()">UPLOAD</button>
+    let fieldsHtml;
+    if (type === 'projects' || type === 'tech-work') {
+            fieldsHtml = `
+                <div class="form-group"><label>Title</label><input type="text" name="title" value="${item.title || ''}" required></div>
+                <div class="form-group"><label>Category/System</label><input type="text" name="category" value="${item.category || ''}" required></div>
+                <div class="form-group"><label>Tags (comma separated)</label><input type="text" name="tags" value="${item.tags ? item.tags.join(', ') : ''}" required></div>
+                <div class="form-group"><label>Description</label><textarea name="description" rows="5" required>${item.description || ''}</textarea></div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <div style="display:flex; gap:1rem;">
+                        <input type="text" name="image" id="image-url-input" value="${item.image || ''}">
+                        <input type="file" id="image-file" style="display:none;" accept="image/*">
+                        <button type="button" class="btn" onclick="document.getElementById('image-file').click()">UPLOAD</button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group"><label>MS Store Link</label><input type="text" name="viewLink" value="${item.viewLink || '#'}"></div>
-        `;
+                <div class="form-group"><label>MS Store Link (or URL)</label><input type="text" name="viewLink" value="${item.viewLink || '#'}"></div>
+            `;
     } else {
         fieldsHtml = `
             <div class="form-group"><label>Signal / Meta</label><input type="text" name="signal" value="${item.signal || ''}" required></div>
@@ -227,6 +233,8 @@ async function pushToGit() {
 
 // Init
 fetchData('projects');
+fetchData('tech-work');
+fetchData('writing');
 </script>
 </body>
 </html>
