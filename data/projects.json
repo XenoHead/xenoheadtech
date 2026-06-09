@@ -37,5 +37,17 @@
     "image": "",
     "viewLink": "#",
     "id": "p1780974760545"
+  },
+  {
+    "title": "XenoMP3",
+    "category": "MP3 Player, Audio Meta Embedding",
+    "tags": [
+      "mp3 player",
+      "meta tag embedding"
+    ],
+    "description": "Plays MP3 file and displays any embedded lyrics tot he song.\nAllows you to manually add lyrics or other meta data and will search the internet lyrics pages for lyrics to every song with them",
+    "image": "",
+    "viewLink": "#",
+    "id": "p1780985096386"
   }
 ]

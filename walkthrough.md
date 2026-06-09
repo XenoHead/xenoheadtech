@@ -10,6 +10,7 @@ Right now, if you load up your `index.html` file, you won't see the Admin button
 2. Open your browser's Developer Tools (`F12` or `Ctrl+Shift+I`).
 3. Go to the **Console** tab.
 4. Paste the following command and hit Enter:
+   
    ```javascript
    localStorage.setItem('xeno_admin', 'true')
    ```
@@ -20,8 +21,10 @@ Right now, if you load up your `index.html` file, you won't see the Admin button
 The Admin Dashboard runs locally on your machine, meaning it is perfectly secure and impossible for internet users to access.
 
 Whenever you want to add or edit content:
+
 1. Open a terminal in your `xenoheadtech` directory.
 2. Run the command:
+   
    ```bash
    node admin.js
    ```
@@ -33,6 +36,7 @@ Whenever you want to add or edit content:
 ## 3. The Dashboard
 
 The Dashboard allows you to switch between **PROJECTS** and **WRITING**. 
+
 - You can add new entries, edit existing ones, and delete them.
 - Everything is instantly saved to `data/projects.json` and `data/writing.json`.
 - The live `projects.html` and `writing.html` pages will instantly fetch and display the new content without you needing to write a single line of code!
