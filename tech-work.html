@@ -6,696 +6,598 @@ projects.html
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>XenoHead — Tech Work</title>
+    <title>XenoHead — Tech Work</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
 
-<style>
-
-@font-face {
-    font-family: 'Elektora';
-    src: url('assets/Elektora-qm0.ttf') format('truetype');
-}
-.logo h2 {
-    font-family: 'Elektora', sans-serif !important;
-    font-size: 2.2rem !important;
-    text-transform: none !important;
-    letter-spacing: 1px !important;
-}
-
-
-@font-face {
-    font-family: 'MSDOS';
-    src: url('PcSeniorRegular-OEnd.ttf') format('truetype');
-}
-h1, h2, h3, .header h1, .hero h1 {
-    font-family: 'MSDOS', monospace !important;
-    font-weight: normal !important;
-    line-height: 1.2 !important;
-    text-transform: uppercase;
-}
-h1 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
-h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
-h3 { font-size: clamp(1rem, 1.5vw, 1.2rem); }
-
-
-/* =========================================
-RESET
-========================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050816;
-    color:#EAF7FF;
-    font-family:'Space Grotesk',sans-serif;
-    overflow-x:hidden;
-}
-
-/* =========================================
-VARIABLES
-========================================= */
-
-:root{
-    --bg:#050816;
-    --surface:#0B1020;
-    --surface2:#12192B;
-    --accent:#00CFFF;
-    --accentSoft:#5CE1FF;
-    --text:#EAF7FF;
-    --muted:#7D8CA3;
-}
-
-/* =========================================
+    <style>
+        /* =========================================
 BACKGROUND
 ========================================= */
 
-.background-image{
-    position:fixed;
-    inset:0;
+        .background-image {
+            position: fixed;
+            inset: 0;
 
-    background-image:
-    linear-gradient(rgba(5,8,22,0.86), rgba(5,8,22,0.95)),
-    url('assets/projects-bg.webp');
+            background-image:
+                linear-gradient(rgba(5, 8, 22, 0.86), rgba(5, 8, 22, 0.95)),
+                url('assets/projects-bg.webp');
 
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-    z-index:-2;
+            z-index: -2;
 
-    animation:slowZoom 24s ease-in-out infinite alternate;
-}
+            animation: slowZoom 24s ease-in-out infinite alternate;
+        }
 
-@keyframes slowZoom{
-    from{
-        transform:scale(1.02);
-    }
+        @keyframes slowZoom {
+            from {
+                transform: scale(1.02);
+            }
 
-    to{
-        transform:scale(1.08);
-    }
-}
+            to {
+                transform: scale(1.08);
+            }
+        }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
 
-    background:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 
-    background-size:60px 60px;
+            background-size: 60px 60px;
 
-    z-index:-1;
-}
+            z-index: -1;
+        }
 
-/* =========================================
-NAV
-========================================= */
-
-nav{
-    width:100%;
-    position:fixed;
-    top:0;
-    z-index:999;
-
-    backdrop-filter:blur(18px);
-
-    background:rgba(5,8,22,0.7);
-
-    border-bottom:1px solid rgba(255,255,255,0.05);
-}
-
-.nav-inner{
-    max-width:1300px;
-    margin:auto;
-
-    padding:1.4rem 2rem 1.4rem 80px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:1rem;
-
-    text-decoration:none;
-    color:white;
-}
-
-.logo img{
-    width:42px;
-}
-
-.logo span{
-    color:var(--accent);
-}
-
-.nav-links{
-    display:flex;
-    gap:2rem;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:var(--muted);
-
-    transition:0.3s;
-
-    position:relative;
-}
-
-.nav-links a:hover{
-    color:var(--accent);
-}
-
-/* =========================================
+        /* =========================================
 LAYOUT
 ========================================= */
 
-.container{
-    max-width:1300px;
-    margin:auto;
+        .container {
+            max-width: 1300px;
+            margin: auto;
 
-    padding:9rem 2rem 6rem 80px;
-}
+            padding: 9rem 2rem 6rem 80px;
+        }
 
-/* =========================================
+        /* =========================================
 HEADER
 ========================================= */
 
-.header{
-    margin-bottom:5rem;
+        .header {
+            margin-bottom: 5rem;
 
-    animation:fadeUp 1s ease forwards;
-}
+            animation: fadeUp 1s ease forwards;
+        }
 
-.system{
-    color:var(--accent);
-    font-family:'IBM Plex Mono', monospace;
-    letter-spacing:2px;
-    font-size:0.85rem;
+        .system {
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
 
-    margin-bottom:1rem;
-}
+            margin-bottom: 1rem;
+        }
 
-.header h1{
-    font-size:clamp(2rem,5vw,4rem);
-    line-height:0.95;
+        .header h1 {
+            line-height: 0.95;
 
-    margin-bottom:1.5rem;
-}
+            margin-bottom: 1.5rem;
+        }
 
-.header p{
-    max-width:700px;
+        .header p {
+            max-width: 700px;
 
-    color:var(--muted);
+            color: var(--muted);
 
-    line-height:1.9;
-    font-size:1.1rem;
-}
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
 
-/* =========================================
+        /* =========================================
 PROJECT GRID
 ========================================= */
 
-.projects-grid{
+        .projects-grid {
 
-    display:grid;
+            display: grid;
 
-    grid-template-columns:
-    repeat(auto-fit,minmax(340px,1fr));
+            grid-template-columns:
+                repeat(auto-fit, minmax(340px, 1fr));
 
-    gap:2rem;
-}
+            gap: 2rem;
+        }
 
-/* =========================================
+        /* =========================================
 PROJECT CARD
 ========================================= */
 
-.project-card{
+        .project-card {
 
-    position:relative;
+            position: relative;
 
-    background:
-    rgba(11,16,32,0.72);
+            background:
+                rgba(11, 16, 32, 0.72);
 
-    border:
-    1px solid rgba(255,255,255,0.06);
+            border:
+                1px solid rgba(255, 255, 255, 0.06);
 
-    overflow:hidden;
+            overflow: hidden;
 
-    transition:0.4s ease;
+            transition: 0.4s ease;
 
-    backdrop-filter:blur(14px);
+            backdrop-filter: blur(14px);
 
-    min-height:480px;
+            min-height: 480px;
 
-    display:flex;
-    flex-direction:column;
-}
+            display: flex;
+            flex-direction: column;
+        }
 
-.project-card:hover{
+        .project-card:hover {
 
-    transform:
-    translateY(-10px);
+            transform:
+                translateY(-10px);
 
-    border-color:
-    rgba(0,207,255,0.28);
+            border-color:
+                rgba(0, 207, 255, 0.28);
 
-    box-shadow:
-    0 0 40px rgba(0,207,255,0.1);
+            box-shadow:
+                0 0 40px rgba(0, 207, 255, 0.1);
 
-}
+        }
 
-/* =========================================
+        /* =========================================
 PROJECT IMAGE
 ========================================= */
 
-.project-image{
-    height:220px;
+        .project-image {
+            height: 220px;
 
-    background-size:cover;
-    background-position:center;
+            background-size: cover;
+            background-position: center;
 
-    position:relative;
-}
+            position: relative;
+        }
 
-.project-image::after{
-    content:"";
+        .project-image::after {
+            content: "";
 
-    position:absolute;
-    inset:0;
+            position: absolute;
+            inset: 0;
 
-    background:
-    linear-gradient(
-    transparent,
-    rgba(5,8,22,0.95));
-}
+            background:
+                linear-gradient(transparent,
+                    rgba(5, 8, 22, 0.95));
+        }
 
-/* =========================================
+        /* =========================================
 CARD CONTENT
 ========================================= */
 
-.project-content{
+        .project-content {
 
-    padding:2rem;
+            padding: 2rem;
 
-    flex:1;
+            flex: 1;
 
-    display:flex;
-    flex-direction:column;
-}
+            display: flex;
+            flex-direction: column;
+        }
 
-.project-content small{
-    color:var(--accent);
+        .project-content small {
+            color: var(--accent);
 
-    font-family:'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
 
-    letter-spacing:2px;
-}
+            letter-spacing: 2px;
+        }
 
-.project-content h2{
+        .project-content h2 {
 
-    margin:1rem 0;
+            margin: 1rem 0;
+        }
 
-    font-size:1.8rem;
-}
+        .project-content p {
 
-.project-content p{
+            color: var(--muted);
 
-    color:var(--muted);
+            line-height: 1.8;
 
-    line-height:1.8;
+            margin-bottom: 2rem;
+        }
 
-    margin-bottom:2rem;
-}
-
-/* =========================================
+        /* =========================================
 TAGS
 ========================================= */
 
-.tags{
-    display:flex;
-    gap:0.6rem;
-    flex-wrap:wrap;
+        .tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
 
-    margin-top:auto;
-}
+            margin-top: auto;
+        }
 
-.tags span{
+        .tags span {
 
-    border:
-    1px solid rgba(0,207,255,0.18);
+            border:
+                1px solid rgba(0, 207, 255, 0.18);
 
-    padding:
-    0.4rem 0.7rem;
+            padding:
+                0.4rem 0.7rem;
 
-    color:var(--accent);
+            color: var(--accent);
 
-    font-size:0.75rem;
+            font-size: 0.75rem;
 
-    font-family:'IBM Plex Mono', monospace;
-}
+            font-family: 'IBM Plex Mono', monospace;
+        }
 
-/* =========================================
+        /* =========================================
 BUTTONS
 ========================================= */
 
-.project-links{
+        .project-links {
 
-    display:flex;
-    gap:1rem;
+            display: flex;
+            gap: 1rem;
 
-    margin-top:2rem;
-}
+            margin-top: 2rem;
+        }
 
-.button{
+        .button {
 
-    padding:
-    0.9rem 1.3rem;
+            padding:
+                0.9rem 1.3rem;
 
-    text-decoration:none;
+            text-decoration: none;
 
-    border:
-    1px solid rgba(0,207,255,0.22);
+            border:
+                1px solid rgba(0, 207, 255, 0.22);
 
-    color:white;
+            color: white;
 
-    transition:0.3s ease;
+            transition: 0.3s ease;
 
-    position:relative;
+            position: relative;
 
-    overflow:hidden;
-}
+            overflow: hidden;
+        }
 
-.button:hover{
+        .button:hover {
 
-    background:
-    rgba(0,207,255,0.1);
+            background:
+                rgba(0, 207, 255, 0.1);
 
-    border-color:
-    rgba(0,207,255,0.45);
+            border-color:
+                rgba(0, 207, 255, 0.45);
 
-    box-shadow:
-    0 0 25px rgba(0,207,255,0.18);
-}
+            box-shadow:
+                0 0 25px rgba(0, 207, 255, 0.18);
+        }
 
-/* =========================================
+        /* =========================================
 ANIMATION
 ========================================= */
 
-.reveal{
-    opacity:0;
-    transform:translateY(40px);
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
 
-    transition:1s ease;
-}
+            transition: 1s ease;
+        }
 
-.reveal.active{
-    opacity:1;
-    transform:translateY(0px);
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0px);
+        }
 
-@keyframes fadeUp{
+        @keyframes fadeUp {
 
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
 
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
 
-}
+        }
 
-/* =========================================
-FOOTER
-========================================= */
-
-footer{
-
-    margin-top:6rem;
-
-    border-top:
-    1px solid rgba(255,255,255,0.05);
-
-    padding-top:2rem;
-
-    color:var(--muted);
-}
-
-/* =========================================
-PAGE TRANSITION
-========================================= */
-
-.fade-out{
-    animation:fadeOut 0.45s ease forwards;
-}
-
-@keyframes fadeOut{
-
-    to{
-        opacity:0;
-        filter:blur(8px);
-        transform:scale(1.02);
-    }
-
-}
-
-/* =========================================
+        /* =========================================
 MODAL
 ========================================= */
 
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(5,8,22,0.95);
-    z-index: 2000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    opacity: 0;
-    transition: 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-.modal-overlay.active {
-    display: flex;
-    opacity: 1;
-}
-.modal-content {
-    background: var(--surface);
-    border: 1px solid rgba(0,207,255,0.2);
-    box-shadow: 0 0 40px rgba(0,207,255,0.1);
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    padding: 3rem;
-}
-.modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 2.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-    line-height: 1;
-}
-.modal-close:hover {
-    color: var(--accent);
-}
-.modal-hero {
-    width: 100%;
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    border: 1px solid rgba(0,207,255,0.2);
-    margin-bottom: 2rem;
-    position: relative;
-}
-.modal-hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, var(--surface), transparent);
-}
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 22, 0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
 
-@media(max-width:800px){
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
 
-    .nav-links{
-        display:none;
-    }
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid rgba(0, 207, 255, 0.2);
+            box-shadow: 0 0 40px rgba(0, 207, 255, 0.1);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 3rem;
+        }
 
-    .projects-grid{
-        grid-template-columns:1fr;
-    }
-    
-    .modal-content {
-        padding: 1.5rem;
-    }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            line-height: 1;
+        }
 
-}
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal-hero {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(0, 207, 255, 0.2);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .modal-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--surface), transparent);
+        }
+
+        @media(max-width:800px) {
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+        }
 
 
-/* CYBER SIDEBAR */
-.cyber-sidebar { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); height: 85vh; width: 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; z-index: 10; pointer-events: none; --accent: #00ff00; }
-.cyber-line { flex-grow: 1; border-left: 1px dotted var(--accent); width: 4px; border-right: 1px dotted var(--accent); opacity: 0.6; position: relative; margin: 10px 0; }
-.cyber-text { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; margin: 2rem 0; opacity: 0.9; text-shadow: 0 0 5px var(--accent); }
-.cyber-blocks { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
-.cyber-blocks span { display: block; width: 12px; height: 12px; border: 1px solid var(--accent); opacity: 0.6; box-shadow: inset 0 0 5px var(--accent); }
-.cyber-blocks span.active { background: var(--accent); opacity: 1; box-shadow: 0 0 10px var(--accent); }
-@media(max-width:800px) { .cyber-sidebar { display: none; } }
+        /* CYBER SIDEBAR */
+        .cyber-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 85vh;
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+            --accent: #00ff00;
+        }
 
-</style>
+        .cyber-line {
+            flex-grow: 1;
+            border-left: 1px dotted var(--accent);
+            width: 4px;
+            border-right: 1px dotted var(--accent);
+            opacity: 0.6;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .cyber-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            margin: 2rem 0;
+            opacity: 0.9;
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        .cyber-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .cyber-blocks span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--accent);
+            opacity: 0.6;
+            box-shadow: inset 0 0 5px var(--accent);
+        }
+
+        .cyber-blocks span.active {
+            background: var(--accent);
+            opacity: 1;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @media(max-width:800px) {
+            .cyber-sidebar {
+                display: none;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="background-image"></div>
+    <div class="background-image"></div>
 
-<div class="cyber-sidebar">
-    <div class="cyber-blocks"><span class="active" style="height:20px"></span><span style="height:4px"></span><span style="height:10px"></span></div>
-    <div class="cyber-line"></div>
-    <div class="cyber-text">TECH.NET // COMPILE_SEQ_99</div>
-    <div class="cyber-line"></div>
-    <div class="cyber-blocks"><span class="active" style="height:20px"></span><span style="height:4px"></span><span style="height:10px"></span></div>
-</div>
+    <div class="cyber-sidebar">
+        <div class="cyber-blocks"><span class="active" style="height:20px"></span><span style="height:4px"></span><span
+                style="height:10px"></span></div>
+        <div class="cyber-line"></div>
+        <div class="cyber-text">TECH.NET // COMPILE_SEQ_99</div>
+        <div class="cyber-line"></div>
+        <div class="cyber-blocks"><span class="active" style="height:20px"></span><span style="height:4px"></span><span
+                style="height:10px"></span></div>
+    </div>
 
 
-<!-- =========================================
+    <!-- =========================================
 NAVIGATION
 ========================================= -->
 
-<nav>
+    <nav>
 
-```
-<div class="nav-inner">
+        ```
+        <div class="nav-inner">
 
-    <a href="index.html" class="logo page-link">
+            <a href="index.html" class="logo page-link">
 
-        <img src="logo.png" alt="XenoHead">
+                <img src="logo.png" alt="XenoHead">
 
-        <h2>Xeno<span>Head</span></h2>
+                <h2>Xeno<span>Head</span></h2>
 
-    </a>
+            </a>
 
-    <div class="nav-links">
+            <div class="nav-links">
 
-        <a href="projects.html">Projects</a>
+                <a href="projects.html">Projects</a>
 
-        <a href="writing.html">Writing</a>
+                <a href="writing.html">Writing</a>
 
-        <a href="books.html">Books</a>
+                <a href="books.html">Books</a>
 
-        <a href="contact.html">Contact</a>
+                <a href="contact.html">Contact</a>
 
-    </div>
+            </div>
 
-</div>
-```
+        </div>
+        ```
 
-</nav>
+    </nav>
 
-<!-- =========================================
+    <!-- =========================================
 MAIN
 ========================================= -->
 
-<div class="container">
+    <div class="container">
 
-```
-<!-- HEADER -->
+        ```
+        <!-- HEADER -->
 
-<div class="header">
+        <div class="header">
 
-    <div class="system">
-        // ACTIVE SYSTEMS
+            <div class="system">
+                // ACTIVE SYSTEMS
+            </div>
+
+            <h1>
+                Technical Work &
+                Code
+            </h1>
+
+            <p>
+                Independent software systems,
+                AI experimentation,
+                interface design,
+                speculative tooling,
+                and research-oriented development
+                from the edge of tomorrow.
+            </p>
+
+        </div>
+
+        <!-- PROJECT GRID -->
+
+        <div class="projects-grid">
+            <!-- Tech work will be loaded dynamically from data/tech-work.json -->
+        </div>
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                XenoHead —
+                Building systems for strange futures.
+            </p>
+
+        </footer>
+        ```
+
     </div>
 
-    <h1>
-        Technical Work &
-        Code
-    </h1>
-
-    <p>
-        Independent software systems,
-        AI experimentation,
-        interface design,
-        speculative tooling,
-        and research-oriented development
-        from the edge of tomorrow.
-    </p>
-
-</div>
-
-<!-- PROJECT GRID -->
-
-<div class="projects-grid">
-    <!-- Tech work will be loaded dynamically from data/tech-work.json -->
-</div>
-
-<!-- FOOTER -->
-
-<footer>
-
-    <p>
-        XenoHead —
-        Building systems for strange futures.
-    </p>
-
-</footer>
-```
-
-</div>
-
-<!-- MODAL -->
-<div id="project-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-        <div id="modal-body"></div>
+    <!-- MODAL -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
     </div>
-</div>
 
-<script>
+    <script>
 
-let allTechWork = [];
+        let allTechWork = [];
 
-async function loadTechWork() {
-    try {
-        // Prevent caching in development by appending timestamp, though a cache-control header is better in prod
-        const response = await fetch('data/tech-work.json?t=' + Date.now());
-        allTechWork = await response.json();
-        const grid = document.querySelector('.projects-grid');
-        grid.innerHTML = allTechWork.map(p => `
+        async function loadTechWork() {
+            try {
+                // Prevent caching in development by appending timestamp, though a cache-control header is better in prod
+                const response = await fetch('data/tech-work.json?t=' + Date.now());
+                allTechWork = await response.json();
+                const grid = document.querySelector('.projects-grid');
+                grid.innerHTML = allTechWork.map(p => `
             <div class="project-card reveal">
                 <div class="project-image" style="background-image:url('${p.image}')"></div>
                 <div class="project-content">
@@ -714,21 +616,21 @@ async function loadTechWork() {
                 </div>
             </div>
         `).join('');
-        
-        initializeEffects();
-    } catch (e) {
-        console.error("Failed to load projects:", e);
-    }
-}
 
-function openModal(id) {
-    const p = allTechWork.find(x => x.id === id);
-    if (!p) return;
-    
-    document.getElementById('modal-body').innerHTML = `
+                initializeEffects();
+            } catch (e) {
+                console.error("Failed to load projects:", e);
+            }
+        }
+
+        function openModal(id) {
+            const p = allTechWork.find(x => x.id === id);
+            if (!p) return;
+
+            document.getElementById('modal-body').innerHTML = `
         <div class="modal-hero" style="background-image:url('${p.image || ''}')"></div>
         <div class="system" style="color:var(--accent); font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:0.85rem; margin-bottom:1rem;">// ${p.category || 'System'}</div>
-        <h1 style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1; margin-bottom: 1.5rem;">${p.title || 'Untitled'}</h1>
+        <h1 style="line-height: 1; margin-bottom: 1.5rem;">${p.title || 'Untitled'}</h1>
         <div class="tags" style="display:flex; gap:0.8rem; margin-bottom: 2rem; flex-wrap: wrap;">
             ${(p.tags || []).map(t => `<span style="border: 1px solid rgba(0,207,255,0.15); padding: 0.35rem 0.6rem; color:var(--accentSoft); font-size:0.75rem; font-family:'IBM Plex Mono', monospace;">${t}</span>`).join('')}
         </div>
@@ -741,68 +643,69 @@ function openModal(id) {
             </a>
         </div>
     `;
-    
-    document.getElementById('project-modal').classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
 
-function closeModal() {
-    document.getElementById('project-modal').classList.remove('active');
-    document.body.style.overflow = 'auto'; // Restore scrolling
-}
+            document.getElementById('project-modal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
 
-function initializeEffects() {
-    /* =========================================
-    SCROLL REVEAL
-    ========================================= */
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.classList.add('active');
-            }
+        function closeModal() {
+            document.getElementById('project-modal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function initializeEffects() {
+            /* =========================================
+            SCROLL REVEAL
+            ========================================= */
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+
+            /* =========================================
+            CARD LIGHT TRACKING
+            ========================================= */
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,207,255,0.10), rgba(11,16,32,0.78) 40%)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.background = `rgba(11,16,32,0.72)`;
+                });
+            });
+        }
+
+        /* =========================================
+        PAGE TRANSITIONS
+        ========================================= */
+        const pageLinks = document.querySelectorAll('.page-link');
+        pageLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                const target = link.getAttribute('href');
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 400);
+            });
         });
-    }, { threshold:0.15 });
 
-    reveals.forEach(reveal => {
-        observer.observe(reveal);
-    });
+        document.addEventListener('DOMContentLoaded', loadTechWork);
 
-    /* =========================================
-    CARD LIGHT TRACKING
-    ========================================= */
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,207,255,0.10), rgba(11,16,32,0.78) 40%)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.background = `rgba(11,16,32,0.72)`;
-        });
-    });
-}
-
-/* =========================================
-PAGE TRANSITIONS
-========================================= */
-const pageLinks = document.querySelectorAll('.page-link');
-pageLinks.forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        document.body.classList.add('fade-out');
-        const target = link.getAttribute('href');
-        setTimeout(() => {
-            window.location.href = target;
-        }, 400);
-    });
-});
-
-document.addEventListener('DOMContentLoaded', loadTechWork);
-
-</script>
+    </script>
 
 </body>
+
 </html>

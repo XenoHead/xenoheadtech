@@ -1,0 +1,159 @@
+@font-face {
+    font-family: 'Elektora';
+    src: url('assets/Elektora-qm0.ttf') format('truetype');
+}
+
+.logo h2 {
+    font-family: 'Elektora', sans-serif !important;
+    font-size: 2.2rem !important;
+    text-transform: none !important;
+    letter-spacing: 1px !important;
+}
+
+@font-face {
+    font-family: 'MSDOS';
+    src: url('PcSeniorRegular-OEnd.ttf') format('truetype');
+}
+
+h1,
+h2,
+h3,
+.header h1,
+.hero h1 {
+    font-family: 'MSDOS', monospace !important;
+    font-weight: normal !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(.4rem, 2.5vw, .8rem);
+}
+
+h2 {
+    font-size: clamp(.4rem, 1.8vw, .8rem);
+}
+
+h3 {
+    font-size: clamp(0.6rem, 1.2vw, .9rem);
+}
+
+/* =========================================
+SHARED RESET & BASE
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050816;
+    color: #EAF7FF;
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+}
+
+/* =========================================
+SHARED VARIABLES
+========================================= */
+:root {
+    --bg: #050816;
+    --surface: #0B1020;
+    --surface2: #12192B;
+    --accent: #00CFFF;
+    --accentSoft: #5CE1FF;
+    --text: #EAF7FF;
+    --muted: #7D8CA3;
+}
+
+/* =========================================
+SHARED NAVIGATION
+========================================= */
+nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    backdrop-filter: blur(16px);
+    background: rgba(5, 8, 22, 0.72);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-inner {
+    max-width: 1300px;
+    margin: auto;
+    padding: 1.4rem 2rem 1.4rem 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: white;
+}
+
+.logo img {
+    width: 42px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+/* =========================================
+SHARED FOOTER
+========================================= */
+footer {
+    margin-top: 6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 2rem;
+    color: var(--muted);
+}
+
+/* =========================================
+SHARED PAGE TRANSITION
+========================================= */
+.fade-out {
+    animation: fadeOut 0.45s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        filter: blur(8px);
+        transform: scale(1.02);
+    }
+}
+
+/* =========================================
+SHARED MOBILE
+========================================= */
+@media(max-width:800px) {
+    .nav-links {
+        display: none;
+    }
+}

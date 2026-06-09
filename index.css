@@ -1,0 +1,607 @@
+/* =========================================
+RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050816;
+    color: #EAF7FF;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* =========================================
+VARIABLES
+========================================= */
+
+:root {
+    --bg: #050816;
+    --surface: #0B1020;
+    --accent: #00CFFF;
+    --accentSoft: #5CE1FF;
+    --text: #EAF7FF;
+    --muted: #7D8CA3;
+}
+
+/* =========================================
+BACKGROUND
+========================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: -3;
+}
+
+/* =========================================
+SCI-FI BACKGROUND IMAGE
+========================================= */
+
+.background-image {
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(5, 8, 22, 0.78), rgba(5, 8, 22, 0.92)),
+        url('assets/home-bg.webp');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: -2;
+
+    transform: scale(1.05);
+
+    animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+    from {
+        transform: scale(1.05);
+    }
+
+    to {
+        transform: scale(1.12);
+    }
+}
+
+/* =========================================
+CYAN GLOW
+========================================= */
+
+.glow {
+    position: fixed;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle,
+            rgba(0, 207, 255, 0.15) 0%,
+            transparent 70%);
+
+    top: -200px;
+    right: -200px;
+
+    filter: blur(60px);
+
+    z-index: -1;
+}
+
+/* =========================================
+LAYOUT
+========================================= */
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    padding-left: 80px;
+    /* Make room for sidebar */
+}
+
+.hero {
+    width: 100%;
+    max-width: 1200px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* =========================================
+LEFT
+========================================= */
+
+.left {
+    animation: fadeUp 1.2s ease forwards;
+}
+
+.logo-frame {
+    display: inline-block;
+    padding: 0.8rem;
+    margin-bottom: 2rem;
+
+    border-top: 2px solid rgba(0, 207, 255, 0.6);
+    border-left: 2px solid rgba(0, 207, 255, 0.6);
+    border-bottom: 2px solid rgba(0, 207, 255, 0.1);
+    border-right: 2px solid rgba(0, 207, 255, 0.1);
+
+    background: rgba(0, 207, 255, 0.05);
+    position: relative;
+    animation: glitchFlicker 6s infinite;
+
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.2),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.5),
+        0 0 15px rgba(0, 207, 255, 0.1);
+}
+
+.logo-frame::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background:
+        linear-gradient(to right, var(--accent) 6px, transparent 6px) top left,
+        linear-gradient(to bottom, var(--accent) 6px, transparent 6px) top left,
+        linear-gradient(to left, var(--accent) 6px, transparent 6px) top right,
+        linear-gradient(to bottom, var(--accent) 6px, transparent 6px) top right,
+        linear-gradient(to right, var(--accent) 6px, transparent 6px) bottom left,
+        linear-gradient(to top, var(--accent) 6px, transparent 6px) bottom left,
+        linear-gradient(to left, var(--accent) 6px, transparent 6px) bottom right,
+        linear-gradient(to top, var(--accent) 6px, transparent 6px) bottom right;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+}
+
+@keyframes glitchFlicker {
+
+    0%,
+    6%,
+    8%,
+    46%,
+    48%,
+    86%,
+    88%,
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    7% {
+        opacity: 0.1;
+        transform: translate(-3px, 2px);
+    }
+
+    47% {
+        opacity: 0.3;
+        transform: translate(4px, -1px);
+    }
+
+    87% {
+        opacity: 0.2;
+        transform: translate(-2px, -3px);
+    }
+}
+
+.logo {
+    width: 120px;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(0, 207, 255, 0.4));
+}
+
+.system {
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-family: 'VT323', monospace;
+    line-height: 1;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+h1 span {
+    color: var(--accent);
+}
+
+.description {
+    max-width: 550px;
+
+    color: var(--muted);
+
+    line-height: 1.9;
+    font-size: 1.1rem;
+}
+
+/* =========================================
+RIGHT
+========================================= */
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+
+    animation: fadeUp 1.4s ease forwards;
+}
+
+/* =========================================
+NAV BUTTONS
+========================================= */
+
+.nav-button {
+
+    width: 100%;
+
+    padding: 1.4rem 1.8rem;
+
+    background: rgba(11, 16, 32, 0.65);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: 0.35s ease;
+
+    position: relative;
+
+    overflow: hidden;
+
+    backdrop-filter: blur(12px);
+}
+
+.nav-button:hover {
+    border-color: rgba(0, 207, 255, 0.35);
+
+    transform: translateX(10px);
+
+    box-shadow:
+        0 0 40px rgba(0, 207, 255, 0.12);
+}
+
+.nav-button::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at center,
+            rgba(0, 207, 255, 0.12),
+            transparent 70%);
+
+    opacity: 0;
+
+    transition: 0.4s;
+}
+
+.nav-button:hover::before {
+    opacity: 1;
+}
+
+.nav-button strong {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.nav-button span {
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* =========================================
+TERMINAL
+========================================= */
+
+.terminal {
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(0, 207, 255, 0.15);
+    padding: 1.5rem;
+    color: var(--accentSoft);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 2;
+    text-shadow: 1px 0px 1px rgba(0, 255, 255, 0.4), -1px 0px 1px rgba(255, 0, 255, 0.4);
+    animation: crtFlicker 0.15s infinite;
+}
+
+.terminal::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    mix-blend-mode: color-dodge;
+}
+
+.terminal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes crtFlicker {
+    0% {
+        opacity: 0.95;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.98;
+    }
+}
+
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* =========================================
+ANIMATION
+========================================= */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+}
+
+/* =========================================
+PAGE FADE
+========================================= */
+
+.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+
+    to {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(1.02);
+    }
+
+}
+
+/* =========================================
+AUDIO PLAYER
+========================================= */
+.audio-player {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 207, 255, 0.3);
+    padding: 0.5rem 1rem;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 207, 255, 0.1);
+}
+
+.audio-player:hover {
+    background: rgba(0, 207, 255, 0.15);
+    box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
+}
+
+.audio-icon {
+    font-size: 1rem;
+}
+
+/* =========================================
+CYBER SIDEBAR
+========================================= */
+
+.cyber-sidebar {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 85vh;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.cyber-line {
+    width: 1px;
+    flex-grow: 1;
+    background: linear-gradient(to bottom, transparent, var(--accent), var(--accentSoft), transparent);
+    box-shadow: 0 0 10px var(--accent);
+    opacity: 0.8;
+    position: relative;
+}
+
+.cyber-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    width: 5px;
+    height: 20px;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: cyberSlide 4s infinite ease-in-out alternate;
+}
+
+@keyframes cyberSlide {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+
+.cyber-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    margin: 2rem 0;
+    opacity: 0.9;
+    text-shadow: 0 0 5px var(--accent);
+}
+
+.cyber-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.cyber-blocks span {
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 5px var(--accent);
+    opacity: 0.6;
+}
+
+.cyber-blocks span:nth-child(1) {
+    width: 14px;
+    opacity: 1;
+}
+
+.cyber-blocks span:nth-child(2) {
+    width: 6px;
+}
+
+.cyber-blocks span:nth-child(3) {
+    width: 20px;
+    opacity: 1;
+}
+
+.cyber-blocks span:nth-child(4) {
+    width: 10px;
+}
+
+.cyber-blocks span:nth-child(5) {
+    width: 4px;
+}
+
+.cyber-blocks.bottom span:nth-child(1) {
+    width: 4px;
+}
+
+.cyber-blocks.bottom span:nth-child(2) {
+    width: 10px;
+}
+
+.cyber-blocks.bottom span:nth-child(3) {
+    width: 20px;
+    opacity: 1;
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media(max-width:800px) {
+
+    .cyber-sidebar {
+        display: none;
+    }
+
+    .wrapper {
+        height: auto;
+        padding-top: 100px;
+        padding-left: 2rem;
+    }
+
+    .wrapper {
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 2rem;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+}

@@ -6,752 +6,633 @@ books.html
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>XenoHead — Books</title>
+    <title>XenoHead — Books</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
 
-<style>
-
-@font-face {
-    font-family: 'Elektora';
-    src: url('assets/Elektora-qm0.ttf') format('truetype');
-}
-.logo h2 {
-    font-family: 'Elektora', sans-serif !important;
-    font-size: 2.2rem !important;
-    text-transform: none !important;
-    letter-spacing: 1px !important;
-}
-
-
-@font-face {
-    font-family: 'MSDOS';
-    src: url('PcSeniorRegular-OEnd.ttf') format('truetype');
-}
-h1, h2, h3, .header h1, .hero h1 {
-    font-family: 'MSDOS', monospace !important;
-    font-weight: normal !important;
-    line-height: 1.2 !important;
-    text-transform: uppercase;
-}
-h1 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
-h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
-h3 { font-size: clamp(1rem, 1.5vw, 1.2rem); }
-
-
-/* =========================================
-RESET
-========================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050816;
-    color:#EAF7FF;
-    font-family:'Space Grotesk',sans-serif;
-    overflow-x:hidden;
-}
-
-/* =========================================
-VARIABLES
-========================================= */
-
-:root{
-    --bg:#050816;
-    --surface:#0B1020;
-    --surface2:#12192B;
-    --accent:#00CFFF;
-    --accentSoft:#5CE1FF;
-    --text:#EAF7FF;
-    --muted:#7D8CA3;
-}
-
-/* =========================================
+    <style>
+        /* =========================================
 BACKGROUND
 ========================================= */
 
-.background-image{
-    position:fixed;
-    inset:0;
+        .background-image {
+            position: fixed;
+            inset: 0;
 
-    background-image:
-    linear-gradient(rgba(5,8,22,0.84), rgba(5,8,22,0.96)),
-    url('assets/books-bg.webp');
+            background-image:
+                linear-gradient(rgba(5, 8, 22, 0.84), rgba(5, 8, 22, 0.96)),
+                url('assets/books-bg.webp');
 
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-    z-index:-2;
+            z-index: -2;
 
-    animation:slowZoom 28s ease-in-out infinite alternate;
-}
+            animation: slowZoom 28s ease-in-out infinite alternate;
+        }
 
-@keyframes slowZoom{
+        @keyframes slowZoom {
 
-    from{
-        transform:scale(1.02);
-    }
+            from {
+                transform: scale(1.02);
+            }
 
-    to{
-        transform:scale(1.1);
-    }
+            to {
+                transform: scale(1.1);
+            }
 
-}
+        }
 
-body::before{
+        body::before {
 
-    content:"";
+            content: "";
 
-    position:fixed;
-    inset:0;
+            position: fixed;
+            inset: 0;
 
-    background:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 
-    background-size:70px 70px;
+            background-size: 70px 70px;
 
-    z-index:-1;
-}
+            z-index: -1;
+        }
 
-/* =========================================
-NAVIGATION
-========================================= */
-
-nav{
-
-    width:100%;
-
-    position:fixed;
-
-    top:0;
-
-    z-index:999;
-
-    backdrop-filter:blur(16px);
-
-    background:rgba(5,8,22,0.72);
-
-    border-bottom:
-    1px solid rgba(255,255,255,0.05);
-}
-
-.nav-inner{
-
-    max-width:1300px;
-
-    margin:auto;
-
-    padding:1.4rem 2rem 1.4rem 80px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-}
-
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:1rem;
-
-    text-decoration:none;
-
-    color:white;
-}
-
-.logo img{
-    width:42px;
-}
-
-.logo span{
-    color:var(--accent);
-}
-
-.nav-links{
-    display:flex;
-    gap:2rem;
-}
-
-.nav-links a{
-
-    text-decoration:none;
-
-    color:var(--muted);
-
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:var(--accent);
-}
-
-/* =========================================
+        /* =========================================
 LAYOUT
 ========================================= */
 
-.container{
+        .container {
 
-    max-width:1300px;
+            max-width: 1300px;
 
-    margin:auto;
+            margin: auto;
 
-    padding:9rem 2rem 6rem 80px;
-}
+            padding: 9rem 2rem 6rem 80px;
+        }
 
-/* =========================================
+        /* =========================================
 HEADER
 ========================================= */
 
-.header{
+        .header {
 
-    margin-bottom:5rem;
+            margin-bottom: 5rem;
 
-    animation:fadeUp 1s ease forwards;
-}
+            animation: fadeUp 1s ease forwards;
+        }
 
-.system{
+        .system {
 
-    color:var(--accent);
+            color: var(--accent);
 
-    font-family:'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
 
-    letter-spacing:2px;
+            letter-spacing: 2px;
 
-    font-size:0.85rem;
+            font-size: 0.85rem;
 
-    margin-bottom:1rem;
-}
+            margin-bottom: 1rem;
+        }
 
-.header h1{
-    font-size:clamp(2rem,5vw,4rem);
-    line-height:0.95;
+        .header h1 {
+            line-height: 0.95;
 
-    margin-bottom:1.5rem;
-}
+            margin-bottom: 1.5rem;
+        }
 
-.header p{
+        .header p {
 
-    max-width:700px;
+            max-width: 700px;
 
-    color:var(--muted);
+            color: var(--muted);
 
-    line-height:1.9;
+            line-height: 1.9;
 
-    font-size:1.1rem;
-}
+            font-size: 1.1rem;
+        }
 
-/* =========================================
+        /* =========================================
 BOOK PANEL
 ========================================= */
 
-.book-panel{
+        .book-panel {
 
-    display:grid;
+            display: grid;
 
-    grid-template-columns:420px 1fr;
+            grid-template-columns: 420px 1fr;
 
-    gap:4rem;
+            gap: 4rem;
 
-    align-items:center;
+            align-items: center;
 
-    background:
-    rgba(11,16,32,0.72);
+            background:
+                rgba(11, 16, 32, 0.72);
 
-    border:
-    1px solid rgba(255,255,255,0.06);
+            border:
+                1px solid rgba(255, 255, 255, 0.06);
 
-    backdrop-filter:blur(16px);
+            backdrop-filter: blur(16px);
 
-    padding:3rem;
+            padding: 3rem;
 
-    position:relative;
+            position: relative;
 
-    overflow:hidden;
+            overflow: hidden;
 
-    transition:0.4s ease;
-}
+            transition: 0.4s ease;
+        }
 
-.book-panel:hover{
+        .book-panel:hover {
 
-    border-color:
-    rgba(0,207,255,0.24);
+            border-color:
+                rgba(0, 207, 255, 0.24);
 
-    box-shadow:
-    0 0 40px rgba(0,207,255,0.1);
-}
+            box-shadow:
+                0 0 40px rgba(0, 207, 255, 0.1);
+        }
 
-.book-panel::before{
+        .book-panel::before {
 
-    content:"";
+            content: "";
 
-    position:absolute;
+            position: absolute;
 
-    inset:0;
+            inset: 0;
 
-    background:
-    radial-gradient(circle at top right,
-    rgba(0,207,255,0.08),
-    transparent 45%);
-}
+            background:
+                radial-gradient(circle at top right,
+                    rgba(0, 207, 255, 0.08),
+                    transparent 45%);
+        }
 
-/* =========================================
+        /* =========================================
 BOOK COVER
 ========================================= */
 
-.book-cover{
+        .book-cover {
 
-    position:relative;
+            position: relative;
 
-    aspect-ratio:2/3;
+            aspect-ratio: 2/3;
 
-    background-image:url('assets/book-cover.webp');
+            background-image: url('assets/book-cover.webp');
 
-    background-size:cover;
+            background-size: cover;
 
-    background-position:center;
+            background-position: center;
 
-    border:
-    1px solid rgba(255,255,255,0.08);
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
 
-    box-shadow:
-    0 0 60px rgba(0,207,255,0.12);
+            box-shadow:
+                0 0 60px rgba(0, 207, 255, 0.12);
 
-    overflow:hidden;
-}
+            overflow: hidden;
+        }
 
-.book-cover::after{
+        .book-cover::after {
 
-    content:"";
+            content: "";
 
-    position:absolute;
+            position: absolute;
 
-    inset:0;
+            inset: 0;
 
-    background:
-    linear-gradient(
-    transparent,
-    rgba(0,0,0,0.35));
-}
+            background:
+                linear-gradient(transparent,
+                    rgba(0, 0, 0, 0.35));
+        }
 
-/* =========================================
+        /* =========================================
 BOOK INFO
 ========================================= */
 
-.book-info small{
+        .book-info small {
 
-    color:var(--accent);
+            color: var(--accent);
 
-    font-family:'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
 
-    letter-spacing:2px;
-}
+            letter-spacing: 2px;
+        }
 
-.book-info h2{
+        .book-info h2 {
 
-    font-size:clamp(2.5rem,5vw,4.5rem);
+            line-height: 0.95;
 
-    line-height:0.95;
+            margin: 1rem 0 2rem;
+        }
 
-    margin:1rem 0 2rem;
-}
+        .book-info p {
 
-.book-info p{
+            color: var(--muted);
 
-    color:var(--muted);
+            line-height: 1.9;
 
-    line-height:1.9;
+            margin-bottom: 2rem;
 
-    margin-bottom:2rem;
+            max-width: 700px;
+        }
 
-    max-width:700px;
-}
-
-/* =========================================
+        /* =========================================
 QUOTE
 ========================================= */
 
-.quote{
+        .quote {
 
-    border-left:
-    2px solid rgba(0,207,255,0.35);
+            border-left:
+                2px solid rgba(0, 207, 255, 0.35);
 
-    padding-left:1.5rem;
+            padding-left: 1.5rem;
 
-    margin:2rem 0;
+            margin: 2rem 0;
 
-    color:#D6F4FF;
+            color: #D6F4FF;
 
-    font-size:1.1rem;
+            font-size: 1.1rem;
 
-    line-height:1.9;
+            line-height: 1.9;
 
-    font-style:italic;
-}
+            font-style: italic;
+        }
 
-/* =========================================
+        /* =========================================
 BUTTONS
 ========================================= */
 
-.buttons{
+        .buttons {
 
-    display:flex;
+            display: flex;
 
-    gap:1rem;
+            gap: 1rem;
 
-    flex-wrap:wrap;
+            flex-wrap: wrap;
 
-    margin-top:2rem;
-}
+            margin-top: 2rem;
+        }
 
-.button{
+        .button {
 
-    text-decoration:none;
+            text-decoration: none;
 
-    color:white;
+            color: white;
 
-    border:
-    1px solid rgba(0,207,255,0.22);
+            border:
+                1px solid rgba(0, 207, 255, 0.22);
 
-    padding:
-    1rem 1.5rem;
+            padding:
+                1rem 1.5rem;
 
-    transition:0.35s ease;
+            transition: 0.35s ease;
 
-    position:relative;
+            position: relative;
 
-    overflow:hidden;
-}
+            overflow: hidden;
+        }
 
-.button:hover{
+        .button:hover {
 
-    background:
-    rgba(0,207,255,0.08);
+            background:
+                rgba(0, 207, 255, 0.08);
 
-    border-color:
-    rgba(0,207,255,0.45);
+            border-color:
+                rgba(0, 207, 255, 0.45);
 
-    box-shadow:
-    0 0 30px rgba(0,207,255,0.12);
-}
+            box-shadow:
+                0 0 30px rgba(0, 207, 255, 0.12);
+        }
 
-/* =========================================
-FOOTER
-========================================= */
-
-footer{
-
-    margin-top:6rem;
-
-    border-top:
-    1px solid rgba(255,255,255,0.05);
-
-    padding-top:2rem;
-
-    color:var(--muted);
-}
-
-/* =========================================
+        /* =========================================
 ANIMATION
 ========================================= */
 
-@keyframes fadeUp{
+        @keyframes fadeUp {
 
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
 
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
 
-}
+        }
 
-/* =========================================
-PAGE TRANSITION
-========================================= */
-
-.fade-out{
-    animation:fadeOut 0.45s ease forwards;
-}
-
-@keyframes fadeOut{
-
-    to{
-        opacity:0;
-        filter:blur(8px);
-        transform:scale(1.02);
-    }
-
-}
-
-/* =========================================
+        /* =========================================
 MOBILE
 ========================================= */
 
-@media(max-width:980px){
+        @media(max-width:980px) {
 
-    .book-panel{
-        grid-template-columns:1fr;
-    }
+            .book-panel {
+                grid-template-columns: 1fr;
+            }
 
-    .nav-links{
-        display:none;
-    }
-
-}
+        }
 
 
-/* CYBER SIDEBAR */
-.cyber-sidebar { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); height: 85vh; width: 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; z-index: 10; pointer-events: none; --accent: #a020f0; }
-.cyber-line { flex-grow: 1; background: linear-gradient(to bottom, transparent, var(--accent), transparent); width: 2px; opacity: 0.6; position: relative; margin: 10px 0; }
-.cyber-text { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; margin: 2rem 0; opacity: 0.9; text-shadow: 0 0 5px var(--accent); }
-.cyber-blocks { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
-.cyber-blocks span { display: block; width: 12px; height: 12px; border: 1px solid var(--accent); opacity: 0.6; box-shadow: inset 0 0 5px var(--accent); }
-.cyber-blocks span.active { background: var(--accent); opacity: 1; box-shadow: 0 0 10px var(--accent); }
-@media(max-width:800px) { .cyber-sidebar { display: none; } }
+        /* CYBER SIDEBAR */
+        .cyber-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 85vh;
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+            --accent: #a020f0;
+        }
 
-</style>
+        .cyber-line {
+            flex-grow: 1;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            width: 2px;
+            opacity: 0.6;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .cyber-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            margin: 2rem 0;
+            opacity: 0.9;
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        .cyber-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .cyber-blocks span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--accent);
+            opacity: 0.6;
+            box-shadow: inset 0 0 5px var(--accent);
+        }
+
+        .cyber-blocks span.active {
+            background: var(--accent);
+            opacity: 1;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @media(max-width:800px) {
+            .cyber-sidebar {
+                display: none;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="background-image"></div>
+    <div class="background-image"></div>
 
-<div class="cyber-sidebar">
-    <div class="cyber-blocks"><span class="active" style="width:20px"></span></div>
-    <div class="cyber-line"></div>
-    <div class="cyber-text">TRANSMISSIONS // RECEIVED</div>
-    <div class="cyber-line"></div>
-    <div class="cyber-blocks"><span class="active" style="width:20px"></span></div>
-</div>
+    <div class="cyber-sidebar">
+        <div class="cyber-blocks"><span class="active" style="width:20px"></span></div>
+        <div class="cyber-line"></div>
+        <div class="cyber-text">TRANSMISSIONS // RECEIVED</div>
+        <div class="cyber-line"></div>
+        <div class="cyber-blocks"><span class="active" style="width:20px"></span></div>
+    </div>
 
 
-<!-- =========================================
+    <!-- =========================================
 NAVIGATION
 ========================================= -->
 
-<nav>
+    <nav>
 
-```
-<div class="nav-inner">
+        ```
+        <div class="nav-inner">
 
-    <a href="index.html" class="logo page-link">
+            <a href="index.html" class="logo page-link">
 
-        <img src="logo.png" alt="XenoHead">
+                <img src="logo.png" alt="XenoHead">
 
-        <h2>Xeno<span>Head</span></h2>
+                <h2>Xeno<span>Head</span></h2>
 
-    </a>
+            </a>
 
-    <div class="nav-links">
+            <div class="nav-links">
 
-        <a href="projects.html">Projects</a>
+                <a href="projects.html">Projects</a>
 
-        <a href="writing.html">Writing</a>
+                <a href="writing.html">Writing</a>
 
-        <a href="books.html">Books</a>
+                <a href="books.html">Books</a>
 
-        <a href="contact.html">Contact</a>
+                <a href="contact.html">Contact</a>
 
-    </div>
+            </div>
 
-</div>
-```
+        </div>
+        ```
 
-</nav>
+    </nav>
 
-<!-- =========================================
+    <!-- =========================================
 MAIN
 ========================================= -->
 
-<div class="container">
+    <div class="container">
 
-```
-<!-- HEADER -->
+        ```
+        <!-- HEADER -->
 
-<div class="header">
+        <div class="header">
 
-    <div class="system">
-        // TRANSMISSION ARCHIVE
-    </div>
+            <div class="system">
+                // TRANSMISSION ARCHIVE
+            </div>
 
-    <h1>
-        Stories From
-        Strange Futures
-    </h1>
+            <h1>
+                Stories From
+                Strange Futures
+            </h1>
 
-    <p>
-        Speculative fiction,
-        cognitive landscapes,
-        synthetic minds,
-        and impossible futures emerging
-        from the edge of signal and machine.
-    </p>
-
-</div>
-
-<!-- BOOK -->
-
-<div class="book-panel">
-
-    <!-- COVER -->
-
-    <div class="book-cover"></div>
-
-    <!-- INFO -->
-
-    <div class="book-info">
-
-        <small>// CURRENT TRANSMISSION</small>
-
-        <h2>
-            The Silence
-            Between Stars
-        </h2>
-
-        <p>
-            In the aftermath of a failed cognitive expansion experiment,
-            fragments of synthetic consciousness begin appearing
-            across interstellar communication networks.
-            Humanity is forced to confront an intelligence
-            that may not be alien —
-            but post-human.
-        </p>
-
-        <div class="quote">
-
-            “We believed consciousness
-            belonged to biology.
-            We were wrong.”
+            <p>
+                Speculative fiction,
+                cognitive landscapes,
+                synthetic minds,
+                and impossible futures emerging
+                from the edge of signal and machine.
+            </p>
 
         </div>
 
-        <p>
-            A science-fiction exploration of memory,
-            machine cognition,
-            isolation,
-            and the terrifying beauty
-            of emergent intelligence.
-        </p>
+        <!-- BOOK -->
 
-        <div class="buttons">
+        <div class="book-panel">
 
-            <a href="#" class="button">
-                Read Excerpt
-            </a>
+            <!-- COVER -->
 
-            <a href="#" class="button">
-                Purchase
-            </a>
+            <div class="book-cover"></div>
+
+            <!-- INFO -->
+
+            <div class="book-info">
+
+                <small>// CURRENT TRANSMISSION</small>
+
+                <h2>
+                    The Silence
+                    Between Stars
+                </h2>
+
+                <p>
+                    In the aftermath of a failed cognitive expansion experiment,
+                    fragments of synthetic consciousness begin appearing
+                    across interstellar communication networks.
+                    Humanity is forced to confront an intelligence
+                    that may not be alien —
+                    but post-human.
+                </p>
+
+                <div class="quote">
+
+                    “We believed consciousness
+                    belonged to biology.
+                    We were wrong.”
+
+                </div>
+
+                <p>
+                    A science-fiction exploration of memory,
+                    machine cognition,
+                    isolation,
+                    and the terrifying beauty
+                    of emergent intelligence.
+                </p>
+
+                <div class="buttons">
+
+                    <a href="#" class="button">
+                        Read Excerpt
+                    </a>
+
+                    <a href="#" class="button">
+                        Purchase
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                XenoHead —
+                Transmission archive active.
+            </p>
+
+        </footer>
+        ```
+
     </div>
 
-</div>
+    <script>
 
-<!-- FOOTER -->
+        /* =========================================
+        PAGE TRANSITIONS
+        ========================================= */
 
-<footer>
+        const pageLinks =
+            document.querySelectorAll('.page-link');
 
-    <p>
-        XenoHead —
-        Transmission archive active.
-    </p>
+        pageLinks.forEach(link => {
 
-</footer>
-```
+            link.addEventListener('click', e => {
 
-</div>
+                e.preventDefault();
 
-<script>
+                document.body.classList.add('fade-out');
 
-/* =========================================
-PAGE TRANSITIONS
-========================================= */
+                const target =
+                    link.getAttribute('href');
 
-const pageLinks =
-document.querySelectorAll('.page-link');
+                setTimeout(() => {
 
-pageLinks.forEach(link => {
+                    window.location.href = target;
 
-    link.addEventListener('click', e => {
+                }, 400);
 
-        e.preventDefault();
+            });
 
-        document.body.classList.add('fade-out');
+        });
 
-        const target =
-        link.getAttribute('href');
+        /* =========================================
+        BOOK PANEL LIGHT TRACKING
+        ========================================= */
 
-        setTimeout(() => {
+        const panel =
+            document.querySelector('.book-panel');
 
-            window.location.href = target;
+        panel.addEventListener('mousemove', e => {
 
-        }, 400);
+            const rect =
+                panel.getBoundingClientRect();
 
-    });
+            const x =
+                e.clientX - rect.left;
 
-});
+            const y =
+                e.clientY - rect.top;
 
-/* =========================================
-BOOK PANEL LIGHT TRACKING
-========================================= */
-
-const panel =
-document.querySelector('.book-panel');
-
-panel.addEventListener('mousemove', e => {
-
-    const rect =
-    panel.getBoundingClientRect();
-
-    const x =
-    e.clientX - rect.left;
-
-    const y =
-    e.clientY - rect.top;
-
-    panel.style.background =
-    `radial-gradient(circle at ${x}px ${y}px,
+            panel.style.background =
+                `radial-gradient(circle at ${x}px ${y}px,
     rgba(0,207,255,0.08),
     rgba(11,16,32,0.76) 45%)`;
 
-});
+        });
 
-panel.addEventListener('mouseleave', () => {
+        panel.addEventListener('mouseleave', () => {
 
-    panel.style.background =
-    `rgba(11,16,32,0.72)`;
+            panel.style.background =
+                `rgba(11,16,32,0.72)`;
 
-});
+        });
 
-</script>
+    </script>
 
 </body>
+
 </html>

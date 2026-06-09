@@ -6,723 +6,622 @@ contact.html
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>XenoHead — Contact</title>
+    <title>XenoHead — Contact</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
 
-<style>
-
-@font-face {
-    font-family: 'Elektora';
-    src: url('assets/Elektora-qm0.ttf') format('truetype');
-}
-.logo h2 {
-    font-family: 'Elektora', sans-serif !important;
-    font-size: 2.2rem !important;
-    text-transform: none !important;
-    letter-spacing: 1px !important;
-}
-
-
-@font-face {
-    font-family: 'MSDOS';
-    src: url('PcSeniorRegular-OEnd.ttf') format('truetype');
-}
-h1, h2, h3, .header h1, .hero h1 {
-    font-family: 'MSDOS', monospace !important;
-    font-weight: normal !important;
-    line-height: 1.2 !important;
-    text-transform: uppercase;
-}
-h1 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
-h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
-h3 { font-size: clamp(1rem, 1.5vw, 1.2rem); }
-
-
-/* =========================================
-RESET
-========================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050816;
-    color:#EAF7FF;
-    font-family:'Space Grotesk',sans-serif;
-    overflow-x:hidden;
-}
-
-/* =========================================
-VARIABLES
-========================================= */
-
-:root{
-    --bg:#050816;
-    --surface:#0B1020;
-    --surface2:#12192B;
-    --accent:#00CFFF;
-    --accentSoft:#5CE1FF;
-    --text:#EAF7FF;
-    --muted:#7D8CA3;
-}
-
-/* =========================================
+    <style>
+        /* =========================================
 BACKGROUND
 ========================================= */
 
-.background-image{
-    position:fixed;
-    inset:0;
+        .background-image {
+            position: fixed;
+            inset: 0;
 
-    background-image:
-    linear-gradient(rgba(5,8,22,0.9), rgba(5,8,22,0.97)),
-    url('assets/contact-bg.webp');
+            background-image:
+                linear-gradient(rgba(5, 8, 22, 0.9), rgba(5, 8, 22, 0.97)),
+                url('assets/contact-bg.webp');
 
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-    z-index:-2;
+            z-index: -2;
 
-    animation:slowZoom 30s ease-in-out infinite alternate;
-}
+            animation: slowZoom 30s ease-in-out infinite alternate;
+        }
 
-@keyframes slowZoom{
+        @keyframes slowZoom {
 
-    from{
-        transform:scale(1.02);
-    }
+            from {
+                transform: scale(1.02);
+            }
 
-    to{
-        transform:scale(1.08);
-    }
+            to {
+                transform: scale(1.08);
+            }
 
-}
+        }
 
-body::before{
+        body::before {
 
-    content:"";
+            content: "";
 
-    position:fixed;
-    inset:0;
+            position: fixed;
+            inset: 0;
 
-    background:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 
-    background-size:70px 70px;
+            background-size: 70px 70px;
 
-    z-index:-1;
-}
+            z-index: -1;
+        }
 
-/* =========================================
-NAVIGATION
-========================================= */
-
-nav{
-
-    width:100%;
-
-    position:fixed;
-
-    top:0;
-
-    z-index:999;
-
-    backdrop-filter:blur(16px);
-
-    background:rgba(5,8,22,0.7);
-
-    border-bottom:
-    1px solid rgba(255,255,255,0.05);
-
-}
-
-.nav-inner{
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:1.4rem 2rem 1.4rem 80px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-}
-
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:1rem;
-
-    text-decoration:none;
-
-    color:white;
-}
-
-.logo img{
-    width:42px;
-}
-
-.logo span{
-    color:var(--accent);
-}
-
-.nav-links{
-    display:flex;
-    gap:2rem;
-}
-
-.nav-links a{
-
-    text-decoration:none;
-
-    color:var(--muted);
-
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:var(--accent);
-}
-
-/* =========================================
+        /* =========================================
 LAYOUT
 ========================================= */
 
-.container{
+        .container {
 
-    min-height:100vh;
+            min-height: 100vh;
 
-    display:flex;
+            display: flex;
 
-    justify-content:center;
+            justify-content: center;
 
-    align-items:center;
+            align-items: center;
 
-    padding:8rem 2rem 4rem;
-}
+            padding: 8rem 2rem 4rem;
+        }
 
-/* =========================================
+        /* =========================================
 CONTACT PANEL
 ========================================= */
 
-.contact-panel{
+        .contact-panel {
 
-    width:100%;
+            width: 100%;
 
-    max-width:900px;
+            max-width: 900px;
 
-    background:
-    rgba(11,16,32,0.72);
+            background:
+                rgba(11, 16, 32, 0.72);
 
-    border:
-    1px solid rgba(255,255,255,0.06);
+            border:
+                1px solid rgba(255, 255, 255, 0.06);
 
-    padding:4rem;
+            padding: 4rem;
 
-    backdrop-filter:blur(18px);
+            backdrop-filter: blur(18px);
 
-    position:relative;
+            position: relative;
 
-    overflow:hidden;
+            overflow: hidden;
 
-    animation:fadeUp 1s ease forwards;
-}
+            animation: fadeUp 1s ease forwards;
+        }
 
-.contact-panel::before{
+        .contact-panel::before {
 
-    content:"";
+            content: "";
 
-    position:absolute;
+            position: absolute;
 
-    inset:0;
+            inset: 0;
 
-    background:
-    radial-gradient(circle at top right,
-    rgba(0,207,255,0.08),
-    transparent 50%);
-}
+            background:
+                radial-gradient(circle at top right,
+                    rgba(0, 207, 255, 0.08),
+                    transparent 50%);
+        }
 
-/* =========================================
+        /* =========================================
 HEADER
 ========================================= */
 
-.system{
+        .system {
 
-    color:var(--accent);
+            color: var(--accent);
 
-    font-family:'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
 
-    letter-spacing:2px;
+            letter-spacing: 2px;
 
-    font-size:0.85rem;
+            font-size: 0.85rem;
 
-    margin-bottom:1rem;
-}
+            margin-bottom: 1rem;
+        }
 
-.contact-panel h1{
+        .contact-panel h1 {
 
-    font-size:clamp(3rem,6vw,5rem);
 
-    line-height:0.95;
+            line-height: 0.95;
 
-    margin-bottom:1.5rem;
-}
+            margin-bottom: 1.5rem;
+        }
 
-.contact-panel p{
+        .contact-panel p {
 
-    color:var(--muted);
+            color: var(--muted);
 
-    line-height:1.9;
+            line-height: 1.9;
 
-    max-width:650px;
+            max-width: 650px;
 
-    margin-bottom:3rem;
-}
+            margin-bottom: 3rem;
+        }
 
-/* =========================================
+        /* =========================================
 FORM
 ========================================= */
 
-.contact-form{
+        .contact-form {
 
-    display:grid;
+            display: grid;
 
-    gap:1.4rem;
-}
+            gap: 1.4rem;
+        }
 
-.input-group{
+        .input-group {
 
-    display:flex;
+            display: flex;
 
-    flex-direction:column;
+            flex-direction: column;
 
-    gap:0.6rem;
-}
+            gap: 0.6rem;
+        }
 
-.input-group label{
+        .input-group label {
 
-    color:var(--accent);
+            color: var(--accent);
 
-    font-family:'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
 
-    font-size:0.8rem;
+            font-size: 0.8rem;
 
-    letter-spacing:1px;
-}
+            letter-spacing: 1px;
+        }
 
-.contact-form input,
-.contact-form textarea{
+        .contact-form input,
+        .contact-form textarea {
 
-    background:
-    rgba(5,8,22,0.8);
+            background:
+                rgba(5, 8, 22, 0.8);
 
-    border:
-    1px solid rgba(255,255,255,0.08);
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
 
-    padding:
-    1rem 1.2rem;
+            padding:
+                1rem 1.2rem;
 
-    color:white;
+            color: white;
 
-    font-size:1rem;
+            font-size: 1rem;
 
-    outline:none;
+            outline: none;
 
-    transition:0.3s ease;
+            transition: 0.3s ease;
 
-    font-family:'Space Grotesk', sans-serif;
-}
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-.contact-form input:focus,
-.contact-form textarea:focus{
+        .contact-form input:focus,
+        .contact-form textarea:focus {
 
-    border-color:
-    rgba(0,207,255,0.4);
+            border-color:
+                rgba(0, 207, 255, 0.4);
 
-    box-shadow:
-    0 0 25px rgba(0,207,255,0.08);
-}
+            box-shadow:
+                0 0 25px rgba(0, 207, 255, 0.08);
+        }
 
-.contact-form textarea{
+        .contact-form textarea {
 
-    resize:none;
+            resize: none;
 
-    min-height:180px;
-}
+            min-height: 180px;
+        }
 
-/* =========================================
+        /* =========================================
 BUTTON
 ========================================= */
 
-.send-button{
+        .send-button {
 
-    margin-top:1rem;
+            margin-top: 1rem;
 
-    padding:
-    1rem 1.6rem;
+            padding:
+                1rem 1.6rem;
 
-    background:
-    transparent;
+            background:
+                transparent;
 
-    border:
-    1px solid rgba(0,207,255,0.25);
+            border:
+                1px solid rgba(0, 207, 255, 0.25);
 
-    color:white;
+            color: white;
 
-    cursor:pointer;
+            cursor: pointer;
 
-    transition:0.35s ease;
+            transition: 0.35s ease;
 
-    position:relative;
+            position: relative;
 
-    overflow:hidden;
+            overflow: hidden;
 
-    font-size:1rem;
-}
+            font-size: 1rem;
+        }
 
-.send-button:hover{
+        .send-button:hover {
 
-    border-color:
-    rgba(0,207,255,0.5);
+            border-color:
+                rgba(0, 207, 255, 0.5);
 
-    background:
-    rgba(0,207,255,0.08);
+            background:
+                rgba(0, 207, 255, 0.08);
 
-    box-shadow:
-    0 0 30px rgba(0,207,255,0.12);
-}
+            box-shadow:
+                0 0 30px rgba(0, 207, 255, 0.12);
+        }
 
-/* =========================================
+        /* =========================================
 SIGNAL BLOCK
 ========================================= */
 
-.signal{
+        .signal {
 
-    margin-top:3rem;
+            margin-top: 3rem;
 
-    padding-top:2rem;
+            padding-top: 2rem;
 
-    border-top:
-    1px solid rgba(255,255,255,0.06);
+            border-top:
+                1px solid rgba(255, 255, 255, 0.06);
 
-    color:var(--muted);
+            color: var(--muted);
 
-    font-family:'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', monospace;
 
-    line-height:2;
-}
+            line-height: 2;
+        }
 
-/* =========================================
+        /* =========================================
 ANIMATION
 ========================================= */
 
-@keyframes fadeUp{
+        @keyframes fadeUp {
 
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
 
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0px);
+            }
 
-}
+        }
 
-/* =========================================
-PAGE TRANSITION
-========================================= */
-
-.fade-out{
-    animation:fadeOut 0.45s ease forwards;
-}
-
-@keyframes fadeOut{
-
-    to{
-        opacity:0;
-        filter:blur(8px);
-        transform:scale(1.02);
-    }
-
-}
-
-/* =========================================
+        /* =========================================
 MOBILE
 ========================================= */
 
-@media(max-width:800px){
+        @media(max-width:800px) {
 
-    .nav-links{
-        display:none;
-    }
+            .contact-panel {
+                padding: 2rem;
+            }
 
-    .contact-panel{
-        padding:2rem;
-    }
-
-}
+        }
 
 
-/* CYBER SIDEBAR */
-.cyber-sidebar { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); height: 85vh; width: 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; z-index: 10; pointer-events: none; --accent: #ff3366; }
-.cyber-line { flex-grow: 1; background: repeating-linear-gradient(to bottom, transparent, transparent 10px, var(--accent) 10px, var(--accent) 20px); width: 2px; opacity: 0.6; position: relative; margin: 10px 0; }
-.cyber-text { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; margin: 2rem 0; opacity: 0.9; text-shadow: 0 0 5px var(--accent); }
-.cyber-blocks { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
-.cyber-blocks span { display: block; width: 12px; height: 12px; border: 1px solid var(--accent); opacity: 0.6; box-shadow: inset 0 0 5px var(--accent); }
-.cyber-blocks span.active { background: var(--accent); opacity: 1; box-shadow: 0 0 10px var(--accent); }
-@media(max-width:800px) { .cyber-sidebar { display: none; } }
+        /* CYBER SIDEBAR */
+        .cyber-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 85vh;
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+            --accent: #ff3366;
+        }
 
-</style>
+        .cyber-line {
+            flex-grow: 1;
+            background: repeating-linear-gradient(to bottom, transparent, transparent 10px, var(--accent) 10px, var(--accent) 20px);
+            width: 2px;
+            opacity: 0.6;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .cyber-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            margin: 2rem 0;
+            opacity: 0.9;
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        .cyber-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .cyber-blocks span {
+            display: block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--accent);
+            opacity: 0.6;
+            box-shadow: inset 0 0 5px var(--accent);
+        }
+
+        .cyber-blocks span.active {
+            background: var(--accent);
+            opacity: 1;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @media(max-width:800px) {
+            .cyber-sidebar {
+                display: none;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="background-image"></div>
+    <div class="background-image"></div>
 
-<div class="cyber-sidebar">
-    <div class="cyber-blocks"><span style="animation: blink 1s infinite;" class="active"></span></div>
-    <div class="cyber-line"></div>
-    <div class="cyber-text">SIGNAL_PING // WAITING</div>
-    <div class="cyber-line"></div>
-    <div class="cyber-blocks"><span style="animation: blink 1s infinite;" class="active"></span></div>
-</div>
+    <div class="cyber-sidebar">
+        <div class="cyber-blocks"><span style="animation: blink 1s infinite;" class="active"></span></div>
+        <div class="cyber-line"></div>
+        <div class="cyber-text">SIGNAL_PING // WAITING</div>
+        <div class="cyber-line"></div>
+        <div class="cyber-blocks"><span style="animation: blink 1s infinite;" class="active"></span></div>
+    </div>
 
 
-<!-- =========================================
+    <!-- =========================================
 NAVIGATION
 ========================================= -->
 
-<nav>
+    <nav>
 
-```
-<div class="nav-inner">
+        ```
+        <div class="nav-inner">
 
-    <a href="index.html" class="logo page-link">
+            <a href="index.html" class="logo page-link">
 
-        <img src="logo.png" alt="XenoHead">
+                <img src="logo.png" alt="XenoHead">
 
-        <h2>Xeno<span>Head</span></h2>
+                <h2>Xeno<span>Head</span></h2>
 
-    </a>
+            </a>
 
-    <div class="nav-links">
+            <div class="nav-links">
 
-        <a href="projects.html">Projects</a>
+                <a href="projects.html">Projects</a>
 
-        <a href="writing.html">Writing</a>
+                <a href="writing.html">Writing</a>
 
-        <a href="books.html">Books</a>
+                <a href="books.html">Books</a>
 
-        <a href="contact.html">Contact</a>
+                <a href="contact.html">Contact</a>
 
-    </div>
+            </div>
 
-</div>
-```
+        </div>
+        ```
 
-</nav>
+    </nav>
 
-<!-- =========================================
+    <!-- =========================================
 MAIN
 ========================================= -->
 
-<div class="container">
+    <div class="container">
 
-```
-<div class="contact-panel">
+        ```
+        <div class="contact-panel">
 
-    <div class="system">
-        // SIGNAL INTERFACE ACTIVE
+            <div class="system">
+                // SIGNAL INTERFACE ACTIVE
+            </div>
+
+            <h1>
+                Transmit
+                Signal
+            </h1>
+
+            <p>
+                Open communication channel for software,
+                AI systems,
+                creative collaboration,
+                speculative projects,
+                or transmissions from strange futures.
+            </p>
+
+            <!-- FORM -->
+
+            <form class="contact-form">
+
+                <div class="input-group">
+
+                    <label>NAME</label>
+
+                    <input type="text" placeholder="Enter designation">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>EMAIL</label>
+
+                    <input type="email" placeholder="Enter communication address">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>MESSAGE</label>
+
+                    <textarea placeholder="Transmit message..."></textarea>
+
+                </div>
+
+                <button class="send-button">
+                    Send Transmission
+                </button>
+
+            </form>
+
+            <!-- SIGNAL -->
+
+            <div class="signal">
+                ```
+
+                xenohead@network:~$ signal_status<br>
+
+                > Channel Open<br>
+                > Secure Relay Active<br>
+                > Awaiting Transmission_
+
+                ```
+            </div>
+
+        </div>
+        ```
+
     </div>
 
-    <h1>
-        Transmit
-        Signal
-    </h1>
+    <script>
 
-    <p>
-        Open communication channel for software,
-        AI systems,
-        creative collaboration,
-        speculative projects,
-        or transmissions from strange futures.
-    </p>
+        /* =========================================
+        PAGE TRANSITIONS
+        ========================================= */
 
-    <!-- FORM -->
+        const pageLinks =
+            document.querySelectorAll('.page-link');
 
-    <form class="contact-form">
+        pageLinks.forEach(link => {
 
-        <div class="input-group">
+            link.addEventListener('click', e => {
 
-            <label>NAME</label>
+                e.preventDefault();
 
-            <input type="text" placeholder="Enter designation">
+                document.body.classList.add('fade-out');
 
-        </div>
+                const target =
+                    link.getAttribute('href');
 
-        <div class="input-group">
+                setTimeout(() => {
 
-            <label>EMAIL</label>
+                    window.location.href = target;
 
-            <input type="email" placeholder="Enter communication address">
+                }, 400);
 
-        </div>
+            });
 
-        <div class="input-group">
+        });
 
-            <label>MESSAGE</label>
+        /* =========================================
+        BUTTON GLOW TRACKING
+        ========================================= */
 
-            <textarea placeholder="Transmit message..."></textarea>
+        const button =
+            document.querySelector('.send-button');
 
-        </div>
+        button.addEventListener('mousemove', e => {
 
-        <button class="send-button">
-            Send Transmission
-        </button>
+            const rect =
+                button.getBoundingClientRect();
 
-    </form>
+            const x =
+                e.clientX - rect.left;
 
-    <!-- SIGNAL -->
+            const y =
+                e.clientY - rect.top;
 
-    <div class="signal">
-```
-
-xenohead@network:~$ signal_status<br>
-
-> Channel Open<br>
-> Secure Relay Active<br>
-> Awaiting Transmission_
-
-```
-    </div>
-
-</div>
-```
-
-</div>
-
-<script>
-
-/* =========================================
-PAGE TRANSITIONS
-========================================= */
-
-const pageLinks =
-document.querySelectorAll('.page-link');
-
-pageLinks.forEach(link => {
-
-    link.addEventListener('click', e => {
-
-        e.preventDefault();
-
-        document.body.classList.add('fade-out');
-
-        const target =
-        link.getAttribute('href');
-
-        setTimeout(() => {
-
-            window.location.href = target;
-
-        }, 400);
-
-    });
-
-});
-
-/* =========================================
-BUTTON GLOW TRACKING
-========================================= */
-
-const button =
-document.querySelector('.send-button');
-
-button.addEventListener('mousemove', e => {
-
-    const rect =
-    button.getBoundingClientRect();
-
-    const x =
-    e.clientX - rect.left;
-
-    const y =
-    e.clientY - rect.top;
-
-    button.style.background =
-    `radial-gradient(circle at ${x}px ${y}px,
+            button.style.background =
+                `radial-gradient(circle at ${x}px ${y}px,
     rgba(0,207,255,0.18),
     rgba(0,0,0,0) 55%)`;
 
-});
+        });
 
-button.addEventListener('mouseleave', () => {
+        button.addEventListener('mouseleave', () => {
 
-    button.style.background =
-    'transparent';
+            button.style.background =
+                'transparent';
 
-});
+        });
 
-/* =========================================
-PANEL LIGHT TRACKING
-========================================= */
+        /* =========================================
+        PANEL LIGHT TRACKING
+        ========================================= */
 
-const panel =
-document.querySelector('.contact-panel');
+        const panel =
+            document.querySelector('.contact-panel');
 
-panel.addEventListener('mousemove', e => {
+        panel.addEventListener('mousemove', e => {
 
-    const rect =
-    panel.getBoundingClientRect();
+            const rect =
+                panel.getBoundingClientRect();
 
-    const x =
-    e.clientX - rect.left;
+            const x =
+                e.clientX - rect.left;
 
-    const y =
-    e.clientY - rect.top;
+            const y =
+                e.clientY - rect.top;
 
-    panel.style.background =
-    `radial-gradient(circle at ${x}px ${y}px,
+            panel.style.background =
+                `radial-gradient(circle at ${x}px ${y}px,
     rgba(0,207,255,0.06),
     rgba(11,16,32,0.74) 45%)`;
 
-});
+        });
 
-panel.addEventListener('mouseleave', () => {
+        panel.addEventListener('mouseleave', () => {
 
-    panel.style.background =
-    `rgba(11,16,32,0.72)`;
+            panel.style.background =
+                `rgba(11,16,32,0.72)`;
 
-});
+        });
 
-</script>
+    </script>
 
 </body>
+
 </html>
