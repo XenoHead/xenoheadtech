@@ -20,6 +20,31 @@ projects.html
 
 <style>
 
+@font-face {
+    font-family: 'Elektora';
+    src: url('assets/Elektora-qm0.ttf') format('truetype');
+}
+.logo h2 {
+    font-family: 'Elektora', sans-serif !important;
+    font-size: 2.2rem !important;
+    text-transform: none !important;
+    letter-spacing: 1px !important;
+}
+
+
+@font-face {
+    font-family: 'MSDOS';
+    src: url('PcSeniorRegular-OEnd.ttf') format('truetype');
+}
+h1, h2, h3, .header h1, .hero h1 {
+    font-family: 'MSDOS', monospace !important;
+    font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+    font-weight: normal !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase;
+}
+
+
 /* =========================================
 RESET
 ========================================= */
@@ -121,7 +146,7 @@ nav{
     max-width:1300px;
     margin:auto;
 
-    padding:1.4rem 2rem;
+    padding:1.4rem 2rem 1.4rem 80px;
 
     display:flex;
     justify-content:space-between;
@@ -171,7 +196,7 @@ LAYOUT
     max-width:1300px;
     margin:auto;
 
-    padding:9rem 2rem 6rem;
+    padding:9rem 2rem 6rem 80px;
 }
 
 /* =========================================
@@ -538,6 +563,16 @@ MODAL
 
 }
 
+
+/* CYBER SIDEBAR */
+.cyber-sidebar { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); height: 85vh; width: 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; z-index: 10; pointer-events: none; --accent: #00ff00; }
+.cyber-line { flex-grow: 1; border-left: 1px dotted var(--accent); width: 4px; border-right: 1px dotted var(--accent); opacity: 0.6; position: relative; margin: 10px 0; }
+.cyber-text { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; margin: 2rem 0; opacity: 0.9; text-shadow: 0 0 5px var(--accent); }
+.cyber-blocks { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
+.cyber-blocks span { display: block; width: 12px; height: 12px; border: 1px solid var(--accent); opacity: 0.6; box-shadow: inset 0 0 5px var(--accent); }
+.cyber-blocks span.active { background: var(--accent); opacity: 1; box-shadow: 0 0 10px var(--accent); }
+@media(max-width:800px) { .cyber-sidebar { display: none; } }
+
 </style>
 
 </head>
@@ -545,6 +580,15 @@ MODAL
 <body>
 
 <div class="background-image"></div>
+
+<div class="cyber-sidebar">
+    <div class="cyber-blocks"><span class="active" style="height:20px"></span><span style="height:4px"></span><span style="height:10px"></span></div>
+    <div class="cyber-line"></div>
+    <div class="cyber-text">TECH.NET // COMPILE_SEQ_99</div>
+    <div class="cyber-line"></div>
+    <div class="cyber-blocks"><span class="active" style="height:20px"></span><span style="height:4px"></span><span style="height:10px"></span></div>
+</div>
+
 
 <!-- =========================================
 NAVIGATION

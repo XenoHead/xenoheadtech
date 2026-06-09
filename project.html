@@ -6,6 +6,31 @@
     <title>XenoHead — Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+
+@font-face {
+    font-family: 'Elektora';
+    src: url('assets/Elektora-qm0.ttf') format('truetype');
+}
+.logo h2 {
+    font-family: 'Elektora', sans-serif !important;
+    font-size: 2.2rem !important;
+    text-transform: none !important;
+    letter-spacing: 1px !important;
+}
+
+
+@font-face {
+    font-family: 'MSDOS';
+    src: url('PcSeniorRegular-OEnd.ttf') format('truetype');
+}
+h1, h2, h3, .header h1, .hero h1 {
+    font-family: 'MSDOS', monospace !important;
+    font-size: clamp(1.5rem, 3vw, 2.5rem) !important;
+    font-weight: normal !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase;
+}
+
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
         body { background:#050816; color:#EAF7FF; font-family:'Space Grotesk',sans-serif; overflow-x:hidden; }
@@ -15,7 +40,7 @@
         body::before { content:""; position:fixed; inset:0; background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size:70px 70px; z-index:-1; }
         
         nav { width:100%; position:fixed; top:0; z-index:999; backdrop-filter:blur(16px); background:rgba(5,8,22,0.72); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .nav-inner { max-width:1300px; margin:auto; padding:1.4rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .nav-inner { max-width:1300px; margin:auto; padding:1.4rem 2rem 1.4rem 80px; display:flex; justify-content:space-between; align-items:center; }
         .logo { display:flex; align-items:center; gap:1rem; text-decoration:none; color:white; }
         .logo img { width:42px; }
         .logo span { color:var(--accent); }
@@ -23,7 +48,7 @@
         .nav-links a { text-decoration:none; color:var(--muted); transition:0.3s; }
         .nav-links a:hover { color:var(--accent); }
 
-        .container { max-width:900px; margin:auto; padding:9rem 2rem 6rem; }
+        .container { max-width:900px; margin:auto; padding:9rem 2rem 6rem 80px; }
         
         #project-container { display: none; animation: fadeUp 1s ease forwards; }
         
@@ -50,11 +75,30 @@
             .nav-links { display:none; }
             .project-hero { height: 250px; }
         }
-    </style>
+    
+/* CYBER SIDEBAR */
+.cyber-sidebar { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); height: 85vh; width: 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; z-index: 10; pointer-events: none; --accent: #ffff00; }
+.cyber-line { flex-grow: 1; background: var(--accent); width: 1px; box-shadow: 0 0 10px var(--accent); opacity: 0.6; position: relative; margin: 10px 0; }
+.cyber-text { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 4px; margin: 2rem 0; opacity: 0.9; text-shadow: 0 0 5px var(--accent); }
+.cyber-blocks { display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; }
+.cyber-blocks span { display: block; width: 12px; height: 12px; border: 1px solid var(--accent); opacity: 0.6; box-shadow: inset 0 0 5px var(--accent); }
+.cyber-blocks span.active { background: var(--accent); opacity: 1; box-shadow: 0 0 10px var(--accent); }
+@media(max-width:800px) { .cyber-sidebar { display: none; } }
+
+</style>
 </head>
 <body>
 
 <div class="background-image"></div>
+
+<div class="cyber-sidebar">
+    <div class="cyber-blocks"><span class="active"></span><span></span></div>
+    <div class="cyber-line"></div>
+    <div class="cyber-text">MODULE_VIEW // DETAIL</div>
+    <div class="cyber-line"></div>
+    <div class="cyber-blocks"><span class="active"></span><span></span></div>
+</div>
+
 
 <nav>
     <div class="nav-inner">
