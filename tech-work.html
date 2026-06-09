@@ -1,0 +1,763 @@
+<!-- =========================================
+XENOHEAD — PROJECTS PAGE
+projects.html
+========================================= -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XenoHead — Projects</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:#EAF7FF;
+    font-family:'Space Grotesk',sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================================
+VARIABLES
+========================================= */
+
+:root{
+    --bg:#050816;
+    --surface:#0B1020;
+    --surface2:#12192B;
+    --accent:#00CFFF;
+    --accentSoft:#5CE1FF;
+    --text:#EAF7FF;
+    --muted:#7D8CA3;
+}
+
+/* =========================================
+BACKGROUND
+========================================= */
+
+.background-image{
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(rgba(5,8,22,0.86), rgba(5,8,22,0.95)),
+    url('assets/projects-bg.webp');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-2;
+
+    animation:slowZoom 24s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom{
+    from{
+        transform:scale(1.02);
+    }
+
+    to{
+        transform:scale(1.08);
+    }
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+
+    background-size:60px 60px;
+
+    z-index:-1;
+}
+
+/* =========================================
+NAV
+========================================= */
+
+nav{
+    width:100%;
+    position:fixed;
+    top:0;
+    z-index:999;
+
+    backdrop-filter:blur(18px);
+
+    background:rgba(5,8,22,0.7);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.nav-inner{
+    max-width:1300px;
+    margin:auto;
+
+    padding:1.4rem 2rem;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+
+    text-decoration:none;
+    color:white;
+}
+
+.logo img{
+    width:42px;
+}
+
+.logo span{
+    color:var(--accent);
+}
+
+.nav-links{
+    display:flex;
+    gap:2rem;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--muted);
+
+    transition:0.3s;
+
+    position:relative;
+}
+
+.nav-links a:hover{
+    color:var(--accent);
+}
+
+/* =========================================
+LAYOUT
+========================================= */
+
+.container{
+    max-width:1300px;
+    margin:auto;
+
+    padding:9rem 2rem 6rem;
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.header{
+    margin-bottom:5rem;
+
+    animation:fadeUp 1s ease forwards;
+}
+
+.system{
+    color:var(--accent);
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:2px;
+    font-size:0.85rem;
+
+    margin-bottom:1rem;
+}
+
+.header h1{
+    font-size:clamp(3rem,7vw,6rem);
+    line-height:0.95;
+
+    margin-bottom:1.5rem;
+}
+
+.header p{
+    max-width:700px;
+
+    color:var(--muted);
+
+    line-height:1.9;
+    font-size:1.1rem;
+}
+
+/* =========================================
+PROJECT GRID
+========================================= */
+
+.projects-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(340px,1fr));
+
+    gap:2rem;
+}
+
+/* =========================================
+PROJECT CARD
+========================================= */
+
+.project-card{
+
+    position:relative;
+
+    background:
+    rgba(11,16,32,0.72);
+
+    border:
+    1px solid rgba(255,255,255,0.06);
+
+    overflow:hidden;
+
+    transition:0.4s ease;
+
+    backdrop-filter:blur(14px);
+
+    min-height:480px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.project-card:hover{
+
+    transform:
+    translateY(-10px);
+
+    border-color:
+    rgba(0,207,255,0.28);
+
+    box-shadow:
+    0 0 40px rgba(0,207,255,0.1);
+
+}
+
+/* =========================================
+PROJECT IMAGE
+========================================= */
+
+.project-image{
+    height:220px;
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+}
+
+.project-image::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    transparent,
+    rgba(5,8,22,0.95));
+}
+
+/* =========================================
+CARD CONTENT
+========================================= */
+
+.project-content{
+
+    padding:2rem;
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.project-content small{
+    color:var(--accent);
+
+    font-family:'IBM Plex Mono', monospace;
+
+    letter-spacing:2px;
+}
+
+.project-content h2{
+
+    margin:1rem 0;
+
+    font-size:1.8rem;
+}
+
+.project-content p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    margin-bottom:2rem;
+}
+
+/* =========================================
+TAGS
+========================================= */
+
+.tags{
+    display:flex;
+    gap:0.6rem;
+    flex-wrap:wrap;
+
+    margin-top:auto;
+}
+
+.tags span{
+
+    border:
+    1px solid rgba(0,207,255,0.18);
+
+    padding:
+    0.4rem 0.7rem;
+
+    color:var(--accent);
+
+    font-size:0.75rem;
+
+    font-family:'IBM Plex Mono', monospace;
+}
+
+/* =========================================
+BUTTONS
+========================================= */
+
+.project-links{
+
+    display:flex;
+    gap:1rem;
+
+    margin-top:2rem;
+}
+
+.button{
+
+    padding:
+    0.9rem 1.3rem;
+
+    text-decoration:none;
+
+    border:
+    1px solid rgba(0,207,255,0.22);
+
+    color:white;
+
+    transition:0.3s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.button:hover{
+
+    background:
+    rgba(0,207,255,0.1);
+
+    border-color:
+    rgba(0,207,255,0.45);
+
+    box-shadow:
+    0 0 25px rgba(0,207,255,0.18);
+}
+
+/* =========================================
+ANIMATION
+========================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+
+    transition:1s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0px);
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+footer{
+
+    margin-top:6rem;
+
+    border-top:
+    1px solid rgba(255,255,255,0.05);
+
+    padding-top:2rem;
+
+    color:var(--muted);
+}
+
+/* =========================================
+PAGE TRANSITION
+========================================= */
+
+.fade-out{
+    animation:fadeOut 0.45s ease forwards;
+}
+
+@keyframes fadeOut{
+
+    to{
+        opacity:0;
+        filter:blur(8px);
+        transform:scale(1.02);
+    }
+
+}
+
+/* =========================================
+MODAL
+========================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,22,0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+.modal-content {
+    background: var(--surface);
+    border: 1px solid rgba(0,207,255,0.2);
+    box-shadow: 0 0 40px rgba(0,207,255,0.1);
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 3rem;
+}
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+    line-height: 1;
+}
+.modal-close:hover {
+    color: var(--accent);
+}
+.modal-hero {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(0,207,255,0.2);
+    margin-bottom: 2rem;
+    position: relative;
+}
+.modal-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--surface), transparent);
+}
+
+@media(max-width:800px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background-image"></div>
+
+<!-- =========================================
+NAVIGATION
+========================================= -->
+
+<nav>
+
+```
+<div class="nav-inner">
+
+    <a href="index.html" class="logo page-link">
+
+        <img src="logo.png" alt="XenoHead">
+
+        <h2>Xeno<span>Head</span></h2>
+
+    </a>
+
+    <div class="nav-links">
+
+        <a href="projects.html">Projects</a>
+
+        <a href="writing.html">Writing</a>
+
+        <a href="books.html">Books</a>
+
+        <a href="contact.html">Contact</a>
+
+    </div>
+
+</div>
+```
+
+</nav>
+
+<!-- =========================================
+MAIN
+========================================= -->
+
+<div class="container">
+
+```
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="system">
+        // ACTIVE SYSTEMS
+    </div>
+
+    <h1>
+        Experimental
+        Systems &
+        Intelligence
+    </h1>
+
+    <p>
+        Independent software systems,
+        AI experimentation,
+        interface design,
+        speculative tooling,
+        and research-oriented development
+        from the edge of tomorrow.
+    </p>
+
+</div>
+
+<!-- PROJECT GRID -->
+
+<div class="projects-grid">
+    <!-- Projects will be loaded dynamically from data/projects.json -->
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        XenoHead —
+        Building systems for strange futures.
+    </p>
+
+</footer>
+```
+
+</div>
+
+<!-- MODAL -->
+<div id="project-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<script>
+
+let allProjects = [];
+
+async function loadProjects() {
+    try {
+        // Prevent caching in development by appending timestamp, though a cache-control header is better in prod
+        const response = await fetch('data/projects.json?t=' + Date.now());
+        allProjects = await response.json();
+        const grid = document.querySelector('.projects-grid');
+        grid.innerHTML = allProjects.map(p => `
+            <div class="project-card reveal">
+                <div class="project-image" style="background-image:url('${p.image}')"></div>
+                <div class="project-content">
+                    <small>// ${p.category}</small>
+                    <h2>${p.title}</h2>
+                    <p>${p.description ? p.description.split(/\n/).slice(0, 2).join('<br><br>') + (p.description.split(/\n/).length > 2 ? '<br><br>...' : '') : ''}</p>
+                    <div class="tags">
+                        ${p.tags.map(t => `<span>${t}</span>`).join('')}
+                    </div>
+                    <div class="project-links" style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+                        <a href="${p.viewLink}" target="_blank">
+                            <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
+                        </a>
+                        <a href="#" onclick="openModal('${p.id}'); return false;" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; transition: 0.3s;">Read more...</a>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        initializeEffects();
+    } catch (e) {
+        console.error("Failed to load projects:", e);
+    }
+}
+
+function openModal(id) {
+    const p = allProjects.find(x => x.id === id);
+    if (!p) return;
+    
+    document.getElementById('modal-body').innerHTML = `
+        <div class="modal-hero" style="background-image:url('${p.image}')"></div>
+        <div class="system" style="color:var(--accent); font-family:'IBM Plex Mono', monospace; letter-spacing:2px; font-size:0.85rem; margin-bottom:1rem;">// ${p.category}</div>
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem); line-height: 1; margin-bottom: 1.5rem;">${p.title}</h1>
+        <div class="tags" style="display:flex; gap:0.8rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            ${p.tags.map(t => `<span style="border: 1px solid rgba(0,207,255,0.15); padding: 0.35rem 0.6rem; color:var(--accentSoft); font-size:0.75rem; font-family:'IBM Plex Mono', monospace;">${t}</span>`).join('')}
+        </div>
+        <div class="description" style="color:var(--muted); line-height:2; font-size:1.15rem; margin-bottom: 3rem;">
+            ${p.description ? p.description.replace(/\n/g, '<br>') : ''}
+        </div>
+        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            <a href="${p.viewLink}" target="_blank">
+                <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
+            </a>
+        </div>
+    `;
+    
+    document.getElementById('project-modal').classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeModal() {
+    document.getElementById('project-modal').classList.remove('active');
+    document.body.style.overflow = 'auto'; // Restore scrolling
+}
+
+function initializeEffects() {
+    /* =========================================
+    SCROLL REVEAL
+    ========================================= */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold:0.15 });
+
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
+    });
+
+    /* =========================================
+    CARD LIGHT TRACKING
+    ========================================= */
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,207,255,0.10), rgba(11,16,32,0.78) 40%)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.background = `rgba(11,16,32,0.72)`;
+        });
+    });
+}
+
+/* =========================================
+PAGE TRANSITIONS
+========================================= */
+const pageLinks = document.querySelectorAll('.page-link');
+pageLinks.forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        const target = link.getAttribute('href');
+        setTimeout(() => {
+            window.location.href = target;
+        }, 400);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', loadProjects);
+
+</script>
+
+</body>
+</html>
