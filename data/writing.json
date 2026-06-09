@@ -1,18 +1,14 @@
 [
   {
-    "id": "w1",
-    "signal": "SIGNAL 001",
-    "title": "The Romanticism of Code",
-    "description": "Software is often treated as machinery, but code is also architecture, language, psychology, and philosophy. A reflection on software creation as artistic and cognitive expression.",
-    "tags": ["ESSAY", "SOFTWARE", "PHILOSOPHY"],
-    "link": "#"
-  },
-  {
     "id": "w2",
     "signal": "SIGNAL 002",
     "title": "Tomorrow Has Teeth",
     "description": "Speculative thoughts on emerging intelligence, machine agency, and the subtle dangers hidden beneath technological acceleration.",
-    "tags": ["AI", "SPECULATION", "FUTURE"],
+    "tags": [
+      "AI",
+      "SPECULATION",
+      "FUTURE"
+    ],
     "link": "#"
   },
   {
@@ -20,7 +16,11 @@
     "signal": "SIGNAL 003",
     "title": "Echoes Beyond the Simulation",
     "description": "A speculative science-fiction fragment exploring memory, artificial consciousness, and the psychological architecture of synthetic worlds.",
-    "tags": ["SCI-FI", "FICTION", "COGNITION"],
+    "tags": [
+      "SCI-FI",
+      "FICTION",
+      "COGNITION"
+    ],
     "link": "#"
   }
 ]

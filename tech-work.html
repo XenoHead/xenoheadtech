@@ -11,7 +11,7 @@ projects.html
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>XenoHead — Projects</title>
+<title>XenoHead — Tech Work</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -596,9 +596,8 @@ MAIN
     </div>
 
     <h1>
-        Experimental
-        Systems &
-        Intelligence
+        Technical Work &
+        Code
     </h1>
 
     <p>
@@ -615,7 +614,7 @@ MAIN
 <!-- PROJECT GRID -->
 
 <div class="projects-grid">
-    <!-- Projects will be loaded dynamically from data/projects.json -->
+    <!-- Tech work will be loaded dynamically from data/tech-work.json -->
 </div>
 
 <!-- FOOTER -->
@@ -642,15 +641,15 @@ MAIN
 
 <script>
 
-let allProjects = [];
+let allTechWork = [];
 
-async function loadProjects() {
+async function loadTechWork() {
     try {
         // Prevent caching in development by appending timestamp, though a cache-control header is better in prod
-        const response = await fetch('data/projects.json?t=' + Date.now());
-        allProjects = await response.json();
+        const response = await fetch('data/tech-work.json?t=' + Date.now());
+        allTechWork = await response.json();
         const grid = document.querySelector('.projects-grid');
-        grid.innerHTML = allProjects.map(p => `
+        grid.innerHTML = allTechWork.map(p => `
             <div class="project-card reveal">
                 <div class="project-image" style="background-image:url('${p.image}')"></div>
                 <div class="project-content">
@@ -677,7 +676,7 @@ async function loadProjects() {
 }
 
 function openModal(id) {
-    const p = allProjects.find(x => x.id === id);
+    const p = allTechWork.find(x => x.id === id);
     if (!p) return;
     
     document.getElementById('modal-body').innerHTML = `
@@ -755,7 +754,7 @@ pageLinks.forEach(link => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', loadProjects);
+document.addEventListener('DOMContentLoaded', loadTechWork);
 
 </script>
 
