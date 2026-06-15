@@ -604,7 +604,7 @@ MAIN
                         <a href="${p.viewLink || '#'}" target="_blank" style="flex-shrink: 0;">
                             <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 36px; display: block;">
                         </a>
-                        ${p.sellSheetLink ? `<a href="${p.sellSheetLink}" target="_blank" style="display: inline-block; padding: 8px 16px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; background: linear-gradient(135deg, #00cfff 0%, #0077ff 100%); border-radius: 6px; text-decoration: none; font-size: 0.85rem; white-space: nowrap; transition: 0.3s; box-shadow: 0 2px 10px rgba(0, 207, 255, 0.2);">Sell Sheet</a>` : `<a href="#" onclick="openModal('${p.id}'); return false;" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; transition: 0.3s; white-space: nowrap;">Read more...</a>`}
+                        ${p.sellSheetLink ? `<a href="${p.sellSheetLink}" target="_blank" style="display: inline-block; padding: 8px 16px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; background: linear-gradient(135deg, #00cfff 0%, #0077ff 100%); border-radius: 6px; text-decoration: none; font-size: 0.85rem; white-space: nowrap; transition: 0.3s; box-shadow: 0 2px 10px rgba(0, 207, 255, 0.2);">Read More</a>` : `<a href="#" onclick="openModal('${p.id}'); return false;" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; transition: 0.3s; white-space: nowrap;">Read more...</a>`}
                     </div>
                 </div>
             </div>
@@ -631,7 +631,7 @@ MAIN
             ${p.description ? p.description.replace(/\n/g, '<br>') : ''}
         </div>
         <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;">
-            ${p.sellSheetLink ? `<a href="${p.sellSheetLink}" style="display: inline-block; padding: 12px 30px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; background: linear-gradient(135deg, #00cfff 0%, #0077ff 100%); border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 207, 255, 0.3); border: 1px solid rgba(255,255,255,0.1);">Tell Me About it!</a>` : ''}
+            ${p.sellSheetLink ? `<a href="${p.sellSheetLink}" style="display: inline-block; padding: 12px 30px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; background: linear-gradient(135deg, #00cfff 0%, #0077ff 100%); border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 207, 255, 0.3); border: 1px solid rgba(255,255,255,0.1);">Read More</a>` : ''}
             <a href="${p.viewLink || '#'}" target="_blank">
                 <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
             </a>
