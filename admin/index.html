@@ -46,25 +46,15 @@
         <h1 style="margin-bottom: 0;">[ SYSTEM ADMIN ]</h1>
         <button id="push-btn" class="btn" style="background: var(--accentSoft); color: var(--bg);" onclick="pushToGit()">Push to GitHub</button>
     </div>
-    <div class="tabs">
-        <div class="tab active" onclick="switchTab('projects')">PROJECTS</div>
-        <div class="tab" onclick="switchTab('tech-work')">TECH WORK</div>
-        <div class="tab" onclick="switchTab('writing')">WRITING</div>
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+        <div class="tabs" id="dynamic-tabs" style="margin-bottom: 0;">
+            <!-- Tabs injected here -->
+        </div>
+        <button class="btn" onclick="createNewCategory()" style="border-color: #ffcc00; color: #ffcc00;">+ NEW CATEGORY</button>
     </div>
 
-    <div id="projects-panel" class="panel active">
-        <button class="btn" style="margin-bottom: 1rem;" onclick="openEditor('projects')">+ NEW PROJECT</button>
-        <div id="projects-list"></div>
-    </div>
-
-    <div id="tech-work-panel" class="panel">
-        <button class="btn" style="margin-bottom: 1rem;" onclick="openEditor('tech-work')">+ NEW TECH WORK</button>
-        <div id="tech-work-list"></div>
-    </div>
-
-    <div id="writing-panel" class="panel">
-        <button class="btn" style="margin-bottom: 1rem;" onclick="openEditor('writing')">+ NEW ENTRY</button>
-        <div id="writing-list"></div>
+    <div id="panels-container">
+        <!-- Panels injected here -->
     </div>
 
     <div id="editor-modal">
@@ -81,26 +71,83 @@
     </div>
 
 <script>
-let currentData = { projects: [], writing: [], 'tech-work': [] };
+let currentData = {};
+let categories = [];
 let editingType = null;
 let editingId = null;
 
+async function initAdmin() {
+    const res = await fetch('/api/categories');
+    categories = await res.json();
+    
+    renderTabsAndPanels();
+    
+    for (const cat of categories) {
+        await fetchData(cat);
+    }
+    
+    if (categories.length > 0) {
+        switchTab(categories[0]);
+    }
+}
+
+function renderTabsAndPanels() {
+    const tabsContainer = document.getElementById('dynamic-tabs');
+    const panelsContainer = document.getElementById('panels-container');
+    
+    tabsContainer.innerHTML = categories.map(cat => 
+        `<div class="tab" id="tab-${cat}" onclick="switchTab('${cat}')">${cat.toUpperCase().replace(/-/g, ' ')}</div>`
+    ).join('');
+    
+    panelsContainer.innerHTML = categories.map(cat => `
+        <div id="${cat}-panel" class="panel">
+            <button class="btn" style="margin-bottom: 1rem;" onclick="openEditor('${cat}')">+ NEW ENTRY</button>
+            <div id="${cat}-list"></div>
+        </div>
+    `).join('');
+}
+
+async function createNewCategory() {
+    const name = prompt("Enter new category name (e.g., 'books', 'podcasts'):");
+    if (!name) return;
+    
+    const res = await fetch('/api/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+    });
+    
+    if (res.ok) {
+        initAdmin();
+    } else {
+        alert("Failed to create category.");
+    }
+}
+
 async function fetchData(type) {
     const res = await fetch(`/api/${type}`);
-    currentData[type] = await res.json();
-    renderList(type);
+    if (res.ok) {
+        currentData[type] = await res.json();
+        renderList(type);
+    }
 }
 
 function switchTab(type) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById(`${type}-panel`).classList.add('active');
-    fetchData(type);
+    
+    const tab = document.getElementById(`tab-${type}`);
+    const panel = document.getElementById(`${type}-panel`);
+    
+    if (tab) tab.classList.add('active');
+    if (panel) panel.classList.add('active');
 }
 
 function renderList(type) {
     const container = document.getElementById(`${type}-list`);
+    if (!container) return;
+    if (!currentData[type]) return;
+    
     container.innerHTML = currentData[type].map(item => `
         <div class="card">
             <div style="float: right;">
@@ -121,32 +168,21 @@ function openEditor(type, id = null) {
     
     document.getElementById('modal-title').innerText = id ? `EDIT ${type.toUpperCase()}` : `NEW ${type.toUpperCase()}`;
     
-    let fieldsHtml;
-    if (type === 'projects' || type === 'tech-work') {
-            fieldsHtml = `
-                <div class="form-group"><label>Title</label><input type="text" name="title" value="${item.title || ''}" required></div>
-                <div class="form-group"><label>Category/System</label><input type="text" name="category" value="${item.category || ''}" required></div>
-                <div class="form-group"><label>Tags (comma separated)</label><input type="text" name="tags" value="${item.tags ? item.tags.join(', ') : ''}" required></div>
-                <div class="form-group"><label>Description</label><textarea name="description" rows="5" required>${item.description || ''}</textarea></div>
-                <div class="form-group">
-                    <label>Image URL</label>
-                    <div style="display:flex; gap:1rem;">
-                        <input type="text" name="image" id="image-url-input" value="${item.image || ''}">
-                        <input type="file" id="image-file" style="display:none;" accept="image/*">
-                        <button type="button" class="btn" onclick="document.getElementById('image-file').click()">UPLOAD</button>
-                    </div>
-                </div>
-                <div class="form-group"><label>MS Store Link (or URL)</label><input type="text" name="viewLink" value="${item.viewLink || '#'}"></div>
-            `;
-    } else {
-        fieldsHtml = `
-            <div class="form-group"><label>Signal / Meta</label><input type="text" name="signal" value="${item.signal || ''}" required></div>
-            <div class="form-group"><label>Title</label><input type="text" name="title" value="${item.title || ''}" required></div>
-            <div class="form-group"><label>Description / Snippet</label><textarea name="description" rows="5" required>${item.description || ''}</textarea></div>
-            <div class="form-group"><label>Tags (comma separated)</label><input type="text" name="tags" value="${(item.tags || []).join(', ')}"></div>
-            <div class="form-group"><label>Read Link</label><input type="text" name="link" value="${item.link || '#'}"></div>
-        `;
-    }
+    let fieldsHtml = `
+        <div class="form-group"><label>Title</label><input type="text" name="title" value="${item.title || ''}" required></div>
+        <div class="form-group"><label>Subtitle / Category / Signal</label><input type="text" name="category" value="${item.category || item.signal || ''}"></div>
+        <div class="form-group"><label>Tags (comma separated)</label><input type="text" name="tags" value="${item.tags ? item.tags.join(', ') : ''}"></div>
+        <div class="form-group"><label>Description / Snippet</label><textarea name="description" rows="5" required>${item.description || ''}</textarea></div>
+        <div class="form-group">
+            <label>Image URL</label>
+            <div style="display:flex; gap:1rem;">
+                <input type="text" name="image" id="image-url-input" value="${item.image || ''}">
+                <input type="file" id="image-file" style="display:none;" accept="image/*" onchange="uploadImage()">
+                <button type="button" class="btn" onclick="document.getElementById('image-file').click()">UPLOAD</button>
+            </div>
+        </div>
+        <div class="form-group"><label>External Link (Store/Read/View URL)</label><input type="text" name="link" value="${item.link || item.viewLink || '#'}"></div>
+    `;
     
     document.getElementById('form-fields').innerHTML = fieldsHtml;
     document.getElementById('editor-modal').classList.add('active');
@@ -202,7 +238,7 @@ async function uploadImage() {
         });
         if (res.ok) {
             const data = await res.json();
-            document.getElementById('image-input').value = data.imagePath;
+            document.getElementById('image-url-input').value = data.imagePath;
         } else {
             alert('Upload failed');
         }
@@ -231,10 +267,7 @@ async function pushToGit() {
     }
 }
 
-// Init
-fetchData('projects');
-fetchData('tech-work');
-fetchData('writing');
+initAdmin();
 </script>
 </body>
 </html>

@@ -77,109 +77,60 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
     res.json({ imagePath: 'assets/' + req.file.filename });
 });
 
-// --- PROJECTS API ---
+// --- DYNAMIC API ---
 
-app.get('/api/projects', (req, res) => {
-    res.json(readData('projects.json'));
+app.get('/api/categories', (req, res) => {
+    const dataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
+    const files = fs.readdirSync(dataDir);
+    const categories = files.filter(f => f.endsWith('.json')).map(f => f.replace('.json', ''));
+    res.json(categories);
 });
 
-app.post('/api/projects', (req, res) => {
-    const projects = readData('projects.json');
-    const newProject = { ...req.body, id: 'p' + Date.now() };
-    projects.push(newProject);
-    writeData('projects.json', projects);
-    pushToGithub();
-    res.json(newProject);
-});
-
-app.put('/api/projects/:id', (req, res) => {
-    const projects = readData('projects.json');
-    const index = projects.findIndex(p => p.id === req.params.id);
-    if (index !== -1) {
-        projects[index] = { ...projects[index], ...req.body, id: req.params.id };
-        writeData('projects.json', projects);
+app.post('/api/categories', (req, res) => {
+    const { name } = req.body;
+    if (!name) return res.status(400).send('Name required');
+    const safeName = name.toLowerCase().replace(/[^a-z0-9-]/g, '-');
+    const filepath = path.join(__dirname, 'data', `${safeName}.json`);
+    if (!fs.existsSync(filepath)) {
+        fs.writeFileSync(filepath, '[]');
         pushToGithub();
-        res.json(projects[index]);
+    }
+    res.json({ success: true, name: safeName });
+});
+
+app.get('/api/:type', (req, res) => {
+    if (req.params.type === 'push' || req.params.type === 'upload' || req.params.type === 'categories') return res.status(404).send('Not found');
+    res.json(readData(`${req.params.type}.json`));
+});
+
+app.post('/api/:type', (req, res) => {
+    if (req.params.type === 'push' || req.params.type === 'upload' || req.params.type === 'categories') return res.status(404).send('Not found');
+    const items = readData(`${req.params.type}.json`);
+    const newItem = { ...req.body, id: req.params.type.charAt(0) + Date.now() };
+    items.push(newItem);
+    writeData(`${req.params.type}.json`, items);
+    pushToGithub();
+    res.json(newItem);
+});
+
+app.put('/api/:type/:id', (req, res) => {
+    const items = readData(`${req.params.type}.json`);
+    const index = items.findIndex(i => i.id === req.params.id);
+    if (index !== -1) {
+        items[index] = { ...items[index], ...req.body, id: req.params.id };
+        writeData(`${req.params.type}.json`, items);
+        pushToGithub();
+        res.json(items[index]);
     } else {
         res.status(404).send('Not found');
     }
 });
 
-app.delete('/api/projects/:id', (req, res) => {
-    let projects = readData('projects.json');
-    projects = projects.filter(p => p.id !== req.params.id);
-    writeData('projects.json', projects);
-    pushToGithub();
-    res.json({ success: true });
-});
-
-// --- WRITING API ---
-
-app.get('/api/writing', (req, res) => {
-    res.json(readData('writing.json'));
-});
-
-app.post('/api/writing', (req, res) => {
-    const writing = readData('writing.json');
-    const newEntry = { ...req.body, id: 'w' + Date.now() };
-    writing.push(newEntry);
-    writeData('writing.json', writing);
-    pushToGithub();
-    res.json(newEntry);
-});
-
-app.put('/api/writing/:id', (req, res) => {
-    const writing = readData('writing.json');
-    const index = writing.findIndex(w => w.id === req.params.id);
-    if (index !== -1) {
-        writing[index] = { ...writing[index], ...req.body, id: req.params.id };
-        writeData('writing.json', writing);
-        pushToGithub();
-        res.json(writing[index]);
-    } else {
-        res.status(404).send('Not found');
-    }
-});
-
-app.delete('/api/writing/:id', (req, res) => {
-    let writing = readData('writing.json');
-    writing = writing.filter(w => w.id !== req.params.id);
-    writeData('writing.json', writing);
-    pushToGithub();
-    res.json({ success: true });
-});
-
-// Tech-Work Routes
-app.get('/api/tech-work', (req, res) => {
-    res.json(readData('tech-work.json'));
-});
-
-app.post('/api/tech-work', (req, res) => {
-    const techwork = readData('tech-work.json');
-    const newEntry = { ...req.body, id: 'tw' + Date.now() };
-    techwork.push(newEntry);
-    writeData('tech-work.json', techwork);
-    pushToGithub();
-    res.json(newEntry);
-});
-
-app.put('/api/tech-work/:id', (req, res) => {
-    const techwork = readData('tech-work.json');
-    const index = techwork.findIndex(w => w.id === req.params.id);
-    if (index !== -1) {
-        techwork[index] = { ...techwork[index], ...req.body, id: req.params.id };
-        writeData('tech-work.json', techwork);
-        pushToGithub();
-        res.json(techwork[index]);
-    } else {
-        res.status(404).send('Not found');
-    }
-});
-
-app.delete('/api/tech-work/:id', (req, res) => {
-    let techwork = readData('tech-work.json');
-    techwork = techwork.filter(w => w.id !== req.params.id);
-    writeData('tech-work.json', techwork);
+app.delete('/api/:type/:id', (req, res) => {
+    let items = readData(`${req.params.type}.json`);
+    items = items.filter(i => i.id !== req.params.id);
+    writeData(`${req.params.type}.json`, items);
     pushToGithub();
     res.json({ success: true });
 });
