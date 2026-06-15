@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XenoScript - User Manual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(25, 25, 35, 0.6);
+            --bg-card-hover: rgba(35, 35, 50, 0.8);
+            --accent-primary: #5c6fff;
+            --text-main: #f0f0f5;
+            --text-muted: #a0a0b0;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --shadow-glow: 0 0 30px rgba(92, 111, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(92, 111, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 51, 102, 0.04) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0b0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* Alternating Layout */
+        .showcase-row {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .showcase-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .showcase-text {
+            flex: 1;
+        }
+
+        .showcase-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, #b0b0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .showcase-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .showcase-image {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4), var(--shadow-glow);
+            border: 1px solid var(--border-glass);
+        }
+        
+        .showcase-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .showcase-image:hover img {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 900px) {
+            .showcase-row, .showcase-row:nth-child(even) {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero container">
+        <h1>XenoScript User Manual</h1>
+        <p>Your comprehensive guide to configuring and mastering your new professional screenwriting environment.</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="showcase-row">
+            <div class="showcase-text">
+                <h3>1. Author Setup</h3>
+                <p>Before you begin collaborating, set up your personal Author Profile. Navigate to your profile settings to input your name and select a custom Revision Color.</p>
+                <p>Your custom color will be used to generate color-coded asterisks whenever you make revisions to a script, ensuring everyone in your writers' room knows exactly who contributed what.</p>
+            </div>
+            <div class="showcase-image">
+                <img src="screenshots/Author Profile.JPG" alt="Author Setup">
+            </div>
+        </div>
+
+        <div class="showcase-row">
+            <div class="showcase-text">
+                <h3>2. Manage Backups</h3>
+                <p>XenoScript features an aggressive, automated backup system to ensure your work is never lost. The Manage Backups window allows you to browse all the automatic snapshots taken while you write.</p>
+                <p>If you ever need to undo a major structural change or recover a deleted scene, simply locate a timestamped snapshot and roll your script back to safety.</p>
+            </div>
+            <div class="showcase-image">
+                <img src="screenshots/manage_backups.JPG" alt="Manage Backups">
+            </div>
+        </div>
+
+        <div class="showcase-row">
+            <div class="showcase-text">
+                <h3>3. Configure Shared Folder</h3>
+                <p>Writing with a partner? You can configure a Shared Folder to act as your collaborative workspace. Set this up using a local network drive or a cloud-synced directory (like Dropbox or Google Drive).</p>
+                <p>Once configured, XenoScript handles file locking and live updates so you and your co-authors can safely edit in tandem without overwriting each other's work.</p>
+            </div>
+            <div class="showcase-image">
+                <img src="screenshots/configurte share.JPG" alt="Configure Shared Folder">
+            </div>
+        </div>
+
+        <div class="showcase-row">
+            <div class="showcase-text">
+                <h3>4. Set Google API Key</h3>
+                <p>XenoScript's AI features operate on a secure Bring Your Own Key (BYOK) model. We never store your scripts or use them to train models.</p>
+                <p>To enable the AI critique partner, open the Help/Settings menu and paste your personal Google Gemini API key. Once set, you can query the AI for objective, constructive feedback on your scenes.</p>
+            </div>
+            <div class="showcase-image">
+                <img src="screenshots/Help.JPG" alt="Set Google API Key">
+            </div>
+        </div>
+
+        <div class="showcase-row">
+            <div class="showcase-text">
+                <h3>5. Format Colors</h3>
+                <p>Reduce eye strain and personalize your writing interface. The Format menu lets you heavily customize the syntax highlighting colors for different script elements.</p>
+                <p>Assign distinct colors to Scene Headings, Action lines, Characters, and Dialogue so you can visually parse your screenplay structure at a glance.</p>
+            </div>
+            <div class="showcase-image">
+                <img src="screenshots/format.JPG" alt="Format Colors">
+            </div>
+        </div>
+
+        <div class="showcase-row">
+            <div class="showcase-text">
+                <h3>6. Edit Hotkeys</h3>
+                <p>Speed is everything when you're in the zone. XenoScript allows you to customize your keyboard shortcuts to fit your existing muscle memory.</p>
+                <p>Navigate to the Edit menu to bind keys for quick actions like adding new scenes, toggling character names, or firing off quick formats without ever reaching for your mouse.</p>
+            </div>
+            <div class="showcase-image">
+                <img src="screenshots/edit.JPG" alt="Edit Hotkeys">
+            </div>
+        </div>
+
+    </div>
+    
+    <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); margin-top: 20px;">
+        <div class="container">
+            <p>&copy; 2026 Xenohead. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
