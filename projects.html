@@ -146,9 +146,7 @@ PROJECT CARD
             transition: 0.4s ease;
 
             backdrop-filter: blur(14px);
-
-            min-height: 480px;
-
+            min-height: 360px;
             display: flex;
             flex-direction: column;
         }
@@ -171,8 +169,7 @@ PROJECT IMAGE
 ========================================= */
 
         .project-image {
-            height: 220px;
-
+            height: 160px;
             background-size: cover;
             background-position: center;
 
@@ -195,11 +192,8 @@ CARD CONTENT
 ========================================= */
 
         .project-content {
-
-            padding: 2rem;
-
+            padding: 1.5rem;
             flex: 1;
-
             display: flex;
             flex-direction: column;
         }
@@ -596,19 +590,24 @@ MAIN
                 const grid = document.querySelector('.projects-grid');
                 grid.innerHTML = allProjects.map(p => `
             <div class="project-card reveal">
-                <div class="project-image" style="background-image:url('${p.image}')"></div>
+                <div class="project-image" style="background-image:url('${p.image}'); cursor: pointer;" onclick="openModal('${p.id}')"></div>
                 <div class="project-content">
                     <small>// ${p.category}</small>
-                    <h2>${p.title}</h2>
-                    <p>${p.description ? p.description.split(/\n/).slice(0, 2).join('<br><br>') + (p.description.split(/\n/).length > 2 ? '<br><br>...' : '') : ''}</p>
+                    <h2 style="font-size: 1.3rem; margin: 0.5rem 0 1rem 0; cursor: pointer; transition: 0.2s;" onclick="openModal('${p.id}')" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
+                        ${p.title}
+                    </h2>
+                    <p style="cursor: pointer;" onclick="openModal('${p.id}')">${p.description ? p.description.split(/\n/).slice(0, 2).join('<br><br>') + (p.description.split(/\n/).length > 2 ? '<br><br>...' : '') : ''}</p>
                     <div class="tags">
                         ${p.tags.map(t => `<span>${t}</span>`).join('')}
                     </div>
-                    <div class="project-links" style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
-                        <a href="${p.viewLink}" target="_blank">
-                            <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
-                        </a>
-                        <a href="#" onclick="openModal('${p.id}'); return false;" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; transition: 0.3s;">Read more...</a>
+                    <div class="project-links" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        ${p.sellSheetLink ? `<a href="${p.sellSheetLink}" style="display: inline-block; padding: 10px 20px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; background: linear-gradient(135deg, #00cfff 0%, #0077ff 100%); border-radius: 6px; text-decoration: none; font-size: 0.9rem;">Tell Me About It!</a>` : ''}
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <a href="${p.viewLink || '#'}" target="_blank">
+                                <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 36px; display: block;">
+                            </a>
+                            <a href="#" onclick="openModal('${p.id}'); return false;" style="color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; transition: 0.3s;">Read more...</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -634,7 +633,8 @@ MAIN
         <div class="description" style="color:var(--muted); line-height:2; font-size:1.15rem; margin-bottom: 3rem;">
             ${p.description ? p.description.replace(/\n/g, '<br>') : ''}
         </div>
-        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;">
+            ${p.sellSheetLink ? `<a href="${p.sellSheetLink}" style="display: inline-block; padding: 12px 30px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; background: linear-gradient(135deg, #00cfff 0%, #0077ff 100%); border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 207, 255, 0.3); border: 1px solid rgba(255,255,255,0.1);">Tell Me About it!</a>` : ''}
             <a href="${p.viewLink || '#'}" target="_blank">
                 <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" style="height: 44px; display: block;">
             </a>
