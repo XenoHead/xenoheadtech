@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XenoPlayer - All-In-One Media Player & Manga Reader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(25, 25, 35, 0.6);
+            --bg-card-hover: rgba(35, 35, 50, 0.8);
+            --accent-primary: #00CFFF;
+            --accent-secondary: #ff3366;
+            --text-main: #f0f0f5;
+            --text-muted: #a0a0b0;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --shadow-glow: 0 0 30px rgba(0, 207, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 207, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(162, 0, 255, 0.04) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #00CFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeUp 0.8s ease-out 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #0077ff 100%);
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 207, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 207, 255, 0.4);
+        }
+
+        /* Tabs Navigation */
+        .tabs-container {
+            margin-top: 40px;
+            animation: fadeUp 0.8s ease-out 0.6s both;
+        }
+
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 12px 24px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn:hover {
+            background: var(--bg-card-hover);
+            color: white;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #0077ff 100%);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Styling */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Alternating Layout */
+        .showcase-row {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .showcase-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .showcase-text {
+            flex: 1;
+        }
+
+        .showcase-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, #b0b0d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .showcase-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .showcase-text ul {
+            list-style: none;
+            color: var(--text-muted);
+        }
+        
+        .showcase-text ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .showcase-text ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .showcase-row, .showcase-row:nth-child(even) {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .hero h1 { font-size: 2.5rem; }
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-glass);
+            font-family: monospace;
+            color: #00CFFF;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero container">
+        <h1>Your Ultimate Media & Manga Companion</h1>
+        <p>XenoPlayer is a versatile, all-in-one media player and manga reader. It effortlessly handles both video files and images (including animated GIFs), automatically loading all supported media within the same directory as the opened file.</p>
+        <p>Beyond standard playback, XenoPlayer is packed with advanced features including AI-powered live manga translation, built-in online manga downloading, voice-controlled reading, and extensive file management tools. Everything is packaged into a single, easy-to-use application!</p>
+        <a href="#" class="btn">Get XenoPlayer Today</a>
+    </header>
+
+    <div class="container tabs-container">
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-core">Core Features</button>
+            <button class="tab-btn" data-tab="tab-ai">AI & Manga Tools</button>
+            <button class="tab-btn" data-tab="tab-files">Advanced File Management</button>
+            <button class="tab-btn" data-tab="tab-formats">Supported Formats</button>
+            <button class="tab-btn" data-tab="tab-shortcuts">Shortcuts & Usage</button>
+        </div>
+
+        <!-- Tab 1: Core Features -->
+        <div class="tab-content active" id="tab-core">
+            <div class="section-header">
+                <h2>The Core Experience</h2>
+                <p>Everything you need for seamless media playback and image viewing.</p>
+            </div>
+            
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>Folder-based Playback</h3>
+                    <p>Open a single file and instantly access a playlist of all media in that folder. XenoPlayer seamlessly transitions between playing videos and viewing images/GIFs, giving you a continuous, uninterrupted experience.</p>
+                </div>
+            </div>
+
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>Favorites System</h3>
+                    <p>Keep track of your favorite files with ease. You can choose to play exclusively your favorites, or filter them out to watch only unfavorited content.</p>
+                </div>
+            </div>
+
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>Live Thumbnails</h3>
+                    <p>No more guessing what a file contains. The built-in playlist dynamically generates previews for your videos and images on the fly, directly within the interface.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: AI & Manga Tools -->
+        <div class="tab-content" id="tab-ai">
+            <div class="section-header">
+                <h2>Next-Gen Manga Reading & Translation</h2>
+                <p>Powered by AI, designed for comfort and accessibility.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Live AI Translation</h3>
+                    <p>Draw a box over foreign text in the Manga Viewer to automatically recognize and translate it to English (or other languages) using our built-in AI model.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Burn Translations</h3>
+                    <p>Optionally burn translated text directly into the image file using ImageMagick for permanent, seamless reading.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Voice Navigation</h3>
+                    <p>Sit back and control page-turning using voice commands. Just say "next", "back", or "previous" via speech recognition to turn pages hands-free.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Online Manga Integration</h3>
+                    <p>Browse popular tags, search, and download galleries directly from your favorite online sources using the built-in downloader.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Advanced File Management -->
+        <div class="tab-content" id="tab-files">
+            <div class="section-header">
+                <h2>Command Your Collection</h2>
+                <p>Tools designed for massive media libraries.</p>
+            </div>
+
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>Instant Move Targets</h3>
+                    <p>Instantly move files to pre-configured "Move Target" folders with a single click or hotkey. Perfect for sorting large batches of media.</p>
+                </div>
+            </div>
+
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>Smart Duplicate Deletion</h3>
+                    <p>Automatically find and remove identical files in your library to save space and keep your collection clean.</p>
+                </div>
+            </div>
+
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>Mass Renaming</h3>
+                    <p>Rename files individually or mass rename entire selections of files effortlessly directly from the player interface.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Supported Formats -->
+        <div class="tab-content" id="tab-formats">
+            <div class="section-header">
+                <h2>Universal Compatibility</h2>
+                <p>If it's media, XenoPlayer probably plays it.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Video Formats</h3>
+                    <ul style="list-style: none; margin-top: 15px;">
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.mp4</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.avi</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.mkv</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.mov</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.wmv</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.flv</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.webm</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.mpg / .mpeg</li>
+                        <li style="margin-bottom: 8px; color: var(--accent-primary);">.ogg</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Image Formats</h3>
+                    <ul style="list-style: none; margin-top: 15px;">
+                        <li style="margin-bottom: 8px; color: #ff3366;">.jpg / .jpeg</li>
+                        <li style="margin-bottom: 8px; color: #ff3366;">.png</li>
+                        <li style="margin-bottom: 8px; color: #ff3366;">.webp</li>
+                        <li style="margin-bottom: 8px; color: #ff3366;">.gif</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 5: Shortcuts & Usage -->
+        <div class="tab-content" id="tab-shortcuts">
+            <div class="section-header">
+                <h2>Installation & Shortcuts</h2>
+                <p>Get up and running in seconds.</p>
+            </div>
+
+            <div class="showcase-row">
+                <div class="showcase-text">
+                    <h3>🚀 Installation & Usage</h3>
+                    <ol style="margin-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                        <li><strong>Download:</strong> Grab the latest <code>XenoPlayer.exe</code> (or installer) from the Releases page.</li>
+                        <li><strong>Run:</strong> Double-click the executable to launch the app. No complex setup or dependencies required!</li>
+                        <li><strong>Play:</strong> Drag and drop a file, or click "Load Folder/File" to start watching or reading.</li>
+                    </ol>
+                    <p style="margin-top: 15px; font-size: 0.9rem;"><em>*(Note: The AI translation model may download a small, one-time update on its very first run).*</em></p>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>⌨️ Main Player Shortcuts</h3>
+                    <ul style="list-style: none; margin-top: 15px; font-size: 0.9rem;">
+                        <li style="margin-bottom: 8px;"><strong>Space:</strong> Play / Pause</li>
+                        <li style="margin-bottom: 8px;"><strong>Left / Right Arrow:</strong> Previous / Next media</li>
+                        <li style="margin-bottom: 8px;"><strong>Mouse Wheel Up / Down:</strong> Previous / Next media</li>
+                        <li style="margin-bottom: 8px;"><strong>+ / -:</strong> Increase / Decrease video playback speed</li>
+                        <li style="margin-bottom: 8px;"><strong>Home / End:</strong> Jump to the start / end of the playlist</li>
+                        <li style="margin-bottom: 8px;"><strong>F2:</strong> Rename current or selected file(s)</li>
+                        <li style="margin-bottom: 8px;"><strong>F3:</strong> Move current or selected file(s) to a folder</li>
+                        <li style="margin-bottom: 8px;"><strong>Delete:</strong> Delete current or selected file(s)</li>
+                        <li style="margin-bottom: 8px;"><strong>Escape:</strong> Close application</li>
+                        <li style="margin-bottom: 8px;"><strong>Double-Click Video/Image:</strong> Toggle fullscreen</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📖 Manga Viewer Shortcuts</h3>
+                    <ul style="list-style: none; margin-top: 15px; font-size: 0.9rem;">
+                        <li style="margin-bottom: 8px;"><strong>Left / Right Arrow:</strong> Previous / Next page</li>
+                        <li style="margin-bottom: 8px;"><strong>Right-Click / Forward/Back Mouse Buttons:</strong> Navigate pages or clear selection boxes</li>
+                        <li style="margin-bottom: 8px;"><strong>Left-Click & Drag:</strong> Draw translation box</li>
+                        <li style="margin-bottom: 8px;"><strong>Voice Commands:</strong> Say "next", "forward", "back", or "previous" to turn pages (if Voice is enabled).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); margin-top: 60px;">
+        <div class="container">
+            <p>&copy; 2026 Xenohead. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Add active to clicked button and target content
+                    btn.classList.add('active');
+                    const targetId = btn.getAttribute('data-tab');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
