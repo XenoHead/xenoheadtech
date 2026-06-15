@@ -475,13 +475,13 @@ MAIN
 
             <!-- FORM -->
 
-            <form class="contact-form">
+            <form class="contact-form" action="https://formspree.io/f/mqeonkpv" method="POST">
 
                 <div class="input-group">
 
                     <label>NAME</label>
 
-                    <input type="text" placeholder="Enter designation">
+                    <input type="text" name="name" placeholder="Enter designation" required>
 
                 </div>
 
@@ -489,7 +489,7 @@ MAIN
 
                     <label>EMAIL</label>
 
-                    <input type="email" placeholder="Enter communication address">
+                    <input type="email" name="email" placeholder="Enter communication address" required>
 
                 </div>
 
@@ -497,11 +497,11 @@ MAIN
 
                     <label>MESSAGE</label>
 
-                    <textarea placeholder="Transmit message..."></textarea>
+                    <textarea name="message" placeholder="Transmit message..." required></textarea>
 
                 </div>
 
-                <button class="send-button">
+                <button type="submit" class="send-button">
                     Send Transmission
                 </button>
 
