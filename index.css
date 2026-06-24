@@ -137,10 +137,6 @@ LEFT
     padding: 0.8rem;
     margin-bottom: 2rem;
 
-    border-top: 2px solid rgba(0, 207, 255, 0.6);
-    border-left: 2px solid rgba(0, 207, 255, 0.6);
-    border-bottom: 2px solid rgba(0, 207, 255, 0.1);
-    border-right: 2px solid rgba(0, 207, 255, 0.1);
 
     background: rgba(0, 207, 255, 0.05);
     position: relative;
